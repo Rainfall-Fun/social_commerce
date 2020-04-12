@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="registration_center" />
-        <module name="wx_service" />
-        <module name="gateway" />
-        <module name="admin_goods_service" />
         <module name="configuration_center" />
+        <module name="admin_goods_service" />
+        <module name="gateway" />
+        <module name="wx_service" />
+        <module name="registration_center" />
       </profile>
     </annotationProcessing>
   </component>
