@@ -1,0 +1,48 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/social_commerce?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root123
+    driverclass-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  application:
+    name: social-commerce-gateway
+
+server:
+  port: 8002
+
+# Eureka相关配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 10      # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-expiration-duration-in-seconds: 60  # 发呆时间，即服务续约到期时间（缺省为90s）
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+zuul:
+  routes:
+    api-a: #配置路由
+      path: /test/**
+      url: forward:/source/hello #test开头的请求跳转到该接口
+    route163:
+      path: /route163
+      url: http://www.163.com
+    admin-goods-service:
+      path: /admin/goods/**
+      serviceId: admin-goods-service
+    wx:
+      path: /wx/*
+      url: forward:/wx
+    admin:
+      path: /admin/*
+      url: forward:/admin
+
+
+
+

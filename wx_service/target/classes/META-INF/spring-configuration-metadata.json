@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "wx",
+      "type": "com.cqjtu.sc.wx.properties.WxProperties",
+      "sourceType": "com.cqjtu.sc.wx.properties.WxProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "wx.app-i-d",
+      "type": "java.lang.String",
+      "sourceType": "com.cqjtu.sc.wx.properties.WxProperties"
+    },
+    {
+      "name": "wx.appsecret",
+      "type": "java.lang.String",
+      "sourceType": "com.cqjtu.sc.wx.properties.WxProperties"
+    }
+  ],
+  "hints": []
+}
