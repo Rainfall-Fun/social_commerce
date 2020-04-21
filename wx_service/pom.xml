@@ -10,30 +10,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>wx_service</artifactId>
+<!--    必要依赖开始-->
     <dependencies>
         <!-- Spring Boot Web Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <!-- feign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-
         <!-- Eureka Client Starter -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
         <!-- Config Client Starter -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
+<!--        必要依赖结束-->
+
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
