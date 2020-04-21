@@ -4,8 +4,8 @@
 1.右键social_commerce->new->module之后填写模块名称
 2.之后引入必要依赖（wx_service的pom文件里面有标注）
 3.在resources文件夹下面新建bootstrap.yml文件，并在configuration_center中创建该服务对应的配置文件
-
-
+# 项目启动顺序
+configuration_center->registration_center->微服务项目->gateway
 
 
 # 待办事项
