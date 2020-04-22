@@ -6,7 +6,8 @@
 3.在resources文件夹下面新建bootstrap.yml文件，并在configuration_center中创建该服务对应的配置文件
 # 项目启动顺序
 configuration_center->registration_center->微服务项目->gateway
-
+# 注意事项
+在自己电脑运行时，注意更改在configuration_center中resource文件夹下的social-commerce-gateway中的数据库配置
 
 # 待办事项
 -[ ] 在自己的服务中添加swagger模块
