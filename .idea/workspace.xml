@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="092146dc-639c-45a4-abd4-e8dea2454773" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/social_commerce.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin_goods_service/src/main/java/com/cqjtu/sc/admin/goods/dto/GoodsAllinone.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/service/GoodsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_goods_service/src/main/java/com/cqjtu/sc/admin/goods/api/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin_goods_service/src/main/java/com/cqjtu/sc/admin/goods/api/GoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/config/ShiroConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/config/ShiroConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/shiro/AdminWebSessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/shiro/AdminWebSessionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/admin/AdminGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/admin/AdminGoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/wx/LoginRegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/wx/LoginRegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/wx/WxGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/wx/WxGoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/config/ShiroConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/config/ShiroConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/shiro/AdminWebSessionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/shiro/AdminWebSessionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/web/AdminAuthController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/web/AdminGoodsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/web/LoginRegisterController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/web/WxGoodsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-    </list>
+    <list default="true" id="092146dc-639c-45a4-abd4-e8dea2454773" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,7 +50,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RunManager" selected="Spring Boot.Application">
     <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -133,14 +111,30 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1587884272107</updated>
-      <workItem from="1587884279614" duration="7070000" />
+      <workItem from="1587884279614" duration="7497000" />
     </task>
+    <task id="LOCAL-00001" summary="在gateway中实现了类似post和get在服务之间的调用">
+      <created>1587891602753</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1587891602753</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="在gateway中实现了类似post和get在服务之间的调用" />
+    <option name="LAST_COMMIT_MESSAGE" value="在gateway中实现了类似post和get在服务之间的调用" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="178" key="#Notifications" timestamp="1587891672478">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="178" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1587891672478" />
     <state x="688" y="326" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1587890449315">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -157,6 +151,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587890457632" />
+    <state x="532" y="112" key="CommitChangelistDialog2" timestamp="1587891598273">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="532" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1587891598273" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1587884373959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -193,10 +191,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="279" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587891012917" />
-    <state x="461" y="162" key="SettingsEditor" timestamp="1587884374634">
+    <state x="461" y="162" key="SettingsEditor" timestamp="1587891877833">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587884374634" />
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587891877833" />
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2" timestamp="1587892081234">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587892081234" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1587891327517">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
