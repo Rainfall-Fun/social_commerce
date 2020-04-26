@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="092146dc-639c-45a4-abd4-e8dea2454773" name="Default Changelist" comment="" />
+    <list default="true" id="092146dc-639c-45a4-abd4-e8dea2454773" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,7 +113,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1587884272107</updated>
-      <workItem from="1587884279614" duration="8197000" />
+      <workItem from="1587884279614" duration="8524000" />
     </task>
     <task id="LOCAL-00001" summary="在gateway中实现了类似post和get在服务之间的调用">
       <created>1587891602753</created>
@@ -127,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587892565189</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="在gateway中添加了类似post和get在服务之间的调用的demo">
+      <created>1587892677591</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587892677591</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,10 +168,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587890457632" />
-    <state x="532" y="112" key="CommitChangelistDialog2" timestamp="1587892561629">
+    <state x="532" y="112" key="CommitChangelistDialog2" timestamp="1587892675200">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="532" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1587892561629" />
+    <state x="532" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1587892675200" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1587884373959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -199,14 +208,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="279" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587892639850" />
+    <state x="669" y="235" key="MultipleFileMergeDialog" timestamp="1587892856060">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="669" y="235" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587892856060" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1587891877833">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587891877833" />
-    <state x="552" y="241" key="Vcs.Push.Dialog.v2" timestamp="1587892567307">
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2" timestamp="1587892691675">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="241" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587892567307" />
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587892691675" />
+    <state x="637" y="311" key="git4idea.merge.GitPullDialog" timestamp="1587892833976">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="637" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587892833976" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1587891327517">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
