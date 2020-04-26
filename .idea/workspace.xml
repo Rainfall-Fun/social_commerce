@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="092146dc-639c-45a4-abd4-e8dea2454773" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/social_commerce.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin_goods_service/src/main/java/com/cqjtu/sc/admin/goods/dto/GoodsAllinone.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/service/GoodsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_goods_service/src/main/java/com/cqjtu/sc/admin/goods/api/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin_goods_service/src/main/java/com/cqjtu/sc/admin/goods/api/GoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/config/ShiroConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/config/ShiroConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/shiro/AdminWebSessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/shiro/AdminWebSessionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/admin/AdminGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/admin/AdminGoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/wx/LoginRegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/wx/LoginRegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/wx/WxGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/cqjtu/sc/gateway/web/wx/WxGoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/config/ShiroConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/config/ShiroConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/shiro/AdminWebSessionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/shiro/AdminWebSessionManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/web/AdminAuthController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/web/AdminGoodsController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/web/LoginRegisterController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/target/classes/com/cqjtu/sc/gateway/web/WxGoodsController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/maven" />
+        <option name="userSettingsFile" value="D:\maven\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1b4H6etHIuafC4ALHToruAn0PBo" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="configuration_center" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cqjtu.sc.config.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="wx_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cqjtu.sc.wx.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (3)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="registration_center" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cqjtu.sc.registry.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (4)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="admin_goods_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cqjtu.sc.admin.goods.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cqjtu.sc.gateway.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="092146dc-639c-45a4-abd4-e8dea2454773" name="Default Changelist" comment="" />
+      <created>1587884272107</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587884272107</updated>
+      <workItem from="1587884279614" duration="7070000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="688" y="326" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1587890449315">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="688" y="326" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587890449315" />
+    <state x="765" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1587890218099">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="204" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1587890218099" />
+    <state x="1024" y="546" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1587885264919">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1024" y="546" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587885264919" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587890457632">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587890457632" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1587884373959">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587884373959" />
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom" timestamp="1587891012917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587891012917" />
+    <state width="1877" height="279" key="GridCell.Tab.0.center" timestamp="1587891012917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587891012917" />
+    <state width="1877" height="279" key="GridCell.Tab.0.left" timestamp="1587891012917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587891012917" />
+    <state width="1877" height="279" key="GridCell.Tab.0.right" timestamp="1587891012917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587891012917" />
+    <state width="1877" height="279" key="GridCell.Tab.1.bottom" timestamp="1587891012917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587891012917" />
+    <state width="1877" height="279" key="GridCell.Tab.1.center" timestamp="1587891012917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587891012917" />
+    <state width="1877" height="279" key="GridCell.Tab.1.left" timestamp="1587891012917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587891012917" />
+    <state width="1877" height="279" key="GridCell.Tab.1.right" timestamp="1587891012917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587891012917" />
+    <state x="461" y="162" key="SettingsEditor" timestamp="1587884374634">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587884374634" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1587891327517">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1587891327517" />
+  </component>
+</project>

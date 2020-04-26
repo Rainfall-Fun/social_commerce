@@ -1,8 +1,7 @@
 package com.cqjtu.sc.gateway.web.admin;
 
 import com.cqjtu.sc.gateway.annotation.RequiresPermissionsDesc;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.cqjtu.sc.gateway.web.service.GoodsService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,8 @@ public class AdminGoodsController {
 
 
 
+    @Autowired
+    GoodsService goodsService;
     /**
      * 查询商品
      *
@@ -71,6 +72,7 @@ public class AdminGoodsController {
     @RequiresPermissionsDesc(menu = {"商品管理", "商品管理"}, button = "上架")
     @PostMapping("/create")
     public Object create(@RequestBody String goodsAllinone) {
+        goodsService.create(goodsAllinone);
         return null;
     }
 
