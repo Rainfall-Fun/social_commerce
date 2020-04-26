@@ -22,6 +22,7 @@ public class LoginRegisterController {
     @RequestMapping("/wx/auth/login_by_weixin")
     public Object loginByWx(String code){
         String openid = restTemplate.getForObject("http://WX-SERVICE/getOpenid/" + code, String.class);
+
         Integer userInfoId;
         long userName;
         String s = UserTokenManager.generateToken(1);

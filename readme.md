@@ -10,3 +10,7 @@ configuration_center->registration_center->微服务项目->gateway
 
 # 待办事项
 -[ ] 在自己的服务中添加swagger模块
+
+
+# 使用帮助
+在gateway中有通过feign来调用admin_goods_service服务的demo（在web包下面的service里面），有实现类似http中post和get的操作，后面client之间的调用可以参考GoodsService中的例子
