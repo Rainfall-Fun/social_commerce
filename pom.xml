@@ -14,6 +14,11 @@
         <module>gateway</module>
         <module>admin_goods_service</module>
         <module>wx_service</module>
+        <module>order_service</module>
+        <module>goods_recommend_service</module>
+        <module>member_manage_service</module>
+        <module>price_comparison_service</module>
+        <module>picture_search_service</module>
     </modules>
 
     <!--    继承SpringBoot父项目，注意与SpringCloud版本匹配-->

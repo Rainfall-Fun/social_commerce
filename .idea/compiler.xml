@@ -6,11 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="configuration_center" />
-        <module name="admin_goods_service" />
+        <module name="price_comparison_service" />
         <module name="gateway" />
-        <module name="wx_service" />
+        <module name="admin_goods_service" />
+        <module name="configuration_center" />
         <module name="registration_center" />
+        <module name="order_service" />
+        <module name="goods_recommend_service" />
+        <module name="picture_search_service" />
+        <module name="member_manage_service" />
+        <module name="wx_service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -19,6 +24,11 @@
       <module name="admin_goods_service" options="-parameters" />
       <module name="configuration_center" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="goods_recommend_service" options="-parameters" />
+      <module name="member_manage_service" options="-parameters" />
+      <module name="order_service" options="-parameters" />
+      <module name="picture_search_service" options="-parameters" />
+      <module name="price_comparison_service" options="-parameters" />
       <module name="registration_center" options="-parameters" />
       <module name="social_commerce" options="-parameters" />
       <module name="wx_service" options="-parameters" />

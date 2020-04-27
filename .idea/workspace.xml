@@ -2,7 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="092146dc-639c-45a4-abd4-e8dea2454773" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/configuration_center/src/main/resources/goods-recommend-service.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configuration_center/src/main/resources/member-manage-service.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configuration_center/src/main/resources/order-service.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configuration_center/src/main/resources/picture-search-service.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configuration_center/src/main/resources/price-comparison-service.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goods_recommend_service/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goods_recommend_service/src/main/java/com/cqjtu/sc/goodsrecommendservice/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goods_recommend_service/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/member_manage_service/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/member_manage_service/src/main/java/com/cqjtu/membermanageservice/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/member_manage_service/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/cqjtu/sc/orderservice/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/picture_search_service/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/picture_search_service/src/main/java/com/cqjtu/picturesearchservice/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/picture_search_service/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/price_comparison_service/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/price_comparison_service/src/main/java/com/cqjtu/pricecomparisonservice/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/price_comparison_service/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +67,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -52,7 +76,24 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/picture_search_service/src/main/resources" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.cqjtu.picturesearchservice" />
+      <recent name="com.cqjtu.pricecomparisonservice" />
+      <recent name="com.cqjtu.membermanageservice" />
+      <recent name="com.cqjtu.sc.goodsrecommendservice" />
+      <recent name="com.cqjtu.sc.orderservice" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\social_commerce\picture_search_service\src\main\resources" />
+      <recent name="E:\social_commerce\price_comparison_service\src\main\resources" />
+      <recent name="E:\social_commerce\member_manage_service\src\main\resources" />
+      <recent name="E:\social_commerce\goods_recommend_service\src\main\resources" />
+      <recent name="E:\social_commerce\order_service\src\main\resources" />
+    </key>
   </component>
   <component name="RunManager" selected="Spring Boot.Application">
     <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -79,6 +120,34 @@
     <configuration name="Application (4)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="admin_goods_service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.cqjtu.sc.admin.goods.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (5)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="order_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cqjtu.sc.orderservice.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (6)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="goods_recommend_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cqjtu.sc.goodsrecommendservice.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (7)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="member_manage_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cqjtu.membermanageservice.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (8)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="price_comparison_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cqjtu.pricecomparisonservice.Application" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -113,7 +182,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1587884272107</updated>
-      <workItem from="1587884279614" duration="8524000" />
+      <workItem from="1587884279614" duration="9166000" />
+      <workItem from="1587947871788" duration="18000" />
+      <workItem from="1587970173324" duration="1816000" />
     </task>
     <task id="LOCAL-00001" summary="在gateway中实现了类似post和get在服务之间的调用">
       <created>1587891602753</created>
@@ -136,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587892677591</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="在gateway中添加了类似post和get在服务之间的调用的demo">
+      <created>1587892917440</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1587892917440</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,46 +246,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587890457632" />
-    <state x="532" y="112" key="CommitChangelistDialog2" timestamp="1587892675200">
+    <state x="532" y="112" key="CommitChangelistDialog2" timestamp="1587892914720">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="532" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1587892675200" />
+    <state x="532" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1587892914720" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1587884373959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587884373959" />
-    <state width="1877" height="279" key="GridCell.Tab.0.bottom" timestamp="1587892639849">
+    <state width="938" height="279" key="GridCell.Tab.0.bottom" timestamp="1587893989343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587892639849" />
-    <state width="1877" height="279" key="GridCell.Tab.0.center" timestamp="1587892639849">
+    <state width="938" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587893989343" />
+    <state width="938" height="279" key="GridCell.Tab.0.center" timestamp="1587893989343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587892639849" />
-    <state width="1877" height="279" key="GridCell.Tab.0.left" timestamp="1587892639849">
+    <state width="938" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587893989343" />
+    <state width="938" height="279" key="GridCell.Tab.0.left" timestamp="1587893989343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587892639849" />
-    <state width="1877" height="279" key="GridCell.Tab.0.right" timestamp="1587892639849">
+    <state width="938" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587893989343" />
+    <state width="938" height="279" key="GridCell.Tab.0.right" timestamp="1587893989343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587892639849" />
-    <state width="1877" height="279" key="GridCell.Tab.1.bottom" timestamp="1587892639850">
+    <state width="938" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587893989343" />
+    <state width="938" height="279" key="GridCell.Tab.1.bottom" timestamp="1587893989343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587892639850" />
-    <state width="1877" height="279" key="GridCell.Tab.1.center" timestamp="1587892639850">
+    <state width="938" height="279" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587893989343" />
+    <state width="938" height="279" key="GridCell.Tab.1.center" timestamp="1587893989343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587892639850" />
-    <state width="1877" height="279" key="GridCell.Tab.1.left" timestamp="1587892639849">
+    <state width="938" height="279" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587893989343" />
+    <state width="938" height="279" key="GridCell.Tab.1.left" timestamp="1587893989343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587892639849" />
-    <state width="1877" height="279" key="GridCell.Tab.1.right" timestamp="1587892639850">
+    <state width="938" height="279" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587893989343" />
+    <state width="938" height="279" key="GridCell.Tab.1.right" timestamp="1587893989343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587892639850" />
+    <state width="938" height="279" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587893989343" />
     <state x="669" y="235" key="MultipleFileMergeDialog" timestamp="1587892856060">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -216,14 +294,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587891877833" />
-    <state x="552" y="241" key="Vcs.Push.Dialog.v2" timestamp="1587892691675">
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2" timestamp="1587892925436">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="241" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587892691675" />
+    <state x="552" y="241" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587892925436" />
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1587947887082">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587947887082" />
     <state x="637" y="311" key="git4idea.merge.GitPullDialog" timestamp="1587892833976">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="637" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587892833976" />
+    <state x="601" y="381" key="new project wizard" timestamp="1587971841624">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="601" y="381" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1587971841624" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1587891327517">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
