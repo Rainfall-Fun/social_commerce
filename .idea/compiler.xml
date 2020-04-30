@@ -11,11 +11,11 @@
         <module name="admin_goods_service" />
         <module name="configuration_center" />
         <module name="registration_center" />
-        <module name="order_service" />
+        <module name="wx_service" />
         <module name="goods_recommend_service" />
         <module name="picture_search_service" />
         <module name="member_manage_service" />
-        <module name="wx_service" />
+        <module name="order_service" />
       </profile>
     </annotationProcessing>
   </component>

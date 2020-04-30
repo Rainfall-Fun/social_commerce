@@ -1,13 +1,14 @@
 spring:
   application:
     name: social-commerce-config
-  profiles:
-    active: native #启用本地配置文件
   cloud:
     config:
+      label: master
       server:
-        native:
-          search-locations: classpath:/ #配置文件扫描目录
+        git:
+          uri: https://github.com/ChunyuePeng/spring-cloud-config-repo
+          search-paths: dev
+
 
 server:
   port: 8000 #服务端口
