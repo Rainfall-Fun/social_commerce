@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminRegionController {
     @GetMapping("list")
     public Object list(){
+        System.out.println("jin");
         return null;
     }
 }
