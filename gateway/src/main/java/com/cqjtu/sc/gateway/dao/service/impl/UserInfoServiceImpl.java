@@ -12,15 +12,22 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     UserInfoRepo userInfoRepo;
     @Override
-    public int add(Long userName, String password) {
+    public int add(String memberNumber) {
         UserInfo userInfo=new UserInfo();
-        if (userName!=null){
-            userInfo.setUserName(userName);
-        }
-        if (!StringUtils.isBlank(password)){
-            userInfo.setPassword(password);
+        if (memberNumber!=null){
+            userInfo.setMemberNumber(memberNumber);
         }
         UserInfo save = userInfoRepo.save(userInfo);
-        return save==null?null:save.getId();
+        return save==null?null:save.getUserInfoId();
+    }
+
+    @Override
+    public UserInfo getByUserInfoId(int userInfoId) {
+        return userInfoRepo.getOne(userInfoId);
+    }
+
+    @Override
+    public void update(UserInfo userInfo) {
+        userInfoRepo.save(userInfo);
     }
 }

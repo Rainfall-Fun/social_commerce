@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface AdminPermissionRepo extends JpaRepository<AdminPermission,Integer> {
-    List<AdminPermission> findByIdIn(List<Integer> ids);
+    List<AdminPermission> findByAuthorityIdIn(List<Integer> ids);
 }

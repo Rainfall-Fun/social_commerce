@@ -1,39 +1,64 @@
 package com.cqjtu.sc.gateway.dao.entity.wx;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "all_user_info")
 public class UserInfo {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int id;
-    long userName;
-    String password;
+    int userInfoId;
+    int regionId;
+    int invitor;
+    String bankNumber;
+    int isValid;
+    String memberNumber;
 
-    public int getId() {
-        return id;
+    public int getUserInfoId() {
+        return userInfoId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserInfoId(int userInfoId) {
+        this.userInfoId = userInfoId;
     }
 
-    public long getUserName() {
-        return userName;
+    public int getRegionId() {
+        return regionId;
     }
 
-    public void setUserName(long userName) {
-        this.userName = userName;
+    public void setRegionId(int regionId) {
+        this.regionId = regionId;
     }
 
-    public String getPassword() {
-        return password;
+    public int getInvitor() {
+        return invitor;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setInvitor(int invitor) {
+        this.invitor = invitor;
+    }
+
+    public String getBankNumber() {
+        return bankNumber;
+    }
+
+    public void setBankNumber(String bankNumber) {
+        this.bankNumber = bankNumber;
+    }
+
+    public int getIsValid() {
+        return isValid;
+    }
+
+    public void setIsValid(int isValid) {
+        this.isValid = isValid;
+    }
+
+    public String getMemberNumber() {
+        return memberNumber;
+    }
+
+    public void setMemberNumber(String memberNumber) {
+        this.memberNumber = memberNumber;
     }
 }

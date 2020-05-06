@@ -1,26 +1,25 @@
 package com.cqjtu.sc.gateway.dao.entity.wx;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "wx_user_wx_info")
 public class UserWxInfo {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int id;
+    int wxInfoId;
     int userInfoId;
     String openid;
-    Date registrationTime;
+    String nickname;
+    String avatarUrl;
 
-    public int getId() {
-        return id;
+    public int getWxInfoId() {
+        return wxInfoId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setWxInfoId(int wxInfoId) {
+        this.wxInfoId = wxInfoId;
     }
 
     public int getUserInfoId() {
@@ -39,11 +38,19 @@ public class UserWxInfo {
         this.openid = openid;
     }
 
-    public Date getRegistrationTime() {
-        return registrationTime;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setRegistrationTime(Date registrationTime) {
-        this.registrationTime = registrationTime;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

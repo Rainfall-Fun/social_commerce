@@ -19,7 +19,7 @@ public class UserWxInfoServiceImpl implements UserWxInfoService {
     }
 
     @Override
-    public int add(Integer userInfoId, String openid, Date date) {
+    public int add(Integer userInfoId, String openid) {
         UserWxInfo userWxInfo=new UserWxInfo();
         if (userInfoId!=null){
             userWxInfo.setUserInfoId(userInfoId);
@@ -27,10 +27,7 @@ public class UserWxInfoServiceImpl implements UserWxInfoService {
         if(!StringUtils.isBlank(openid)){
             userWxInfo.setOpenid(openid);
         }
-        if (date!=null){
-            userWxInfo.setRegistrationTime(date);
-        }
         UserWxInfo save = userWxInfoRepo.save(userWxInfo);
-        return save==null?null:save.getId();
+        return save==null?null:save.getUserInfoId();
     }
 }

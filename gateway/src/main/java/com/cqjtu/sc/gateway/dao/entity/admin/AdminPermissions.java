@@ -1,31 +1,38 @@
 package com.cqjtu.sc.gateway.dao.entity.admin;
 
-import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
 @Entity
+@Table(name = "admin_operator_authority")
 public class AdminPermissions {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int id;
-    private int userInfoId;
-    private int permissionId;
+    private int operatorAuthId;
+    private int operatorId;
+    private int authorityId;
 
-    public int getUserInfoId() {
-        return userInfoId;
+    public int getOperatorAuthId() {
+        return operatorAuthId;
     }
 
-    public void setUserInfoId(int userInfoId) {
-        this.userInfoId = userInfoId;
+    public void setOperatorAuthId(int operatorAuthId) {
+        this.operatorAuthId = operatorAuthId;
     }
 
-    public int getPermissionId() {
-        return permissionId;
+    public int getOperatorId() {
+        return operatorId;
     }
 
-    public void setPermissionId(int permissionId) {
-        this.permissionId = permissionId;
+    public void setOperatorId(int operatorId) {
+        this.operatorId = operatorId;
+    }
+
+    public int getAuthorityId() {
+        return authorityId;
+    }
+
+    public void setAuthorityId(int authorityId) {
+        this.authorityId = authorityId;
     }
 }

@@ -14,6 +14,6 @@ public class AdminPermissionsServiceImpl implements AdminPermissionsService {
     AdminPermissionsRepo adminPermissionsRepo;
     @Override
     public List<AdminPermissions> findPermissionsByUserInfoId(int userInfoId) {
-        return adminPermissionsRepo.findByUserInfoId(userInfoId);
+        return adminPermissionsRepo.findByOperatorId(userInfoId);
     }
 }
