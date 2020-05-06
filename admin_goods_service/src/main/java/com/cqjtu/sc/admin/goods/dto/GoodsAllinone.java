@@ -1,40 +1,35 @@
 package com.cqjtu.sc.admin.goods.dto;
 
+import com.cqjtu.sc.admin.goods.db.domain.AllGoodsInfo;
+import com.cqjtu.sc.admin.goods.db.domain.AllGoodsSpecifiAttValue;
+import com.cqjtu.sc.admin.goods.db.domain.AllGoodsSpecification;
+
 public class GoodsAllinone {
-    String filed1;
-    String filed2;
-    String filed3;
+    AllGoodsInfo goods;
+    AllGoodsSpecification [] specifications;
+    AllGoodsSpecifiAttValue [] products;
 
-    public String getFiled1() {
-        return filed1;
+    public AllGoodsInfo getGoods() {
+        return goods;
     }
 
-    public void setFiled1(String filed1) {
-        this.filed1 = filed1;
+    public void setGoods(AllGoodsInfo goods) {
+        this.goods = goods;
     }
 
-    public String getFiled2() {
-        return filed2;
+    public AllGoodsSpecification[] getSpecifications() {
+        return specifications;
     }
 
-    public void setFiled2(String filed2) {
-        this.filed2 = filed2;
+    public void setSpecifications(AllGoodsSpecification[] specifications) {
+        this.specifications = specifications;
     }
 
-    public String getFiled3() {
-        return filed3;
+    public AllGoodsSpecifiAttValue[] getProducts() {
+        return products;
     }
 
-    public void setFiled3(String filed3) {
-        this.filed3 = filed3;
-    }
-
-    @Override
-    public String toString() {
-        return "GoodsAllinone{" +
-                "filed1='" + filed1 + '\'' +
-                ", filed2='" + filed2 + '\'' +
-                ", filed3='" + filed3 + '\'' +
-                '}';
+    public void setProducts(AllGoodsSpecifiAttValue[] products) {
+        this.products = products;
     }
 }

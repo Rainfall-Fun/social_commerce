@@ -28,6 +28,7 @@ public class AdminGoodsController {
     @RequiresPermissionsDesc(menu = {"商品管理", "商品管理"}, button = "查询")
     @GetMapping("/list")
     public Object list(@RequestBody String data) {
+        System.out.println("jinru");
         return null;
     }
 
@@ -65,15 +66,16 @@ public class AdminGoodsController {
     /**
      * 添加商品
      *
-     * @param goodsAllinone
+     * @param finalGoods
      * @return
      */
     @RequiresPermissions("admin:goods:create")
     @RequiresPermissionsDesc(menu = {"商品管理", "商品管理"}, button = "上架")
     @PostMapping("/create")
-    public Object create(@RequestBody String goodsAllinone) {
-        goodsService.create(goodsAllinone);
-        return null;
+    public Object create(@RequestBody String finalGoods) {
+        System.out.println("111 "+finalGoods);
+        Object o = goodsService.create(finalGoods);
+        return o;
     }
 
     /**

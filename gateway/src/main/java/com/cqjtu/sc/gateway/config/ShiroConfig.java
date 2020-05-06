@@ -34,6 +34,7 @@ public class ShiroConfig {
         filterMap.put("authc",new MyShiroFilter());
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         filterChainDefinitionMap.put("/admin/auth/login", "anon");
+        filterChainDefinitionMap.put("/admin/auth/info", "anon");
         filterChainDefinitionMap.put("/admin/auth/401", "anon");
         filterChainDefinitionMap.put("/admin/auth/index", "anon");
         filterChainDefinitionMap.put("/admin/auth/403", "anon");
