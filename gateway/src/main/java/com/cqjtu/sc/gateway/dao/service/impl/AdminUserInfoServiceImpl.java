@@ -18,6 +18,6 @@ public class AdminUserInfoServiceImpl implements AdminUserInfoService {
     public List<AdminUserInfo> findAdminUsersByUsername(String userName) {
         if (StringUtils.isBlank(userName))
             return null;
-        return userInfoRepo.findByUsername(userName);
+        return userInfoRepo.findByOperatorAccount(userName);
     }
 }

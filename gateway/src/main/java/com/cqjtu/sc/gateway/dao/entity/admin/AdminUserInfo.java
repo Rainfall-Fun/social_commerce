@@ -1,48 +1,54 @@
 package com.cqjtu.sc.gateway.dao.entity.admin;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import javax.persistence.*;
 @Entity
+@Table(name = "admin_operator")
 public class AdminUserInfo {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int id;
-    String username;
-    String password;
-    int roleId;
+    int operatorId;
+    int actorId;
+    String operatorAccount;
+    String operatorPassword;
+    int operatorIsavailable;
 
-    public int getRoleId() {
-        return roleId;
+    public int getOperatorId() {
+        return operatorId;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setOperatorId(int operatorId) {
+        this.operatorId = operatorId;
     }
 
-    public int getId() {
-        return id;
+    public int getActorId() {
+        return actorId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setActorId(int actorId) {
+        this.actorId = actorId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getOperatorAccount() {
+        return operatorAccount;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setOperatorAccount(String operatorAccount) {
+        this.operatorAccount = operatorAccount;
     }
 
-    public String getPassword() {
-        return password;
+    public String getOperatorPassword() {
+        return operatorPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setOperatorPassword(String operatorPassword) {
+        this.operatorPassword = operatorPassword;
+    }
+
+    public int getOperatorIsavailable() {
+        return operatorIsavailable;
+    }
+
+    public void setOperatorIsavailable(int operatorIsavailable) {
+        this.operatorIsavailable = operatorIsavailable;
     }
 }

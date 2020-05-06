@@ -37,16 +37,16 @@ public class AdminAuthorizingRealm extends AuthorizingRealm {
         }
 
         AdminUserInfo admin = (AdminUserInfo) getAvailablePrincipal(principals);
-        int userInfoId = admin.getId();
+        int userInfoId = admin.getOperatorId();
         List<AdminPermissions> permissionsByUserInfoId = adminPermissionsService.findPermissionsByUserInfoId(userInfoId);
         List<Integer> permissionsIds=new ArrayList<>();
         for (AdminPermissions adminPermissions : permissionsByUserInfoId) {
-            permissionsIds.add(adminPermissions.getPermissionId());
+            permissionsIds.add(adminPermissions.getAuthorityId());
         }
         List<AdminPermission> permissionsByIds = adminPermissionService.findPermissionsByIds(permissionsIds);
         Set<String> permissions=new HashSet<>();
         for (AdminPermission permissionsById : permissionsByIds) {
-            permissions.add(permissionsById.getPermission());
+            permissions.add(permissionsById.getAuthorityAddress());
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //info.setRoles(roles);
@@ -75,7 +75,7 @@ public class AdminAuthorizingRealm extends AuthorizingRealm {
         }
         AdminUserInfo admin = adminList.get(0);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        if (!encoder.matches(password, admin.getPassword())) {
+        if (!encoder.matches(password, admin.getOperatorPassword())) {
             throw new UnknownAccountException("找不到用户（" + username + "）的帐号信息");
         }
         return new SimpleAuthenticationInfo(admin, password, getName());

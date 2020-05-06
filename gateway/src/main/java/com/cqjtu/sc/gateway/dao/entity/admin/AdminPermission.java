@@ -1,39 +1,54 @@
 package com.cqjtu.sc.gateway.dao.entity.admin;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import javax.persistence.*;
 @Entity
+@Table(name = "admin_authority")
 public class AdminPermission {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int id;
-    private String permission;
-    private Boolean deleted;
+    private int authorityId;
+    private int groupId;
+    private String authorityName;
+    private String authorityAddress;
+    private String des;
 
-    public int getId() {
-        return id;
+    public int getAuthorityId() {
+        return authorityId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAuthorityId(int authorityId) {
+        this.authorityId = authorityId;
     }
 
-    public String getPermission() {
-        return permission;
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setPermission(String permission) {
-        this.permission = permission;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
-    public Boolean getDeleted() {
-        return deleted;
+    public String getAuthorityName() {
+        return authorityName;
     }
 
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
+    public void setAuthorityName(String authorityName) {
+        this.authorityName = authorityName;
+    }
+
+    public String getAuthorityAddress() {
+        return authorityAddress;
+    }
+
+    public void setAuthorityAddress(String authorityAddress) {
+        this.authorityAddress = authorityAddress;
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
     }
 }

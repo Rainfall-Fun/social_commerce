@@ -1,31 +1,37 @@
 package com.cqjtu.sc.gateway.dao.entity.admin;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "admin_actor_authority")
 public class AdminRolePermissions {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int id;
-    private int roleId;
-    private int permissionId;
+    int ruleAuthId;
+    private int actorId;
+    private int authorityId;
 
-    public int getRoleId() {
-        return roleId;
+    public int getRuleAuthId() {
+        return ruleAuthId;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRuleAuthId(int ruleAuthId) {
+        this.ruleAuthId = ruleAuthId;
     }
 
-    public int getPermissionId() {
-        return permissionId;
+    public int getActorId() {
+        return actorId;
     }
 
-    public void setPermissionId(int permissionId) {
-        this.permissionId = permissionId;
+    public void setActorId(int actorId) {
+        this.actorId = actorId;
+    }
+
+    public int getAuthorityId() {
+        return authorityId;
+    }
+
+    public void setAuthorityId(int authorityId) {
+        this.authorityId = authorityId;
     }
 }

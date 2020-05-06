@@ -67,7 +67,7 @@ public class AdminAuthController {
 
         // userInfo
         Map<String, Object> adminInfo = new HashMap<String, Object>();
-        adminInfo.put("nickName", admin.getUsername());
+        adminInfo.put("nickName", admin.getOperatorAccount());
 
         Map<Object, Object> result = new HashMap<Object, Object>();
         result.put("token", currentUser.getSession().getId());
@@ -86,17 +86,17 @@ public class AdminAuthController {
         AdminUserInfo admin = (AdminUserInfo) currentUser.getPrincipal();
 
         Map<String, Object> data = new HashMap<>();
-        data.put("name", admin.getUsername());
+        data.put("name", admin.getOperatorAccount());
 
-        List<AdminPermissions> permissionsByUserInfoId = adminPermissionsService.findPermissionsByUserInfoId(admin.getId());
+        List<AdminPermissions> permissionsByUserInfoId = adminPermissionsService.findPermissionsByUserInfoId(admin.getOperatorId());
         List<Integer> permissionsIds=new ArrayList<>();
         for (AdminPermissions adminPermissions : permissionsByUserInfoId) {
-            permissionsIds.add(adminPermissions.getPermissionId());
+            permissionsIds.add(adminPermissions.getAuthorityId());
         }
         List<AdminPermission> permissionsByIds = adminPermissionService.findPermissionsByIds(permissionsIds);
         Set<String> permissions=new HashSet<>();
         for (AdminPermission permissionsById : permissionsByIds) {
-            permissions.add(permissionsById.getPermission());
+            permissions.add(permissionsById.getAuthorityAddress());
         }
         // NOTE
         // 这里需要转换perms结构，因为对于前端而已API形式的权限更容易理解
