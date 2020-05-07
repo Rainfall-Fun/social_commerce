@@ -15,4 +15,5 @@ configuration_center->registration_center->微服务项目->gateway
 # 使用帮助
 在gateway中有通过feign来调用admin_goods_service服务的demo（在web包下面的service里面），有实现类似http中post和get的操作，后面client之间的调用可以参考GoodsService中的例子
 
-我将配置文件放到了我的git仓库https://github.com/ChunyuePeng/spring-cloud-config-repo.git，你们用的时候先把这项目克隆下来，修改配置文件之后提交到这个项目。提交之前记得update以防冲掉别人的代码
+我将配置文件放到了我的git仓库https://github.com/ChunyuePeng/spring-cloud-config-repo.git
+你们用的时候先把这项目克隆下来，修改配置文件之后提交到这个项目。提交之前记得update以防冲掉别人的代码
