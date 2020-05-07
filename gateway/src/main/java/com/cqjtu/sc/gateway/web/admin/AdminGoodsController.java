@@ -27,7 +27,7 @@ public class AdminGoodsController {
     @RequiresPermissions("admin:goods:list")
     @RequiresPermissionsDesc(menu = {"商品管理", "商品管理"}, button = "查询")
     @GetMapping("/list")
-    public Object list(@RequestBody String data) {
+    public Object list() {
         System.out.println("jinru");
         return null;
     }

@@ -30,8 +30,6 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        Map<String, Filter> filterMap = shiroFilterFactoryBean.getFilters();
-        filterMap.put("authc",new MyShiroFilter());
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         filterChainDefinitionMap.put("/admin/auth/login", "anon");
         filterChainDefinitionMap.put("/admin/auth/info", "anon");

@@ -4,37 +4,42 @@
     <el-card class="box-card">
       <h3>商品介绍</h3>
       <el-form ref="goods" :rules="rules" :model="goods" label-width="150px">
-        <el-form-item label="商品编号" prop="goodsSn">
-          <el-input v-model="goods.goodsSn" />
+        <el-form-item label="商品编号" prop="barcode">
+          <el-input v-model="goods.barcode" />
         </el-form-item>
         <el-form-item label="商品名称" prop="name">
-          <el-input v-model="goods.name" />
+          <el-input v-model="goods.goodsName" />
         </el-form-item>
         <el-form-item label="市场售价" prop="counterPrice">
-          <el-input v-model="goods.counterPrice" placeholder="0.00">
+          <el-input v-model="goods.sellingPrice" placeholder="0.00">
             <template slot="append">元</template>
           </el-input>
         </el-form-item>
-        <el-form-item label="是否新品" prop="isNew">
-          <el-radio-group v-model="goods.isNew">
-            <el-radio :label="true">新品</el-radio>
-            <el-radio :label="false">非新品</el-radio>
+        <el-form-item label="税费" prop="taxes">
+          <el-input v-model="goods.taxes" placeholder="0.00">
+            <template slot="append">元</template>
+          </el-input>
+        </el-form-item>
+        <el-form-item label="是否推荐" prop="isRecommand">
+          <el-radio-group v-model="goods.isRecommand">
+            <el-radio :label="1">是</el-radio>
+            <el-radio :label="0">否</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="是否热卖" prop="isHot">
           <el-radio-group v-model="goods.isHot">
-            <el-radio :label="false">普通</el-radio>
-            <el-radio :label="true">热卖</el-radio>
+            <el-radio :label="0">普通</el-radio>
+            <el-radio :label="1">热卖</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="是否在售" prop="isOnSale">
           <el-radio-group v-model="goods.isOnSale">
-            <el-radio :label="true">在售</el-radio>
-            <el-radio :label="false">未售</el-radio>
+            <el-radio :label="1">在售</el-radio>
+            <el-radio :label="0">未售</el-radio>
           </el-radio-group>
         </el-form-item>
 
-        <el-form-item label="商品图片">
+        <!-- <el-form-item label="商品图片">
           <el-upload
             :action="uploadPath"
             :show-file-list="false"
@@ -46,7 +51,7 @@
             <img v-if="goods.picUrl" :src="goods.picUrl" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon" />
           </el-upload>
-        </el-form-item>
+        </el-form-item> -->
 
         <el-form-item label="宣传画廊">
           <el-upload
@@ -67,7 +72,7 @@
         <el-form-item label="商品单位">
           <el-input v-model="goods.unit" placeholder="件 / 个 / 盒" />
         </el-form-item>
-
+<!-- 
         <el-form-item label="关键字">
           <el-tag v-for="tag in keywords" :key="tag" closable type="primary" @close="handleClose(tag)">
             {{ tag }}
@@ -82,7 +87,7 @@
             @blur="handleInputConfirm"
           />
           <el-button v-else class="button-new-keyword" type="primary" @click="showInput">+ 增加</el-button>
-        </el-form-item>
+        </el-form-item> -->
 
         <el-form-item label="所属分类">
           <el-cascader :options="categoryList" expand-trigger="hover" clearable @change="handleCategoryChange" />
@@ -93,13 +98,28 @@
             <el-option v-for="item in brandList" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
-
-        <el-form-item label="商品简介">
-          <el-input v-model="goods.brief" />
+        <el-form-item label="所属板块">
+          <el-select v-model="goods.boardId" clearable>
+            <el-option v-for="item in boardList" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="所属供应商">
+          <el-select v-model="goods.supplierId" clearable>
+            <el-option v-for="item in supplierList" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="运费规则">
+          <el-select v-model="goods.carriageRuleId" clearable>
+            <el-option v-for="item in carriageRuleList" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
         </el-form-item>
 
+        <!-- <el-form-item label="商品简介">
+          <el-input v-model="goods.goodsDesc" />
+        </el-form-item> -->
+
         <el-form-item label="商品详细介绍">
-          <editor v-model="goods.detail" :init="editorInit" />
+          <editor v-model="goods.goodsDesc" :init="editorInit" />
         </el-form-item>
       </el-form>
     </el-card>
@@ -119,11 +139,11 @@
       </el-row>
 
       <el-table :data="specifications">
-        <el-table-column property="specification" label="规格名" />
-        <el-table-column property="value" label="规格值">
+        <el-table-column property="specifiName" label="规格名" />
+        <el-table-column property="specifiValue" label="规格值">
           <template slot-scope="scope">
             <el-tag type="primary">
-              {{ scope.row.value }}
+              {{ scope.row.specifiValue }}
             </el-tag>
           </template>
         </el-table-column>
@@ -155,11 +175,11 @@
           label-width="100px"
           style="width: 400px; margin-left:50px;"
         >
-          <el-form-item label="规格名" prop="specification">
-            <el-input v-model="specForm.specification" />
+          <el-form-item label="规格名" prop="specifiName">
+            <el-input v-model="specForm.specifiName" />
           </el-form-item>
-          <el-form-item label="规格值" prop="value">
-            <el-input v-model="specForm.value" />
+          <el-form-item label="规格值" prop="specifiValue">
+            <el-input v-model="specForm.specifiValue" />
           </el-form-item>
           <el-form-item label="规格图片" prop="picUrl">
             <el-upload
@@ -222,6 +242,12 @@
           </el-form-item>
           <el-form-item label="货品售价" prop="price">
             <el-input v-model="productForm.price" />
+          </el-form-item>
+          <el-form-item label="货品成本价" prop="costPrice">
+            <el-input v-model="productForm.costPrice" />
+          </el-form-item>
+          <el-form-item label="积分最大抵扣额度" prop="maximumPoints">
+            <el-input v-model="productForm.maximumPoints" />
           </el-form-item>
           <el-form-item label="货品数量" prop="number">
             <el-input v-model="productForm.number" />
@@ -355,14 +381,14 @@ export default {
       keywords: [],
       categoryList: [],
       brandList: [],
-      goods: { picUrl: '', gallery: [], isHot: false, isNew: true, isOnSale: true },
+      goods: { gallery: [], isHot: 0, isNew: 1, isOnSale: 0, isRecommand: 0, boardId: 1, carriageRuleId: 1, supplierId: 1, brandId: 1 },
       specVisiable: false,
-      specForm: { specification: '', value: '', picUrl: '' },
+      specForm: { specifiName: '', specifiValue: '', picUrl: '' },
       multipleSpec: false,
-      specifications: [{ specification: '规格', value: '标准', picUrl: '' }],
+      specifications: [{ specifiName: '规格', specifiValue: '标准', picUrl: '' }],
       productVisiable: false,
-      productForm: { id: 0, specifications: [], price: 0.00, number: 0, url: '' },
-      products: [{ id: 0, specifications: ['标准'], price: 0.00, number: 0, url: '' }],
+      productForm: { id: 0, specifications: [], price: 0.00, costPrice: 0.00, maximumPoints: 0.00, number: 0, url: '' },
+      products: [{ id: 0, specifications: ['标准'], price: 0.00, costPrice: 0.00, maximumPoints: 0.00,  number: 0, url: '' }],
       attributeVisiable: false,
       attributeForm: { attribute: '', value: '' },
       attributes: [],
@@ -391,7 +417,7 @@ export default {
   computed: {
     headers() {
       return {
-        'X-Litemall-Admin-Token': getToken()
+        'S-C-Admin-Token': getToken()
       }
     }
   },
@@ -419,6 +445,7 @@ export default {
         products: this.products,
         attributes: this.attributes
       }
+      console.log(finalGoods);
       publishGoods(finalGoods).then(response => {
         this.$notify.success({
           title: '成功',
@@ -462,6 +489,7 @@ export default {
     },
     handleGalleryUrl(response, file, fileList) {
       if (response.errno === 0) {
+        console.log(response.data)
         this.goods.gallery.push(response.data.url)
       }
     },
@@ -485,8 +513,8 @@ export default {
     },
     specChanged: function(label) {
       if (label === false) {
-        this.specifications = [{ specification: '规格', value: '标准', picUrl: '' }]
-        this.products = [{ id: 0, specifications: ['标准'], price: 0.00, number: 0, url: '' }]
+        this.specifications = [{ specifiName: '规格', specifiValue: '标准', picUrl: '' }]
+        this.products = [{ id: 0, specifications: ['标准'], price: 0.00, costPrice: 0.00, maximumPoints: 0.00,  number: 0, url: '' }]
       } else {
         this.specifications = []
         this.products = []
@@ -496,18 +524,18 @@ export default {
       this.specForm.picUrl = response.data.url
     },
     handleSpecificationShow() {
-      this.specForm = { specification: '', value: '', picUrl: '' }
+      this.specForm = { specifiName: '', specifiValue: '', picUrl: '' }
       this.specVisiable = true
     },
     handleSpecificationAdd() {
       var index = this.specifications.length - 1
       for (var i = 0; i < this.specifications.length; i++) {
         const v = this.specifications[i]
-        if (v.specification === this.specForm.specification) {
-          if (v.value === this.specForm.value) {
+        if (v.specifiName === this.specForm.specifiName) {
+          if (v.specifiValue === this.specForm.specifiName) {
             this.$message({
               type: 'warning',
-              message: '已经存在规格值:' + v.value
+              message: '已经存在规格值:' + v.specifiValue
             })
             this.specForm = {}
             this.specVisiable = false
@@ -534,12 +562,12 @@ export default {
       }
       // 根据specifications创建临时规格列表
       var specValues = []
-      var spec = this.specifications[0].specification
+      var spec = this.specifications[0].specifiName
       var values = []
       values.push(0)
 
       for (var i = 1; i < this.specifications.length; i++) {
-        const aspec = this.specifications[i].specification
+        const aspec = this.specifications[i].specifiName
 
         if (aspec === spec) {
           values.push(i)
@@ -552,8 +580,6 @@ export default {
       }
       specValues.push(values)
 
-      // 根据临时规格列表生产货品规格
-      // 算法基于 https://blog.csdn.net/tyhj_sf/article/details/53893125
       var productsIndex = 0
       var products = []
       var combination = []
@@ -567,9 +593,9 @@ export default {
         var specifications = []
         for (var x = 0; x < n; x++) {
           var z = specValues[x][combination[x]]
-          specifications.push(this.specifications[z].value)
+          specifications.push(this.specifications[z].specifiValue)
         }
-        products[productsIndex] = { id: productsIndex, specifications: specifications, price: 0.00, number: 0, url: '' }
+        products[productsIndex] = { id: productsIndex, specifications: specifications, price: 0.00, costPrice: 0.00, maximumPoints: 0.00, number: 0, url: '' }
         productsIndex++
 
         index++
