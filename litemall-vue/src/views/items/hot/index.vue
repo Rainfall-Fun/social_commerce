@@ -1,31 +1,94 @@
 <template>
   <div class="goods_hot">
-    <div class="banner">
-      <div class="title">大家都在买</div>
-    </div>
+    <!-- <div class="banner">
+      <div class="title">人气推荐</div>
+    </div>-->
 
-    <van-list v-model="loading"
-              :finished="finished"
-              :immediate-check="false"
-              finished-text="没有更多了"
-              @load="getHotList">
-      <van-card v-for="(item, i) in list"
-                :key="i"
-                :desc="item.brief"
-                :title="item.name"
-                :thumb="item.picUrl"
-                :price="item.retailPrice"
-                :origin-price="item.counterPrice"
-                @click="itemClick(item.id)">
-      </van-card>
-    </van-list>
-
+    <van-tabs v-model="active" @click="onClick">
+      <van-tab title="点击量最高">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :immediate-check="false"
+          finished-text="没有更多了"
+          @load="getHotList"
+        >
+          <van-card
+            v-for="(item, i) in list"
+            :key="i"
+            :title="item.name"
+            :thumb="item.picUrl"
+            :price="item.retailPrice"
+            :origin-price="item.counterPrice"
+            @click="itemClick(item.id)"
+          ></van-card>
+        </van-list>
+      </van-tab>
+      <van-tab title="销量最高">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :immediate-check="false"
+          finished-text="没有更多了"
+          @load="getHotList"
+        >
+          <van-card
+            v-for="(item, i) in list"
+            :key="i"
+            :title="item.name"
+            :thumb="item.picUrl"
+            :price="item.retailPrice"
+            :origin-price="item.counterPrice"
+            @click="itemClick(item.id)"
+          ></van-card>
+        </van-list>
+      </van-tab>
+      <van-tab title="最好评">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :immediate-check="false"
+          finished-text="没有更多了"
+          @load="getHotList"
+        >
+          <van-card
+            v-for="(item, i) in list"
+            :key="i"
+            :desc="item.brief"
+            :title="item.name"
+            :thumb="item.picUrl"
+            :price="item.retailPrice"
+            :origin-price="item.counterPrice"
+            @click="itemClick(item.id)"
+          ></van-card>
+        </van-list>
+      </van-tab>
+      <van-tab title="本地区都在买">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :immediate-check="false"
+          finished-text="没有更多了"
+          @load="getHotList"
+        >
+          <van-card
+            v-for="(item, i) in list"
+            :key="i"
+            :title="item.name"
+            :thumb="item.picUrl"
+            :price="item.retailPrice"
+            :origin-price="item.counterPrice"
+            @click="itemClick(item.id)"
+          ></van-card>
+        </van-list>
+      </van-tab>
+    </van-tabs>
   </div>
 </template>
 
 <script>
-import { goodsList } from '@/api/api';
-import { Card, List } from 'vant';
+import { recommendGoodsList } from '@/api/api';
+import { Card, List, Tab, Tabs } from 'vant';
 import scrollFixed from '@/mixin/scroll-fixed';
 
 export default {
@@ -35,9 +98,10 @@ export default {
     return {
       list: [],
       page: 0,
-      limit: 10,
+      limit: 5,
       loading: false,
-      finished: false
+      finished: false,
+      active: 0
     };
   },
 
@@ -53,8 +117,8 @@ export default {
     },
     getHotList() {
       this.page++;
-      goodsList({
-        isHot: true,
+      recommendGoodsList({
+        recommendType: this.active,
         page: this.page,
         limit: this.limit
       }).then(res => {
@@ -65,12 +129,19 @@ export default {
     },
     itemClick(id) {
       this.$router.push(`/items/detail/${id}`);
+    },
+    onClick(name, title) {
+      this.page = 0;
+      this.list = [];
+      this.getHotList();
     }
   },
 
   components: {
     [List.name]: List,
-    [Card.name]: Card
+    [Card.name]: Card,
+    [Tabs.name]: Tabs,
+    [Tab.name]: Tab
   }
 };
 </script>

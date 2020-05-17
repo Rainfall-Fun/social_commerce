@@ -99,6 +99,7 @@ public class PermissionUtil {
             Class<?> clz = bean.getClass();
             Class controllerClz = clz.getSuperclass();
             RequestMapping clazzRequestMapping = AnnotationUtils.findAnnotation(controllerClz, RequestMapping.class);
+            //得到所有有@RequiresPernissions注释的方法
             List<Method> methods = MethodUtils.getMethodsListWithAnnotation(controllerClz, RequiresPermissions.class);
             for (Method method : methods) {
                 RequiresPermissions requiresPermissions = AnnotationUtils.getAnnotation(method, RequiresPermissions.class);

@@ -106,6 +106,15 @@ export function goodsList(query) {
     params: query
   })
 }
+
+export const RecommendGoodsList='wx/goods/recommendList'; //获得推荐商品列表
+export function recommendGoodsList(query) {
+  return request({
+    url: RecommendGoodsList,
+    method: 'get',
+    params: query
+  })
+}
 const GoodsCategory='wx/goods/category'; //获得分类数据
 export function goodsCategory(query) {
   return request({

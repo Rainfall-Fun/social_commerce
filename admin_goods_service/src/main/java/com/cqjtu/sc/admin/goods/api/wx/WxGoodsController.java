@@ -1,5 +1,7 @@
 package com.cqjtu.sc.admin.goods.api.wx;
 
+import com.cqjtu.sc.admin.goods.db.service.BriefGoodsService;
+import com.cqjtu.sc.admin.goods.dto.BriefGoods;
 import com.cqjtu.sc.admin.goods.util.ResponseUtil;
 import com.cqjtu.sc.admin.goods.validator.Order;
 import com.cqjtu.sc.admin.goods.validator.Sort;
@@ -8,10 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -28,6 +27,8 @@ import java.util.concurrent.*;
 public class WxGoodsController {
 
 
+    @Autowired
+    BriefGoodsService briefGoodsService;
 //	private final static ArrayBlockingQueue<Runnable> WORK_QUEUE = new ArrayBlockingQueue<>(9);
 //
 //	private final static RejectedExecutionHandler HANDLER = new ThreadPoolExecutor.CallerRunsPolicy();
@@ -118,5 +119,15 @@ public class WxGoodsController {
 //	}
 
 
+    /**
+     * 获取商品的概要信息用于在主页等地方展示
+     * @param goodsIds
+     * @return
+     */
+    @RequestMapping("getBriefGoods")
+    public Object getBriefGoods(@RequestBody List<Integer> goodsIds){
+        List<BriefGoods> briefGoods = briefGoodsService.getBriefGoods(goodsIds);
+        return briefGoods;
+    }
 
 }

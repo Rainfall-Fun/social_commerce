@@ -2,4 +2,5 @@ spring:
   cloud:
     config:
       name: wx-service #配置文件名称，多个通过逗号分隔
-      uri: http://120.26.176.128:8000 #Config Server服务地址
+      uri: http://172.16.50.224:8000 #Config Server服务地址
+      profile: dev
