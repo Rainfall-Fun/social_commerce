@@ -33,11 +33,12 @@ export default {
       return
     }else{
       authLogin({code: this.$route.query.code}).then(res=>{
-        console.log(res.data.data);
+        alert('登录成功');
         setLocalStorage({
           Authorization: res.data.data.token,
           userName:res.data.data.userName
         });
+        window.location.href=`http://120.26.176.128:6255`;
       }).catch(error=>{
         console.log(error);
       })

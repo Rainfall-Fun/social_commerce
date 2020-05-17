@@ -14,6 +14,8 @@ Vue.use(filters);
 
 
 import { Lazyload, Icon, Cell, CellGroup, loading, Button, Toast } from 'vant';
+import VueClipboard from 'vue-clipboard2'
+Vue.use(VueClipboard)
 Vue.use(Icon);
 Vue.use(Cell);
 Vue.use(CellGroup);

@@ -24,7 +24,15 @@
         <span>{{channel.name}}</span>
       </div>
     </div>
-
+    <van-field
+  v-model="password"
+  center
+  clearable
+  label="淘口令"
+  placeholder="请输入淘口令"
+>
+  <van-button slot="button" size="small" type="primary" @click="tao">淘</van-button>
+</van-field>
     <van-panel title="优惠券"
                style=" padding-bottom: 10px;">
       <div class="van-coupon-item"
@@ -199,7 +207,8 @@ import {
   GridItem,
   Row,
   Col,
-  Tag
+  Tag,
+  Field
 } from 'vant';
 
 export default {
@@ -208,7 +217,8 @@ export default {
   data() {
     return {
       shopInfos: [],
-      isLoading: false
+      isLoading: false,
+      password: ''
     };
   },
 
@@ -217,6 +227,12 @@ export default {
   },
 
   methods: {
+    tao(){
+      console.log(this.password.substring(18,this.password.length-1))
+      var text=window.atob(this.password.substring(18,this.password.length-1));
+      var a=text.split(':');
+      this.$router.push(`/items/detail/${a[1]}`);
+    },
     goDetail(id) {
       return `#/items/detail/${id}`;
     },
@@ -263,7 +279,8 @@ export default {
     [TabbarItem.name]: TabbarItem,
     [Tag.name]: Tag,
     [Grid.name]: Grid,
-    [GridItem.name]: GridItem
+    [GridItem.name]: GridItem,
+    [Field.name]: Field
   }
 };
 </script>

@@ -28,6 +28,7 @@
       />
       <van-cell title="属性" isLink @click.native="propsPopup = true"/>
       <van-cell title="运费" value="满88免邮费"/>
+      <van-cell title="淘口令" @click="copy" value="点击复制淘口令"/> 
     </van-cell-group>
     <van-sku
       v-model="showSku"
@@ -124,6 +125,24 @@ export default {
   },
 
   methods: {
+    copy(){
+      var toast=this.$toast;
+      var text=window.btoa('goods id is:'+this.itemId);
+      var text1=window.atob(text);
+      var password='打开社交小商城，查看好友推荐的商品('+text+')';
+      this.$copyText(password).then(
+        function(e) {
+          toast({
+            message: '复制成功',
+            duration: 1500
+          });
+        },
+        function(e) {
+          console.log("copy arguments e:", e);
+          alert("复制失败!");
+        }
+      );
+    },
     skuClick() {
       this.showSku = true;
     },

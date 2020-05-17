@@ -49,7 +49,6 @@ public class AdminAuthorizingRealm extends AuthorizingRealm {
             permissions.add(permissionsById.getAuthorityAddress());
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        //info.setRoles(roles);
         info.setStringPermissions(permissions);
         return info;
     }
