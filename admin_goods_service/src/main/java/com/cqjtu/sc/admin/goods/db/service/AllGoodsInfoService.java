@@ -16,4 +16,8 @@ public class AllGoodsInfoService {
         return allGoodsInfo.getGoodsId();
     }
 
+    public AllGoodsInfo findById(Integer id){
+        return mapper.selectByPrimaryKey(id);
+    }
+
 }

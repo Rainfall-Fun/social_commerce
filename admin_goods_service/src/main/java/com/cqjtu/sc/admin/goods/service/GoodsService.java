@@ -45,6 +45,7 @@ public class GoodsService {
         for (int i = 0; i < gallery.length; i++) {
             AllGoodsSpecifiImg img=new AllGoodsSpecifiImg();
             img.setGoodsId(goodsId);
+            img.setType(1);//1为商品展示图
             imgs.add(img);
         }
 
@@ -55,11 +56,19 @@ public class GoodsService {
             int specificationId = specificationService.add(specifications[i]);
             AllGoodsSpecifiImg img=new AllGoodsSpecifiImg();
             img.setGoodsId(goodsId);
-            img.setSpecifiValueId(specificationId);
+            img.setId(specificationId);
             img.setUrl(specifications[i].getUrl()+"");
+            img.setType(2);//2为规格图
             imgs.add(img);
             specifiIdMap.put(specifications[i].getSpecifiValue(),specificationId);
         }
+        AllGoodsSpecifiImg img=new AllGoodsSpecifiImg();
+        img.setGoodsId(goodsId);
+        img.setType(3);//三为封面图
+        img.setUrl(goods.getCoverImg());
+        if (goods.getCoverImg()==null||goods.getCoverImg().equals(""))
+            img.setUrl("default.jpg");
+        imgs.add(img);
         imgService.batchAdd(imgs);
 
         AllGoodsSpecifiAttValue[] products = goodsAllinone.getProducts();

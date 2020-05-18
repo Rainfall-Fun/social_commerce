@@ -86,6 +86,18 @@ public class RecommendService {
     }
 
     /**
+     * 得到三家该用户所购买过的商品的商家的其他商品
+     * @param page
+     * @param userId
+     * @param limit
+     * @return
+     */
+    public List<Integer> queryBySupplier(Integer page,Integer userId,Integer limit){
+        List<Integer> integers = recommendMapper.querySupplier((page-1)*limit,limit,userId);
+        return integers;
+    }
+
+    /**
      * 获取该用户对应的区域所销售的前三的商品
      * @return
      */
@@ -104,6 +116,8 @@ public class RecommendService {
     public int countByRegion(int limit,int userId){
         return recommendMapper.countByRegion(limit,userId);
     }
+
+    public int countBySupplier(int limit,int userId){return recommendMapper.countBySupplier(limit,userId);}
 
 
 }

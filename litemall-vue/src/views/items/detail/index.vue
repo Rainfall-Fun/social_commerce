@@ -8,11 +8,11 @@
     <van-cell-group class="item_cell_group" v-if="goods">
       <van-cell class="item_info">
         <div>
-          <span class="item_price">{{ goods.info.retailPrice*100 | yuan }}</span>
-          <span class="item_market_price">{{goods.info.counterPrice*100 | yuan}}</span>
+          <span class="item_price">{{ goods.info.price*100 | yuan }}</span>
+          <span class="item_market_price">{{goods.info.price*150 | yuan}}</span>
         </div>
         <div class="item-title">
-          {{ goods.info.name }}
+          {{ goods.info.goodsName }}
         </div>
         <div class="item_intro">{{goods.info.brief}}</div>
       </van-cell>
@@ -46,7 +46,7 @@
 
     <div class="item_desc">
       <div class="item_desc_title">商品详情</div>
-      <div class="item_desc_wrap" v-if="goods.info.detail" v-html="goods.info.detail"></div>
+      <div class="item_desc_wrap" v-if="goods.info.goodsDesc" v-html="goods.info.goodsDesc"></div>
       <div class="item_desc_wrap" v-else style="text-align: center;">
         <p>无详情</p>
       </div>

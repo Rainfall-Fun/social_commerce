@@ -80,9 +80,9 @@
 <!--        <table tableName="all_goods_extension_att_value">-->
 <!--            <generatedKey column="extension_att_id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-        <table tableName="all_goods_info">
-            <generatedKey column="goods_id" sqlStatement="MySql" identity="true"/>
-        </table>
+<!--        <table tableName="all_goods_info">-->
+<!--            <generatedKey column="goods_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
 <!--        <table tableName="all_carrige_rule">-->
 <!--            <generatedKey column="carriage_rule_id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
@@ -98,11 +98,11 @@
 <!--        <table tableName="all_goods_specifi_img">-->
 <!--            <generatedKey column="img_id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-<!--        <table tableName="all_goods_specifi_att_value">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
-<!--                            typeHandler="com.cqjtu.sc.admin.goods.util.JsonStringArrayTypeHandler"/>-->
-<!--        </table>-->
+        <table tableName="all_goods_specifi_att_value">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="specifications" javaType="java.lang.String[]"
+                            typeHandler="com.cqjtu.sc.admin.goods.util.JsonStringArrayTypeHandler"/>
+        </table>
 
 
     </context>

@@ -26,6 +26,18 @@
         limit #{limit,jdbcType=INTEGER} offset #{offset,jdbcType=INTEGER};
     </select>
 
+    <select id="querySupplier" resultType="int" parameterType="map">
+        select all_goods_info.goods_id from all_goods_info where supplier_id = (select t3.supplier_id as supplier_id
+        from all_order t1,all_order_detail t2,all_goods_info t3
+        where t1.order_id=t2.order_id and t1.user_info_id1=#{userId,jdbcType=INTEGER} and t2.goods_id=t3.goods_id
+        group by t3.supplier_id
+        limit 0,3)
+        and goods_id != all(select t2.goods_id as goods_id
+        from all_order t1,all_order_detail t2
+        where t1.order_id=t2.order_id and t1.user_info_id1=#{userId,jdbcType=INTEGER})
+        limit #{limit,jdbcType=INTEGER} offset #{offset,jdbcType=INTEGER};
+    </select>
+
     <select id="countBySale" resultType="int" parameterType="map">
         select ceil(count(*)/#{limit,jdbcType=INTEGER}) from (select t1.goods_id
         from all_goods_info t1,all_order_detail t2
@@ -43,6 +55,17 @@
         from all_goods_info t1,all_order_detail t2
         where t1.goods_id=t2.goods_id
         group by t1.goods_id) as t
+    </select>
+
+    <select id="countBySupplier" resultType="int" parameterType="map">
+        select ceil(count(*)/#{limit,jdbcType=INTEGER}) from (select all_goods_info.goods_id from all_goods_info where supplier_id = (select t3.supplier_id as supplier_id
+        from all_order t1,all_order_detail t2,all_goods_info t3
+        where t1.order_id=t2.order_id and t1.user_info_id1=#{userId,jdbcType=INTEGER} and t2.goods_id=t3.goods_id
+        group by t3.supplier_id
+        limit 0,3)
+        and goods_id != all(select t2.goods_id as goods_id
+        from all_order t1,all_order_detail t2
+        where t1.order_id=t2.order_id and t1.user_info_id1=#{userId,jdbcType=INTEGER})) as t
     </select>
 
 </mapper>

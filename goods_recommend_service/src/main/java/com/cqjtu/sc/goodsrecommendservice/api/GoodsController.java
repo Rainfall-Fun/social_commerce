@@ -71,14 +71,38 @@ public class GoodsController {
         }
 
 
+        if (goodsId.size()==0){
+            Page<BriefGoods> data=new Page<>();
+            data.setPages(0);
+            data.setPageNum(page);
+            return ResponseUtil.okList(data);
+        }
         Page<BriefGoods> data=new Page<>();
         data.setPages(pages);
         data.setPageNum(page);
         data.addAll(goodsService.getBriefGoods(goodsId));
-        for (BriefGoods datum : data) {
-            datum.setCounterPrice(datum.getRetailPrice().multiply(BigDecimal.valueOf(1.5)));
-            datum.setPicUrl("http://localhost:8777/"+datum.getPicUrl());
+        return ResponseUtil.okList(data);
+    }
+
+
+    @GetMapping("getSupplierOtherGoods")
+    public Object getSupplierOtherGoods(Integer userInfoId,
+                                        @RequestParam(defaultValue = "1") Integer page,
+                                        @RequestParam(defaultValue = "10") Integer limit){
+        List<Integer> goodsId=null;
+        int pages=0;
+        goodsId=recommendService.queryBySupplier(page,userInfoId,limit);
+        if (goodsId.size()==0){
+            Page<BriefGoods> data=new Page<>();
+            data.setPages(0);
+            data.setPageNum(page);
+            return ResponseUtil.okList(data);
         }
+        pages=recommendService.countBySupplier(limit,userInfoId);
+        Page<BriefGoods> data=new Page<>();
+        data.setPages(pages);
+        data.setPageNum(page);
+        data.addAll(goodsService.getBriefGoods(goodsId));
         return ResponseUtil.okList(data);
     }
 

@@ -14,6 +14,7 @@ const UserInfo_SetPassword = () => import('@/views/user/user-information-set/set
 const UserOrderList = () => import('@/views/user/order-list');
 const UserCouponList = () => import('@/views/user/coupon-list');
 const UserRefundList = () => import('@/views/user/refund-list');
+const UserIntersted = () => import('@/views/user/module-intersted')
 
 const Tabbar = () => import('@/components/Tabbar/');
 
@@ -60,6 +61,11 @@ export default [
     path: '/user/help',
     name: 'user-help',
     component: UserHelp
+  },
+  {
+    path: '/user/intersted',
+    name: 'user-intersted',
+    component: UserIntersted
   },
   {
     path: '/user/feedback',

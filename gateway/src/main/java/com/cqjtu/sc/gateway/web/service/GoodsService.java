@@ -38,4 +38,8 @@ public interface GoodsService {
      */
     @RequestMapping(value = "/admin/goods/create",method = RequestMethod.POST,consumes = "application/json")
     Object create(@RequestBody String data);
+
+    @GetMapping("/wx/goods/detail")
+    Object detail(@RequestParam("userId") Integer userId,
+                  @RequestParam("id") Integer id);
 }
