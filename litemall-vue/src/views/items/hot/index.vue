@@ -124,6 +124,7 @@ export default {
       }).then(res => {
         this.list.push(...res.data.data.list);
         this.loading = false;
+        if(res.data.data.list.length!=1)
         this.finished = res.data.data.page >= res.data.data.pages;
       });
     },

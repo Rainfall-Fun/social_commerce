@@ -152,9 +152,9 @@ export default {
         this.skuAdapter();
       });
 
-      cartGoodsCount().then(res => {
-        this.cartInfo = res.data.data;
-      });
+      // cartGoodsCount().then(res => {
+      //   this.cartInfo = res.data.data;
+      // });
     },
     toCart() {
       this.$router.push({
@@ -176,20 +176,8 @@ export default {
     },
     getProductId(s1, s2) {
       var productId;
-      var s1_name;
-      var s2_name;
-      _.each(this.goods.specificationList, specification => {
-        _.each(specification.valueList, specValue => {
-          if (specValue.id === s1) {
-            s1_name = specValue.value;
-          } else if (specValue.id === s2) {
-            s2_name = specValue.value;
-          }
-        });
-      });
-
       _.each(this.goods.productList, v => {
-        let result = _.without(v.specifications, s1_name, s2_name);
+        let result = _.without(v.specifications, s1, s2);
         if (result.length === 0) {
           productId = v.id;
         }
@@ -198,18 +186,8 @@ export default {
     },
     getProductIdByOne(s1) {
       var productId;
-      var s1_name;
-      _.each(this.goods.specificationList, specification => {
-        _.each(specification.valueList, specValue => {
-          if (specValue.id === s1) {
-            s1_name = specValue.value;
-            return;
-          }
-        });
-      });
-
       _.each(this.goods.productList, v => {
-        let result = _.without(v.specifications, s1_name);
+        let result = _.without(v.specifications, s1);
         if (result.length === 0) {
           productId = v.id;
         }
@@ -249,7 +227,7 @@ export default {
     buyGoods(data) {
       let that = this;
       let params = {
-        goodsId: data.goodsId,
+        goodsId: this.goods.info.goodsId,
         number: data.selectedNum,
         productId: 0
       };
@@ -267,12 +245,13 @@ export default {
       } else {
         params.productId = this.getProductIdByOne(data.selectedSkuComb.s1);
       }
-      cartFastAdd(params).then(res => {
-        let cartId = res.data.data;
-        setLocalStorage({ CartId: cartId });
-        that.showSku = false;
-        this.$router.push('/order/checkout');
-      });
+      console.log(params)
+      // cartFastAdd(params).then(res => {
+      //   let cartId = res.data.data;
+      //   setLocalStorage({ CartId: cartId });
+      //   that.showSku = false;
+      //   this.$router.push('/order/checkout');
+      // });
     },
     skuAdapter() {
       const tree = this.setSkuTree();
@@ -298,10 +277,8 @@ export default {
       var sku_list = [];
       _.each(this.goods.productList, v => {
         var sku_list_obj = {};
-        _.each(v.specifications, (specificationName, index) => {
-          sku_list_obj['s' + (~~index + 1)] = this.findSpecValueIdByName(
-            specificationName
-          );
+        _.each(v.specifications, (specificationId, index) => {
+          sku_list_obj['s' + (~~index + 1)] = specificationId;
         });
 
         sku_list_obj.price = v.price * 100;
@@ -311,21 +288,6 @@ export default {
 
       return sku_list;
     },
-    findSpecValueIdByName(name) {
-      let id = 0;
-      _.each(this.goods.specificationList, specification => {
-        _.each(specification.valueList, specValue => {
-          if (specValue.value === name) {
-            id = specValue.id;
-            return;
-          }
-        });
-        if (id !== 0) {
-          return;
-        }
-      });
-      return id;
-    },
     setSkuTree() {
       let that = this;
       let specifications = [];
@@ -334,19 +296,17 @@ export default {
         _.each(v.valueList, vv => {
           vv.name = vv.value;
           values.push({
-            id: vv.id,
-            name: vv.value,
-            imUrl: vv.picUrl
+            id: vv.goodsSpecifiId,
+            name: vv.specifiValue,
+            imUrl: vv.url
           });
         });
-
         specifications.push({
           k: v.name,
           v: values,
           k_s: 's' + (~~k + 1)
         });
       });
-
       return specifications;
     }
   },
