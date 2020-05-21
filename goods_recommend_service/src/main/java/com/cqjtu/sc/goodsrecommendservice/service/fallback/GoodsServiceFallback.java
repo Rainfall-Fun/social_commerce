@@ -6,11 +6,12 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 @Component
 public class GoodsServiceFallback implements GoodsService {
     @Override
-    public List<BriefGoods> getBriefGoods(List<Integer> data) {
+    public List<BriefGoods> getBriefGoods(Collection<Integer> data) {
         List<BriefGoods> briefGoods=new ArrayList<>();
         BriefGoods briefGoods1=new BriefGoods();
         briefGoods1.setId(0);

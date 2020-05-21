@@ -98,10 +98,14 @@
 <!--        <table tableName="all_goods_specifi_img">-->
 <!--            <generatedKey column="img_id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-        <table tableName="all_goods_specifi_att_value">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-            <columnOverride column="specifications" javaType="java.lang.String[]"
-                            typeHandler="com.cqjtu.sc.admin.goods.util.JsonStringArrayTypeHandler"/>
+<!--        <table tableName="all_goods_specifi_att_value">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
+<!--                            typeHandler="com.cqjtu.sc.admin.goods.util.JsonStringArrayTypeHandler"/>-->
+<!--        </table>-->
+
+        <table tableName="all_cart">
+            <generatedKey column="cart_id" sqlStatement="MySql" identity="true"/>
         </table>
 
 

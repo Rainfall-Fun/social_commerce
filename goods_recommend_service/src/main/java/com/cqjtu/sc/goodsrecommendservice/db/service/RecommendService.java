@@ -51,13 +51,10 @@ public class RecommendService {
      * @param limit
      * @return
      */
-    public List<Integer> queryByRecommend(int offset, int limit, Set<Integer> goodsIds){
+    public List<Integer> queryByRecommend(int offset, int limit, List<Integer> goodsIds){
         List<Integer> result=new ArrayList<>();
         AllGoodsInfoExample example = new AllGoodsInfoExample();
-        AllGoodsInfoExample.Criteria criteria = example.or().andIsOnSaleEqualTo(1).andIsRecommandEqualTo(1);
-        for (Integer goodsId : goodsIds) {
-            criteria.andGoodsIdNotEqualTo(goodsId);
-        }
+        AllGoodsInfoExample.Criteria criteria = example.or().andIsOnSaleEqualTo(1).andIsRecommandEqualTo(1).andGoodsIdNotIn(goodsIds);
         example.setOrderByClause("goods_last_recommand_time desc");
         PageHelper.startPage(offset, limit);
         List<AllGoodsInfo> allGoodsInfos = goodsInfoMapper.selectByExampleSelective(example, columns);
@@ -119,5 +116,10 @@ public class RecommendService {
 
     public int countBySupplier(int limit,int userId){return recommendMapper.countBySupplier(limit,userId);}
 
+
+    public List<Integer> queryAllInOne(Integer userId){
+        List<Integer> integers = recommendMapper.queryAllInOne(userId);
+        return integers;
+    }
 
 }

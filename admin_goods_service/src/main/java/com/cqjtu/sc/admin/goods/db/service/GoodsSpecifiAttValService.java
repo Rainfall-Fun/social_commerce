@@ -18,4 +18,8 @@ public class GoodsSpecifiAttValService {
         criteria.andGoodsIdEqualTo(goodsId);
         return mapper.selectByExample(example);
     }
+
+    public AllGoodsSpecifiAttValue queryById(int id){
+        return mapper.selectByPrimaryKey(id);
+    }
 }

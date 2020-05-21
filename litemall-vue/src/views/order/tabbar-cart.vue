@@ -6,7 +6,7 @@
     </div>
     <van-checkbox-group @change="toggle" class="card-goods" v-model="checkedGoods">
       <div v-for="(item, i) in goods" :key="i" class="card-goods__item">
-        <van-checkbox :key="item.id" :name="item.id" v-model="item.checked"></van-checkbox>
+        <van-checkbox :key="item.cartId" :name="item.cartId" v-model="item.checked"></van-checkbox>
 
         <van-card :title="item.goodsName" :price="item.price" :num="item.number" :thumb="item.picUrl">
           <div slot="desc">
@@ -72,7 +72,7 @@ export default {
       return this.goods.reduce(
         (total, item) =>
           total +
-          (this.checkedGoods.indexOf(item.id) !== -1
+          (this.checkedGoods.indexOf(item.cartId) !== -1
             ? item.price * item.number * 100
             : 0),
         0
@@ -100,7 +100,7 @@ export default {
     getAllList() {
       let result = [];
       _.each(this.goods, v => {
-        result.push(v.id);
+        result.push(v.cartId);
       });
       return result;
     },
@@ -108,7 +108,7 @@ export default {
       let result = [];
       _.each(goods, v => {
         if (v.checked) {
-          result.push(v.id);
+          result.push(v.cartId);
         }
       });
       return result;
@@ -119,7 +119,7 @@ export default {
       _.each(checkedGoods, id => {
         productIds.push(
           _.find(this.goods, vv => {
-            return id === vv.id;
+            return id === vv.cartId;
           }).productId
         );
       });
@@ -135,7 +135,8 @@ export default {
       } else {
         this.isSubmit = true;
         setLocalStorage({AddressId: 0, CartId: 0, CouponId: 0});
-        this.$router.push('/order/checkout');
+        console.log(this.checkedGoods)
+        // this.$router.push('/order/checkout');
       }
     },
     setCheckAll(val) {
@@ -159,7 +160,7 @@ export default {
       let addProductIds = [];
       _.each(index, v => {
         let productId = _.find(this.goods, result => {
-          return result.id === v;
+          return result.cartId === v;
         }).productId;
         addProductIds.push(productId);
       });
@@ -167,16 +168,16 @@ export default {
       let delProductIds = [];
       _.each(_.difference(this.allGoods, index), v => {
         let productId = _.find(this.goods, result => {
-          return result.id === v;
+          return result.cartId === v;
         }).productId;
         delProductIds.push(productId);
       });
-      if (delProductIds.length > 0) {
-        cartChecked({productIds: delProductIds, isChecked: 0});
-      }
-      if (addProductIds.length > 0) {
-        cartChecked({productIds: addProductIds, isChecked: 1});
-      }
+      // if (delProductIds.length > 0) {
+      //   cartChecked({productIds: delProductIds, isChecked: 0});
+      // }
+      // if (addProductIds.length > 0) {
+      //   cartChecked({productIds: addProductIds, isChecked: 1});
+      // }
 
       if(index.length === this.allGoods.length){
         this.checkedAll = true

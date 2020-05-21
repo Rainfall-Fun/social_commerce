@@ -5,7 +5,7 @@ export default [
     path: '/order',
     name: 'cart',
     meta: {
-      login: true
+      login1: true
     },
     components: { 
       default: () => import('@/views/order/tabbar-cart'), 

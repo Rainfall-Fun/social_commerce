@@ -36,6 +36,7 @@
       :hide-stock="true"
       :goods="skuGoods"
       :goodsId="goods.info.id"
+      :close-on-click-overlay="true"
       @buy-clicked="buyGoods"
       @add-cart="addCart"
     />
@@ -152,9 +153,9 @@ export default {
         this.skuAdapter();
       });
 
-      // cartGoodsCount().then(res => {
-      //   this.cartInfo = res.data.data;
-      // });
+      cartGoodsCount().then(res => {
+        this.cartInfo = res.data.data;
+      });
     },
     toCart() {
       this.$router.push({
@@ -197,9 +198,9 @@ export default {
     addCart(data) {
       let that = this;
       let params = {
-        goodsId: data.goodsId,
+        goodsId: this.goods.info.goodsId,
         number: data.selectedNum,
-        productId: 0
+        id: 0
       };
       if (_.has(data.selectedSkuComb, 's3')) {
         this.$toast({
@@ -208,12 +209,12 @@ export default {
         });
         return;
       } else if (_.has(data.selectedSkuComb, 's2')) {
-        params.productId = this.getProductId(
+        params.id = this.getProductId(
           data.selectedSkuComb.s1,
           data.selectedSkuComb.s2
         );
       } else {
-        params.productId = this.getProductIdByOne(data.selectedSkuComb.s1);
+        params.id = this.getProductIdByOne(data.selectedSkuComb.s1);
       }
       cartAdd(params).then(() => {
         this.cartInfo = this.cartInfo + data.selectedNum;
@@ -245,7 +246,12 @@ export default {
       } else {
         params.productId = this.getProductIdByOne(data.selectedSkuComb.s1);
       }
-      console.log(params)
+      let list=[];
+      list.push(params);
+      this.$store.commit('putPurchaseList',{
+        list:list
+      });
+      this.$router.push('/order/checkout');
       // cartFastAdd(params).then(res => {
       //   let cartId = res.data.data;
       //   setLocalStorage({ CartId: cartId });

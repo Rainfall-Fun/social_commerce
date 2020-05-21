@@ -10,6 +10,7 @@ public interface RecommendMapper {
     List<Integer> queryByRegion(int offset,int limit,int userId);
     List<Integer> queryByRatio(int offset,int limit);
     List<Integer> querySupplier(int offset,int limit,int userId);
+    List<Integer> queryAllInOne(int userId);
     int countBySale(int limit);
     int countByRegion(int limit,int userId);
     int countByRatio(int limit);

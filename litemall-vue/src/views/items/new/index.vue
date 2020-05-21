@@ -30,7 +30,6 @@ import scrollFixed from '@/mixin/scroll-fixed';
 
 export default {
   mixins: [scrollFixed],
-
   data() {
     return {
       list: [],

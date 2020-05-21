@@ -42,4 +42,19 @@ public interface GoodsService {
     @GetMapping("/wx/goods/detail")
     Object detail(@RequestParam("userId") Integer userId,
                   @RequestParam("id") Integer id);
+
+    @GetMapping("/wx/home/index")
+    Object index(@RequestParam("userInfoId") Integer userInfoId);
+
+
+
+    @GetMapping(value = "wx/cart/add",consumes = "application/json")
+    Object add(@RequestParam("userInfoId") Integer userInfoId, @RequestBody String cart);
+
+    @GetMapping(value = "wx/cart/goodscount")
+    Object goodscount(@RequestParam("userInfoId") Integer userInfoId);
+
+    @GetMapping(value = "wx/cart/index")
+    Object cartIndex(@RequestParam("userInfoId") Integer userInfoId);
+
 }

@@ -22,24 +22,14 @@ public class GoodsController {
 
     @GetMapping("getRecommendGoods")
     public Object getRecommendGoods(Integer userInfoId){
-        Set<Integer> goodsIds=new HashSet<>();
-        //查询出点击量前三的商品
-        List<Integer> browsing = recommendService.queryByBrowsingTimes(1, 3);
-        //查询出该用户所在区域的销售前三的商品
-        List<Integer> region = recommendService.queryByRegion(0,3,userInfoId);
-        //查询销量前三的商品
-        List<Integer> sale = recommendService.queryBySale(0,3);
-        //查询出好评前三的商品
-        List<Integer> ratio = recommendService.queryByRatio(0,3);
-        goodsIds.addAll(region);
-        goodsIds.addAll(sale);
-        goodsIds.addAll(browsing);
-        goodsIds.addAll(ratio);
-        //不足十个商品时从推荐商品中获取剩余的商品
+        List<Integer> goodsIds = recommendService.queryAllInOne(userInfoId);
         List<Integer> recommend = recommendService.queryByRecommend(0, 10-goodsIds.size(),goodsIds);
         goodsIds.addAll(recommend);
+        if (goodsIds.size()==0)
+            return null;
         //从商品服务中获取商品信息
-        return goodsIds;
+        List<BriefGoods> briefGoods = goodsService.getBriefGoods(goodsIds);
+        return briefGoods;
     }
 
     @GetMapping("getRecommendGoodsList")
@@ -69,8 +59,6 @@ public class GoodsController {
                 pages= recommendService.countByRegion(limit,userInfoId);
                 break;
         }
-
-
         if (goodsId.size()==0){
             Page<BriefGoods> data=new Page<>();
             data.setPages(0);

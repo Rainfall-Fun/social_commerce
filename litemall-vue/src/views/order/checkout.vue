@@ -100,6 +100,7 @@ export default {
     };
   },
   created() {
+    console.log(this.$store.state.purchaseGoodsList);
     this.init();
   },
 

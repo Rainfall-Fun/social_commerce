@@ -117,9 +117,6 @@ public class ResponseUtil {
         return fail(402, "参数值不对");
     }
 
-    public static Object unlogin() {
-        return fail(501, "请登录");
-    }
 
     public static Object serious() {
         return fail(502, "系统内部错误");
@@ -137,8 +134,5 @@ public class ResponseUtil {
         return fail(505, "更新数据失败");
     }
 
-    public static Object unauthz() {
-        return fail(506, "无操作权限");
-    }
 }
 
