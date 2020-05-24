@@ -30,6 +30,7 @@ public class RecommendService {
      */
     public Page<Integer> queryByBrowsingTimes(int offset, int limit) {
         Page<Integer> result=new Page<>();
+        //生成sql语句
         AllGoodsInfoExample example = new AllGoodsInfoExample();
         example.or().andIsOnSaleEqualTo(1);
         example.setOrderByClause("browsing_times desc");

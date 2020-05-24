@@ -20,6 +20,7 @@ public class GoodsController {
     @Autowired
     GoodsService goodsService;
 
+    //查询出十条商品记录，根据销量、点击量、地区分别三条，剩余的从推荐商品中选择
     @GetMapping("getRecommendGoods")
     public Object getRecommendGoods(Integer userInfoId){
         List<Integer> goodsIds = recommendService.queryAllInOne(userInfoId);
