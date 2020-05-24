@@ -1,17 +1,13 @@
 <template>
-  <div class="goods_new">
-    <div class="banner">
-      <div class="title">新品首发</div>
-    </div>
-
-    <van-list v-model="loading"
+<div>
+  <div class="title">商家其它商品</div>
+  <van-list v-model="loading"
               :finished="finished"
               :immediate-check="false"
               finished-text="没有更多了"
-              @load="getNewtList">
+              @load="getGoodsList">
       <van-card v-for="(item, i) in list"
                 :key="i"
-                :desc="item.brief"
                 :title="item.name"
                 :thumb="item.picUrl"
                 :price="item.retailPrice"
@@ -19,14 +15,14 @@
                 @click="itemClick(item.id)">
       </van-card>
     </van-list>
-
-  </div>
+</div>
+  
 </template>
 
 <script>
-import { goodsList } from '@/api/api';
 import { Card, List } from 'vant';
 import scrollFixed from '@/mixin/scroll-fixed';
+import { supplierRecommend } from '@/api/api';
 
 export default {
   mixins: [scrollFixed],
@@ -39,56 +35,33 @@ export default {
       finished: false
     };
   },
-
   created() {
     this.init();
   },
-
   methods: {
     init() {
       this.page = 0;
       this.list = [];
-      this.getNewtList();
+      this.getGoodsList();
     },
-    getNewtList() {
+    getGoodsList() {
       this.page++;
-      goodsList({
-        isNew: true,
+      supplierRecommend({
         page: this.page,
         limit: this.limit
       }).then(res => {
         this.list.push(...res.data.data.list);
         this.loading = false;
         this.finished = res.data.data.page >= res.data.data.pages;
-      });
+      })
     },
     itemClick(id) {
       this.$router.push(`/items/detail/${id}`);
     }
   },
-
-  components: {
-
+    components: {
     [List.name]: List,
     [Card.name]: Card
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.goods_new {
-  padding: 20px;
-  .banner {
-    height: 250px;
-    background-image: url('http://yanxuan.nosdn.127.net/8976116db321744084774643a933c5ce.png');
-    background-size: cover;
-    margin-bottom: 20px;
-    .title {
-      text-align: center;
-      line-height: 200px;
-      color: #ffffff;
-      font-size: 40px;
-    }
-  }
-}
-</style>

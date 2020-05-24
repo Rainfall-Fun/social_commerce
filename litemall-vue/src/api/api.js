@@ -107,6 +107,15 @@ export function goodsList(query) {
   })
 }
 
+export const SupplierRecommend='wx/goods/supplierRecommend'; //获得购买过的商家推荐
+export function supplierRecommend(query) {
+  return request({
+    url: SupplierRecommend,
+    method: 'get',
+    params: query
+  })
+}
+
 export const RecommendGoodsList='wx/goods/recommendList'; //获得推荐商品列表
 export function recommendGoodsList(query) {
   return request({

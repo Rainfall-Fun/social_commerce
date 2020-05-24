@@ -7,6 +7,15 @@ import java.util.Arrays;
 
 public class AllGoodsInfo {
     private String[] gallery;
+    private String coverImg;
+
+    public String getCoverImg() {
+        return coverImg;
+    }
+
+    public void setCoverImg(String coverImg) {
+        this.coverImg = coverImg;
+    }
 
     public String[] getGallery() {
         return gallery;

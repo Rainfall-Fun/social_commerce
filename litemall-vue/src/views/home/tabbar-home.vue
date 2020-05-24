@@ -223,7 +223,7 @@ export default {
   },
 
   created() {
-    //this.initViews();
+    this.initViews();
   },
 
   methods: {
@@ -259,6 +259,7 @@ export default {
     initViews() {
       getHome().then(res => {
         this.shopInfos = res.data.data;
+        console.log(res.data);
       });
     }
   },

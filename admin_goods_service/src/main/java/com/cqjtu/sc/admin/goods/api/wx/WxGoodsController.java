@@ -1,6 +1,7 @@
 package com.cqjtu.sc.admin.goods.api.wx;
 
-import com.cqjtu.sc.admin.goods.db.service.BriefGoodsService;
+import com.cqjtu.sc.admin.goods.db.domain.AllGoodsInfo;
+import com.cqjtu.sc.admin.goods.db.service.*;
 import com.cqjtu.sc.admin.goods.dto.BriefGoods;
 import com.cqjtu.sc.admin.goods.util.ResponseUtil;
 import com.cqjtu.sc.admin.goods.validator.Order;
@@ -13,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,26 +31,127 @@ public class WxGoodsController {
 
     @Autowired
     BriefGoodsService briefGoodsService;
-//	private final static ArrayBlockingQueue<Runnable> WORK_QUEUE = new ArrayBlockingQueue<>(9);
+    @Autowired
+    AllGoodsInfoService allGoodsInfoService;
+    @Autowired
+    GoodsSpecifiAttValService goodsSpecifiAttValService;
+    @Autowired
+    GoodsSpecificationService goodsSpecificationService;
+    @Autowired
+    GoodsImgService goodsImgService;
+	private final static ArrayBlockingQueue<Runnable> WORK_QUEUE = new ArrayBlockingQueue<>(9);
 //
-//	private final static RejectedExecutionHandler HANDLER = new ThreadPoolExecutor.CallerRunsPolicy();
+	private final static RejectedExecutionHandler HANDLER = new ThreadPoolExecutor.CallerRunsPolicy();
 //
-//	private static ThreadPoolExecutor executorService = new ThreadPoolExecutor(16, 16, 1000, TimeUnit.MILLISECONDS, WORK_QUEUE, HANDLER);
+	private static ThreadPoolExecutor executorService = new ThreadPoolExecutor(16, 16, 1000, TimeUnit.MILLISECONDS, WORK_QUEUE, HANDLER);
 //
-//	/**
-//	 * 商品详情
-//	 * <p>
-//	 * 用户可以不登录。
-//	 * 如果用户登录，则记录用户足迹以及返回用户收藏信息。
-//	 *
-//	 * @param userId 用户ID
-//	 * @param id     商品ID
-//	 * @return 商品详情
-//	 */
-//	@GetMapping("detail")
-//	public Object detail(Integer userId, @NotNull Integer id) {
-//		return ResponseUtil.ok(data);
-//	}
+	/**
+	 * 商品详情
+	 * <p>
+	 * 用户可以不登录。
+	 * 如果用户登录，则记录用户足迹以及返回用户收藏信息。
+	 *
+	 * @param userId 用户ID
+	 * @param id     商品ID
+	 * @return 商品详情
+	 */
+	@GetMapping("detail")
+	public Object detail(Integer userId, @NotNull Integer id) {
+        // 商品信息
+        AllGoodsInfo info = allGoodsInfoService.findById(id);
+        info.setGallery(goodsImgService.getGallery(id));
+
+//        // 商品属性
+//        Callable<List> goodsAttributeListCallable = () -> goodsAttributeService.queryByGid(id);
+
+        // 商品规格 返回的是定制的GoodsSpecificationVo
+        Callable<Object> objectCallable = () -> goodsSpecificationService.getSpecificationVoList(id);
+
+        // 商品规格对应的数量和价格
+        Callable<List> productListCallable = () ->goodsSpecifiAttValService.queryByGoodsId(id);
+
+//        // 商品问题，这里是一些通用问题
+//        Callable<List> issueCallable = () -> goodsIssueService.querySelective("", 1, 4, "", "");
+
+
+//
+//        // 评论
+//        Callable<Map> commentsCallable = () -> {
+//            List<LitemallComment> comments = commentService.queryGoodsByGid(id, 0, 2);
+//            List<Map<String, Object>> commentsVo = new ArrayList<>(comments.size());
+//            long commentCount = PageInfo.of(comments).getTotal();
+//            for (LitemallComment comment : comments) {
+//                Map<String, Object> c = new HashMap<>();
+//                c.put("id", comment.getId());
+//                c.put("addTime", comment.getAddTime());
+//                c.put("content", comment.getContent());
+//                LitemallUser user = userService.findById(comment.getUserId());
+//                c.put("nickname", user == null ? "" : user.getNickname());
+//                c.put("avatar", user == null ? "" : user.getAvatar());
+//                c.put("picList", comment.getPicUrls());
+//                commentsVo.add(c);
+//            }
+//            Map<String, Object> commentList = new HashMap<>();
+//            commentList.put("count", commentCount);
+//            commentList.put("data", commentsVo);
+//            return commentList;
+//        };
+//
+//        //团购信息
+//        Callable<List> grouponRulesCallable = () ->rulesService.queryByGoodsId(id);
+//
+//        // 用户收藏
+//        int userHasCollect = 0;
+//        if (userId != null) {
+//            userHasCollect = collectService.count(userId, id);
+//        }
+//
+//        // 记录用户的足迹 异步处理
+//        if (userId != null) {
+//            executorService.execute(()->{
+//                LitemallFootprint footprint = new LitemallFootprint();
+//                footprint.setUserId(userId);
+//                footprint.setGoodsId(id);
+//                footprintService.add(footprint);
+//            });
+//        }
+//        FutureTask<List> goodsAttributeListTask = new FutureTask<>(goodsAttributeListCallable);
+        FutureTask<Object> objectCallableTask = new FutureTask<>(objectCallable);
+        FutureTask<List> productListCallableTask = new FutureTask<>(productListCallable);
+//        FutureTask<List> issueCallableTask = new FutureTask<>(issueCallable);
+//        FutureTask<Map> commentsCallableTsk = new FutureTask<>(commentsCallable);
+//        FutureTask<List> grouponRulesCallableTask = new FutureTask<>(grouponRulesCallable);
+
+//        executorService.submit(goodsAttributeListTask);
+        executorService.submit(objectCallableTask);
+        executorService.submit(productListCallableTask);
+//        executorService.submit(issueCallableTask);
+//        executorService.submit(commentsCallableTsk);
+//        executorService.submit(grouponRulesCallableTask);
+
+        Map<String, Object> data = new HashMap<>();
+
+        try {
+            data.put("info", info);
+//            data.put("userHasCollect", userHasCollect);
+//            data.put("issue", issueCallableTask.get());
+//            data.put("comment", commentsCallableTsk.get());
+            data.put("specificationList", objectCallableTask.get());
+            data.put("productList", productListCallableTask.get());
+//            data.put("attribute", goodsAttributeListTask.get());
+//            data.put("groupon", grouponRulesCallableTask.get());
+            //SystemConfig.isAutoCreateShareImage()
+//            data.put("share", SystemConfig.isAutoCreateShareImage());
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //商品分享图片地址
+//        data.put("shareImage", info.getShareUrl());
+		return ResponseUtil.ok(data);
+	}
 //
 //	/**
 //	 * 商品分类类目
@@ -127,6 +230,10 @@ public class WxGoodsController {
     @RequestMapping("getBriefGoods")
     public Object getBriefGoods(@RequestBody List<Integer> goodsIds){
         List<BriefGoods> briefGoods = briefGoodsService.getBriefGoods(goodsIds);
+        for (BriefGoods datum : briefGoods) {
+            datum.setCounterPrice(datum.getRetailPrice().multiply(BigDecimal.valueOf(1.5)));
+            datum.setPicUrl("http://localhost:8777/"+datum.getPicUrl());
+        }
         return briefGoods;
     }
 

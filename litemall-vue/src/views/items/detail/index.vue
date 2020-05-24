@@ -8,11 +8,11 @@
     <van-cell-group class="item_cell_group" v-if="goods">
       <van-cell class="item_info">
         <div>
-          <span class="item_price">{{ goods.info.retailPrice*100 | yuan }}</span>
-          <span class="item_market_price">{{goods.info.counterPrice*100 | yuan}}</span>
+          <span class="item_price">{{ goods.info.price*100 | yuan }}</span>
+          <span class="item_market_price">{{goods.info.price*150 | yuan}}</span>
         </div>
         <div class="item-title">
-          {{ goods.info.name }}
+          {{ goods.info.goodsName }}
         </div>
         <div class="item_intro">{{goods.info.brief}}</div>
       </van-cell>
@@ -36,6 +36,7 @@
       :hide-stock="true"
       :goods="skuGoods"
       :goodsId="goods.info.id"
+      :close-on-click-overlay="true"
       @buy-clicked="buyGoods"
       @add-cart="addCart"
     />
@@ -46,7 +47,7 @@
 
     <div class="item_desc">
       <div class="item_desc_title">商品详情</div>
-      <div class="item_desc_wrap" v-if="goods.info.detail" v-html="goods.info.detail"></div>
+      <div class="item_desc_wrap" v-if="goods.info.goodsDesc" v-html="goods.info.goodsDesc"></div>
       <div class="item_desc_wrap" v-else style="text-align: center;">
         <p>无详情</p>
       </div>
@@ -176,20 +177,8 @@ export default {
     },
     getProductId(s1, s2) {
       var productId;
-      var s1_name;
-      var s2_name;
-      _.each(this.goods.specificationList, specification => {
-        _.each(specification.valueList, specValue => {
-          if (specValue.id === s1) {
-            s1_name = specValue.value;
-          } else if (specValue.id === s2) {
-            s2_name = specValue.value;
-          }
-        });
-      });
-
       _.each(this.goods.productList, v => {
-        let result = _.without(v.specifications, s1_name, s2_name);
+        let result = _.without(v.specifications, s1, s2);
         if (result.length === 0) {
           productId = v.id;
         }
@@ -198,18 +187,8 @@ export default {
     },
     getProductIdByOne(s1) {
       var productId;
-      var s1_name;
-      _.each(this.goods.specificationList, specification => {
-        _.each(specification.valueList, specValue => {
-          if (specValue.id === s1) {
-            s1_name = specValue.value;
-            return;
-          }
-        });
-      });
-
       _.each(this.goods.productList, v => {
-        let result = _.without(v.specifications, s1_name);
+        let result = _.without(v.specifications, s1);
         if (result.length === 0) {
           productId = v.id;
         }
@@ -219,9 +198,9 @@ export default {
     addCart(data) {
       let that = this;
       let params = {
-        goodsId: data.goodsId,
+        goodsId: this.goods.info.goodsId,
         number: data.selectedNum,
-        productId: 0
+        id: 0
       };
       if (_.has(data.selectedSkuComb, 's3')) {
         this.$toast({
@@ -230,12 +209,12 @@ export default {
         });
         return;
       } else if (_.has(data.selectedSkuComb, 's2')) {
-        params.productId = this.getProductId(
+        params.id = this.getProductId(
           data.selectedSkuComb.s1,
           data.selectedSkuComb.s2
         );
       } else {
-        params.productId = this.getProductIdByOne(data.selectedSkuComb.s1);
+        params.id = this.getProductIdByOne(data.selectedSkuComb.s1);
       }
       cartAdd(params).then(() => {
         this.cartInfo = this.cartInfo + data.selectedNum;
@@ -249,7 +228,7 @@ export default {
     buyGoods(data) {
       let that = this;
       let params = {
-        goodsId: data.goodsId,
+        goodsId: this.goods.info.goodsId,
         number: data.selectedNum,
         productId: 0
       };
@@ -267,12 +246,18 @@ export default {
       } else {
         params.productId = this.getProductIdByOne(data.selectedSkuComb.s1);
       }
-      cartFastAdd(params).then(res => {
-        let cartId = res.data.data;
-        setLocalStorage({ CartId: cartId });
-        that.showSku = false;
-        this.$router.push('/order/checkout');
+      let list=[];
+      list.push(params);
+      this.$store.commit('putPurchaseList',{
+        list:list
       });
+      this.$router.push('/order/checkout');
+      // cartFastAdd(params).then(res => {
+      //   let cartId = res.data.data;
+      //   setLocalStorage({ CartId: cartId });
+      //   that.showSku = false;
+      //   this.$router.push('/order/checkout');
+      // });
     },
     skuAdapter() {
       const tree = this.setSkuTree();
@@ -298,10 +283,8 @@ export default {
       var sku_list = [];
       _.each(this.goods.productList, v => {
         var sku_list_obj = {};
-        _.each(v.specifications, (specificationName, index) => {
-          sku_list_obj['s' + (~~index + 1)] = this.findSpecValueIdByName(
-            specificationName
-          );
+        _.each(v.specifications, (specificationId, index) => {
+          sku_list_obj['s' + (~~index + 1)] = specificationId;
         });
 
         sku_list_obj.price = v.price * 100;
@@ -311,21 +294,6 @@ export default {
 
       return sku_list;
     },
-    findSpecValueIdByName(name) {
-      let id = 0;
-      _.each(this.goods.specificationList, specification => {
-        _.each(specification.valueList, specValue => {
-          if (specValue.value === name) {
-            id = specValue.id;
-            return;
-          }
-        });
-        if (id !== 0) {
-          return;
-        }
-      });
-      return id;
-    },
     setSkuTree() {
       let that = this;
       let specifications = [];
@@ -334,19 +302,17 @@ export default {
         _.each(v.valueList, vv => {
           vv.name = vv.value;
           values.push({
-            id: vv.id,
-            name: vv.value,
-            imUrl: vv.picUrl
+            id: vv.goodsSpecifiId,
+            name: vv.specifiValue,
+            imUrl: vv.url
           });
         });
-
         specifications.push({
           k: v.name,
           v: values,
           k_s: 's' + (~~k + 1)
         });
       });
-
       return specifications;
     }
   },

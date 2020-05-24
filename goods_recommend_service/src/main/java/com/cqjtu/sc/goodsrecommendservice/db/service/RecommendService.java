@@ -51,13 +51,10 @@ public class RecommendService {
      * @param limit
      * @return
      */
-    public List<Integer> queryByRecommend(int offset, int limit, Set<Integer> goodsIds){
+    public List<Integer> queryByRecommend(int offset, int limit, List<Integer> goodsIds){
         List<Integer> result=new ArrayList<>();
         AllGoodsInfoExample example = new AllGoodsInfoExample();
-        AllGoodsInfoExample.Criteria criteria = example.or().andIsOnSaleEqualTo(1).andIsRecommandEqualTo(1);
-        for (Integer goodsId : goodsIds) {
-            criteria.andGoodsIdNotEqualTo(goodsId);
-        }
+        AllGoodsInfoExample.Criteria criteria = example.or().andIsOnSaleEqualTo(1).andIsRecommandEqualTo(1).andGoodsIdNotIn(goodsIds);
         example.setOrderByClause("goods_last_recommand_time desc");
         PageHelper.startPage(offset, limit);
         List<AllGoodsInfo> allGoodsInfos = goodsInfoMapper.selectByExampleSelective(example, columns);
@@ -86,6 +83,18 @@ public class RecommendService {
     }
 
     /**
+     * 得到三家该用户所购买过的商品的商家的其他商品
+     * @param page
+     * @param userId
+     * @param limit
+     * @return
+     */
+    public List<Integer> queryBySupplier(Integer page,Integer userId,Integer limit){
+        List<Integer> integers = recommendMapper.querySupplier((page-1)*limit,limit,userId);
+        return integers;
+    }
+
+    /**
      * 获取该用户对应的区域所销售的前三的商品
      * @return
      */
@@ -105,5 +114,12 @@ public class RecommendService {
         return recommendMapper.countByRegion(limit,userId);
     }
 
+    public int countBySupplier(int limit,int userId){return recommendMapper.countBySupplier(limit,userId);}
+
+
+    public List<Integer> queryAllInOne(Integer userId){
+        List<Integer> integers = recommendMapper.queryAllInOne(userId);
+        return integers;
+    }
 
 }
