@@ -128,7 +128,7 @@ export default {
   methods: {
     copy(){
       var toast=this.$toast;
-      var text=window.btoa('goods id is:'+this.itemId);
+      var text=window.btoa('goods id is:'+this.itemId);//进行base64编码
       var text1=window.atob(text);
       var password='打开社交小商城，查看好友推荐的商品('+text+')';
       this.$copyText(password).then(
