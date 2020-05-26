@@ -57,14 +57,23 @@
                              targetProject="src/main/java"/>
         <!--表名-->
 
-        <table tableName="all_order_detail">
-            <generatedKey column="order_detail_id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="all_goods_specifi_att_value">
-            <generatedKey column="specifi_value_id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="all_goods_specification">
-            <generatedKey column="goods_specifi_id" sqlStatement="MySql" identity="true"/>
+<!--        <table tableName="all_order_detail">-->
+<!--            <generatedKey column="order_detail_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="all_goods_specifi_att_value">-->
+<!--            <generatedKey column="specifi_value_id" sqlStatement="MySql" identity="true"/>-->
+<!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
+<!--                            typeHandler="com.cqjtu.sc.orderservice.util.JsonStringArrayTypeHandler"/>-->
+<!--        </table>-->
+<!--        <table tableName="all_goods_specification">-->
+<!--            <generatedKey column="goods_specifi_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+<!--                <table tableName="all_goods_info">-->
+<!--                    <generatedKey column="goods_id" sqlStatement="MySql" identity="true"/>-->
+<!--                </table>-->
+        <table tableName="all_carrige_address">
+            <generatedKey column="address_id" sqlStatement="MySql" identity="true"/>
         </table>
 
     </context>

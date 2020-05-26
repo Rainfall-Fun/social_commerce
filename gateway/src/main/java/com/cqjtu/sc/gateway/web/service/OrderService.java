@@ -10,4 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface OrderService {
     @PostMapping(value = "wx/order/checkout",consumes = "application/json")
     Object checkout(@RequestParam("userId") Integer userId, @RequestBody String body);
+
+    @PostMapping(value = "wx/order/submit",consumes = "application/json")
+    Object submit(@RequestParam("userId") Integer userId, @RequestBody String body);
 }

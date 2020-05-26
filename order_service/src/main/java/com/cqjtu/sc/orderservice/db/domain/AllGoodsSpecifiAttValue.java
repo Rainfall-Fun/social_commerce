@@ -22,7 +22,7 @@ public class AllGoodsSpecifiAttValue {
      *
      * @mbg.generated
      */
-    private String specifications;
+    private String[] specifications;
 
     /**
      *
@@ -119,7 +119,7 @@ public class AllGoodsSpecifiAttValue {
      *
      * @mbg.generated
      */
-    public String getSpecifications() {
+    public String[] getSpecifications() {
         return specifications;
     }
 
@@ -131,7 +131,7 @@ public class AllGoodsSpecifiAttValue {
      *
      * @mbg.generated
      */
-    public void setSpecifications(String specifications) {
+    public void setSpecifications(String[] specifications) {
         this.specifications = specifications;
     }
 
@@ -347,7 +347,7 @@ public class AllGoodsSpecifiAttValue {
         }
         AllGoodsSpecifiAttValue other = (AllGoodsSpecifiAttValue) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getSpecifications() == null ? other.getSpecifications() == null : this.getSpecifications().equals(other.getSpecifications()))
+            && (Arrays.equals(this.getSpecifications(), other.getSpecifications()))
             && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
             && (this.getCostPrice() == null ? other.getCostPrice() == null : this.getCostPrice().equals(other.getCostPrice()))
             && (this.getMaximumPoints() == null ? other.getMaximumPoints() == null : this.getMaximumPoints().equals(other.getMaximumPoints()))
@@ -368,7 +368,7 @@ public class AllGoodsSpecifiAttValue {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getSpecifications() == null) ? 0 : getSpecifications().hashCode());
+        result = prime * result + (Arrays.hashCode(getSpecifications()));
         result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
         result = prime * result + ((getCostPrice() == null) ? 0 : getCostPrice().hashCode());
         result = prime * result + ((getMaximumPoints() == null) ? 0 : getMaximumPoints().hashCode());

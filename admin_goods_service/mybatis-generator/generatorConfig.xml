@@ -104,9 +104,9 @@
 <!--                            typeHandler="com.cqjtu.sc.admin.goods.util.JsonStringArrayTypeHandler"/>-->
 <!--        </table>-->
 
-        <table tableName="all_cart">
-            <generatedKey column="cart_id" sqlStatement="MySql" identity="true"/>
-        </table>
+<!--        <table tableName="all_cart">-->
+<!--            <generatedKey column="cart_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
 
 
     </context>

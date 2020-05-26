@@ -1,10 +1,17 @@
 package com.cqjtu.sc.orderservice.api.wx;
 
+import com.cqjtu.sc.orderservice.db.domain.AllCarrigeAddress;
 import com.cqjtu.sc.orderservice.db.domain.AllGoodsSpecifiAttValue;
+import com.cqjtu.sc.orderservice.db.domain.AllGoodsSpecification;
+import com.cqjtu.sc.orderservice.db.domain.BriefGoods;
+import com.cqjtu.sc.orderservice.db.service.BriefGoodsService;
+import com.cqjtu.sc.orderservice.db.service.GoodsSpecificationService;
 import com.cqjtu.sc.orderservice.db.service.ProductService;
 import com.cqjtu.sc.orderservice.dto.CheckDto;
 import com.cqjtu.sc.orderservice.dto.PurchaseGoodsDto;
+import com.cqjtu.sc.orderservice.dto.PurchaseOrderDto;
 import com.cqjtu.sc.orderservice.util.ResponseUtil;
+import com.cqjtu.sc.orderservice.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,29 +31,77 @@ import java.util.Map;
 public class WxOrderController {
     @Autowired
     ProductService productService;
+    @Autowired
+    GoodsSpecificationService goodsSpecificationService;
+    @Autowired
+    BriefGoodsService briefGoodsService;
 
     @PostMapping("checkout")
     public Object checked(Integer userId, @RequestBody CheckDto body) {
         PurchaseGoodsDto[] purchaseGoods = body.getPurchaseGoods();
         List<Integer> productId=new ArrayList<>();
+        List<Integer> goodsId=new ArrayList<>();
         Map<Integer,Integer> numberMap=new HashMap<>();
+        List<GoodsVo> checkedGoodsList=new ArrayList<>();
+        List<GoodsVo> uncheckedGoodsList=new ArrayList<>();
         for (PurchaseGoodsDto purchaseGood : purchaseGoods) {
             productId.add(purchaseGood.getProductId());
             numberMap.put(purchaseGood.getProductId(),purchaseGood.getNumber());
+            goodsId.add(purchaseGood.getGoodsId());
         }
         List<AllGoodsSpecifiAttValue> allGoodsSpecifiAttValues = productService.queryInList(productId);
         BigDecimal orderTotalPrice=new BigDecimal(0);
         for (AllGoodsSpecifiAttValue allGoodsSpecifiAttValue : allGoodsSpecifiAttValues) {
-            orderTotalPrice=orderTotalPrice.add(allGoodsSpecifiAttValue.getPrice().multiply(new BigDecimal(numberMap.get(allGoodsSpecifiAttValue.getId()))));
+            GoodsVo goodsVo=new GoodsVo();
+            goodsVo.setGoodsId(allGoodsSpecifiAttValue.getGoodsId());
+            goodsVo.setProductId(allGoodsSpecifiAttValue.getId());
+            goodsVo.setSpecifications(allGoodsSpecifiAttValue.getSpecifications());
+            goodsVo.setPrice(allGoodsSpecifiAttValue.getPrice());
+            goodsVo.setNumber(numberMap.get(allGoodsSpecifiAttValue.getId()));
+            if (numberMap.get(allGoodsSpecifiAttValue.getId())>allGoodsSpecifiAttValue.getNumber()){//库存不足
+                uncheckedGoodsList.add(goodsVo);
+                continue;
+            }
+            else {
+                orderTotalPrice=orderTotalPrice.add(allGoodsSpecifiAttValue.getPrice().multiply(new BigDecimal(numberMap.get(allGoodsSpecifiAttValue.getId()))));
+                checkedGoodsList.add(goodsVo);
+            }
         }
+
+        List<BriefGoods> briefGoods = briefGoodsService.getBriefGoods(goodsId);
+
+        for (GoodsVo goodsVo : checkedGoodsList) {
+            for (BriefGoods briefGood : briefGoods) {
+                if (briefGood.getId()==goodsVo.getGoodsId()){
+                    goodsVo.setGoodsName(briefGood.getName());
+                    goodsVo.setGoodsPic("http://localhost:8777/"+briefGood.getPicUrl());
+                }
+            }
+        }
+
+        for (GoodsVo goodsVo : uncheckedGoodsList) {
+            for (BriefGoods briefGood : briefGoods) {
+                if (briefGood.getId()==goodsVo.getGoodsId()){
+                    goodsVo.setGoodsName(briefGood.getName());
+                    goodsVo.setGoodsPic("http://localhost:8777/"+briefGood.getPicUrl());
+                }
+            }
+        }
+
+        //此地址后面需要从数据库中获取
+        AllCarrigeAddress address=new AllCarrigeAddress();
+        address.setAddressId(1);
+        address.setConsignee("彭椿悦");
+        address.setTel("18888888888");
+        address.setAdress("重庆交通大学");
         Map<String, Object> data = new HashMap<>();
         data.put("addressId", 0);
-        data.put("checkedAddress", 0);
+        data.put("checkedAddress", address);
         data.put("goodsTotalPrice", orderTotalPrice);
         data.put("freightPrice", 0);
         data.put("orderTotalPrice", orderTotalPrice);
         data.put("actualPrice", orderTotalPrice);
-        data.put("checkedGoodsList",null);
+        data.put("checkedGoodsList",checkedGoodsList);
 //        if (userId == null) {
 //            return ResponseUtil.unlogin();
 //        }
@@ -89,7 +144,19 @@ public class WxOrderController {
      * @return 提交订单操作结果
      */
     @PostMapping("submit")
-    public Object submit(Integer userId, @RequestBody String body) {
+    public Object submit(Integer userId, @RequestBody PurchaseOrderDto body) throws Exception {
+        GoodsVo[] purchaseProducts = body.getPurchaseProducts();
+        List<GoodsVo> uncheckedGoods=new ArrayList<>();
+        List<GoodsVo> checkedGoods=new ArrayList<>();
+        for (GoodsVo purchaseProduct : purchaseProducts) {
+            boolean b = productService.reduceNumber(purchaseProduct.getProductId(), purchaseProduct.getNumber());
+            if (b==false){
+                uncheckedGoods.add(purchaseProduct);
+                continue;
+            }
+            checkedGoods.add(purchaseProduct);
+        }
+
         return ResponseUtil.ok();
     }
 

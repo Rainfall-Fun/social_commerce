@@ -72,7 +72,7 @@ public class WxOrderController {
      */
     @PostMapping("submit")
     public Object submit(@LoginUser Integer userId, @RequestBody String body) {
-        return ResponseUtil.ok();
+        return orderService.submit(13,body);
     }
 
     /**
