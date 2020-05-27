@@ -149,6 +149,7 @@ public class WxOrderController {
         List<GoodsVo> uncheckedGoods=new ArrayList<>();
         List<GoodsVo> checkedGoods=new ArrayList<>();
         for (GoodsVo purchaseProduct : purchaseProducts) {
+            System.out.println(purchaseProduct.toString());
             boolean b = productService.reduceNumber(purchaseProduct.getProductId(), purchaseProduct.getNumber());
             if (b==false){
                 uncheckedGoods.add(purchaseProduct);
@@ -156,6 +157,7 @@ public class WxOrderController {
             }
             checkedGoods.add(purchaseProduct);
         }
+
 
         return ResponseUtil.ok();
     }
