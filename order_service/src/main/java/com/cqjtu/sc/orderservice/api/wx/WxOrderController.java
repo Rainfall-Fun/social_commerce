@@ -1,12 +1,7 @@
 package com.cqjtu.sc.orderservice.api.wx;
 
-import com.cqjtu.sc.orderservice.db.domain.AllCarrigeAddress;
-import com.cqjtu.sc.orderservice.db.domain.AllGoodsSpecifiAttValue;
-import com.cqjtu.sc.orderservice.db.domain.AllGoodsSpecification;
-import com.cqjtu.sc.orderservice.db.domain.BriefGoods;
-import com.cqjtu.sc.orderservice.db.service.BriefGoodsService;
-import com.cqjtu.sc.orderservice.db.service.GoodsSpecificationService;
-import com.cqjtu.sc.orderservice.db.service.ProductService;
+import com.cqjtu.sc.orderservice.db.domain.*;
+import com.cqjtu.sc.orderservice.db.service.*;
 import com.cqjtu.sc.orderservice.dto.CheckDto;
 import com.cqjtu.sc.orderservice.dto.PurchaseGoodsDto;
 import com.cqjtu.sc.orderservice.dto.PurchaseOrderDto;
@@ -20,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +31,10 @@ public class WxOrderController {
     GoodsSpecificationService goodsSpecificationService;
     @Autowired
     BriefGoodsService briefGoodsService;
+    @Autowired
+    OrderService orderService;
+    @Autowired
+    OrderDetailService orderDetailService;
 
     @PostMapping("checkout")
     public Object checked(Integer userId, @RequestBody CheckDto body) {
@@ -146,20 +146,65 @@ public class WxOrderController {
     @PostMapping("submit")
     public Object submit(Integer userId, @RequestBody PurchaseOrderDto body) throws Exception {
         GoodsVo[] purchaseProducts = body.getPurchaseProducts();
+        //检查通过的商品
         List<GoodsVo> uncheckedGoods=new ArrayList<>();
+        //检查未通过的商品
         List<GoodsVo> checkedGoods=new ArrayList<>();
+        //检查通过的商品id
+        List<Integer> productIds=new ArrayList<>();
+
+        //检查库存是否充足，充足并在库存表中减少商品数量
         for (GoodsVo purchaseProduct : purchaseProducts) {
-            System.out.println(purchaseProduct.toString());
             boolean b = productService.reduceNumber(purchaseProduct.getProductId(), purchaseProduct.getNumber());
             if (b==false){
                 uncheckedGoods.add(purchaseProduct);
                 continue;
             }
             checkedGoods.add(purchaseProduct);
+            productIds.add(purchaseProduct.getProductId());
         }
 
+        //保存商品数量的map
+        Map<Integer, Integer> productNumberMap = new HashMap<>();
+        //保存商品价格的map
+        Map<Integer,BigDecimal> productPriceMap= new HashMap<>();
+        List<AllGoodsSpecifiAttValue> allGoodsSpecifiAttValues = productService.queryInList(productIds);
+        for (AllGoodsSpecifiAttValue allGoodsSpecifiAttValue : allGoodsSpecifiAttValues) {
+            productNumberMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getNumber());
+            productPriceMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getPrice());
+        }
 
-        return ResponseUtil.ok();
+        //计算订单总价
+        BigDecimal totalOrderPrice=BigDecimal.ZERO;
+        for (GoodsVo checkedGood : checkedGoods) {
+            Integer productId=checkedGood.getProductId();
+            totalOrderPrice=totalOrderPrice.add(productPriceMap.get(productId).multiply(BigDecimal.valueOf(productNumberMap.get(productId))));
+        }
+        //将订单信息写入订单表
+        AllOrder order=new AllOrder();
+        order.setAmount(totalOrderPrice);
+        order.setAddressStr("地址");
+        order.setUserInfoId(userId);
+        order.setGenTime(LocalTime.now());
+        int orderId = orderService.add(order);
+        //异步为订单生成订单号
+
+
+        //将商品信息写入订单明细
+        List<AllOrderDetail> orderDetailList=new ArrayList<>();
+        for (GoodsVo checkedGood : checkedGoods) {
+            AllOrderDetail allOrderDetail=new AllOrderDetail();
+            allOrderDetail.setGoodsId(checkedGood.getGoodsId());
+            allOrderDetail.setSpecifiValueId(checkedGood.getProductId());
+            allOrderDetail.setQuantity(checkedGood.getNumber());
+            allOrderDetail.setGoodsstatus(101);
+            orderDetailList.add(allOrderDetail);
+        }
+        orderDetailService.addBatch(orderDetailList);
+        //异步为订单明细生成订单明细号
+
+
+        return ResponseUtil.ok(orderId);
     }
 
     /**

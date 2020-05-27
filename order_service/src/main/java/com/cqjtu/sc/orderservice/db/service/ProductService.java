@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -32,5 +34,24 @@ public class ProductService {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 获取list中id的商品数量
+     * @param ids
+     * @return
+     */
+    public Map<Integer,Integer> getNumbersInList(List<Integer> ids){
+        AllGoodsSpecifiAttValue.Column column[]={AllGoodsSpecifiAttValue.Column.number, AllGoodsSpecifiAttValue.Column.id};
+        Map<Integer,Integer> numberMap=new HashMap<>();
+        AllGoodsSpecifiAttValueExample example=new AllGoodsSpecifiAttValueExample();
+        AllGoodsSpecifiAttValueExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(ids);
+        List<AllGoodsSpecifiAttValue> allGoodsSpecifiAttValues = mapper.selectByExampleSelective(example, column);
+        for (AllGoodsSpecifiAttValue allGoodsSpecifiAttValue : allGoodsSpecifiAttValues) {
+            numberMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getNumber());
+        }
+
+        return numberMap;
     }
 }
