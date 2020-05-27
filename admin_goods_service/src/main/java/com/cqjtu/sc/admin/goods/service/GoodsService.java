@@ -76,11 +76,8 @@ public class GoodsService {
         for (int i = 0; i < products.length; i++) {
             AllGoodsSpecifiAttValue product = products[i];
             String[] specifications1 = product.getSpecifications();
-            String[] specifiIds=new String[specifications1.length];
-            for (int i1 = 0; i1 < specifications1.length; i1++) {
-                specifiIds[i1]=String.valueOf(specifiIdMap.get(specifications1[i1]));
-            }
-            product.setSpecifications(specifiIds);
+            product.setSpecifications(specifications1);
+            product.setGoodsId(goodsId);
             ps.add(product);
         }
         productService.batchInsert(ps);

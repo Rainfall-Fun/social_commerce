@@ -51,63 +51,33 @@
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.cqjtu.sc.admin.goods.db.domain" targetProject="src/main/java"/>
-        <sqlMapGenerator targetPackage="com.cqjtu.sc.admin.goods.db.dao" targetProject="src/main/resources"/>
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cqjtu.sc.admin.goods.db.dao"
+        <javaModelGenerator targetPackage="com.cqjtu.sc.orderservice.db.domain" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="com.cqjtu.sc.orderservice.db.dao" targetProject="src/main/resources"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cqjtu.sc.orderservice.db.dao"
                              targetProject="src/main/java"/>
         <!--表名-->
-<!--        <table tableName="all_region">-->
-<!--            <generatedKey column="region_id" sqlStatement="MySql" identity="true"/>-->
+
+<!--        <table tableName="all_order_detail">-->
+<!--            <generatedKey column="order_detail_id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-<!--        <table tableName="all_supplier">-->
-<!--            <generatedKey column="supplier_id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="all_goods_brand">-->
-<!--            <generatedKey column="brand_id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="all_goods_board">-->
-<!--            <generatedKey column="board_id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="all_goods_category">-->
-<!--            <generatedKey column="category_id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="all_goods_cat_exten_att">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="all_extention_att">-->
-<!--            <generatedKey column="extension_att_id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="all_goods_extension_att_value">-->
-<!--            <generatedKey column="extension_att_id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="all_goods_info">-->
-<!--            <generatedKey column="goods_id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="all_carrige_rule">-->
-<!--            <generatedKey column="carriage_rule_id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="all_carrige_rule_consist">-->
-<!--            <generatedKey column="carrige_rule_id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="all_payment">-->
-<!--            <generatedKey column="payment_id" sqlStatement="MySql" identity="true"/>-->
+<!--        <table tableName="all_goods_specifi_att_value">-->
+<!--            <generatedKey column="specifi_value_id" sqlStatement="MySql" identity="true"/>-->
+<!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
+<!--                            typeHandler="com.cqjtu.sc.orderservice.util.JsonStringArrayTypeHandler"/>-->
 <!--        </table>-->
 <!--        <table tableName="all_goods_specification">-->
 <!--            <generatedKey column="goods_specifi_id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-<!--        <table tableName="all_goods_specifi_img">-->
-<!--            <generatedKey column="img_id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="all_goods_specifi_att_value">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
-<!--                            typeHandler="com.cqjtu.sc.admin.goods.util.JsonStringArrayTypeHandler"/>-->
-<!--        </table>-->
 
-<!--        <table tableName="all_cart">-->
-<!--            <generatedKey column="cart_id" sqlStatement="MySql" identity="true"/>-->
+<!--                <table tableName="all_goods_info">-->
+<!--                    <generatedKey column="goods_id" sqlStatement="MySql" identity="true"/>-->
+<!--                </table>-->
+<!--        <table tableName="all_carrige_address">-->
+<!--            <generatedKey column="address_id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-
+        <table tableName="all_order">
+            <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>
+        </table>
 
     </context>
 </generatorConfiguration>
