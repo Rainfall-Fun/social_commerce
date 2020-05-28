@@ -9,10 +9,14 @@
     <id column="address_id" jdbcType="INTEGER" property="addressId" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <result column="user_info_id1" jdbcType="INTEGER" property="userInfoId1" />
 =======
     <result column="user_info_id" jdbcType="INTEGER" property="userInfoId" />
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+    <result column="user_info_id1" jdbcType="INTEGER" property="userInfoId1" />
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
     <result column="user_info_id1" jdbcType="INTEGER" property="userInfoId1" />
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -23,10 +27,14 @@
     <result column="county" jdbcType="INTEGER" property="county" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <result column="adress" jdbcType="VARCHAR" property="adress" />
 =======
     <result column="address" jdbcType="VARCHAR" property="address" />
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+    <result column="adress" jdbcType="VARCHAR" property="adress" />
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
     <result column="adress" jdbcType="VARCHAR" property="adress" />
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -105,10 +113,14 @@
     -->
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     address_id, user_info_id1, consignee, tel, province, city, county, adress, is_default
 =======
     address_id, user_info_id, consignee, tel, province, city, county, address, is_default
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+    address_id, user_info_id1, consignee, tel, province, city, county, adress, is_default
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
     address_id, user_info_id1, consignee, tel, province, city, county, adress, is_default
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -143,10 +155,14 @@
     <choose>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <when test="selective != null and selective.length > 0">
 =======
       <when test="selective != null and selective.length &gt; 0">
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      <when test="selective != null and selective.length > 0">
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       <when test="selective != null and selective.length > 0">
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -185,10 +201,14 @@
     <choose>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <when test="selective != null and selective.length > 0">
 =======
       <when test="selective != null and selective.length &gt; 0">
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      <when test="selective != null and selective.length > 0">
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       <when test="selective != null and selective.length > 0">
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -231,6 +251,7 @@
     </selectKey>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     insert into all_carrige_address (user_info_id1, consignee, tel, 
       province, city, county, 
       adress, is_default)
@@ -242,13 +263,20 @@
 =======
     insert into all_carrige_address (user_info_id1, consignee, tel, 
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+    insert into all_carrige_address (user_info_id1, consignee, tel, 
+>>>>>>> parent of 547cab6... 下单已经实现
       province, city, county, 
       adress, is_default)
     values (#{userInfoId1,jdbcType=INTEGER}, #{consignee,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
       #{province,jdbcType=INTEGER}, #{city,jdbcType=INTEGER}, #{county,jdbcType=INTEGER}, 
 <<<<<<< HEAD
+<<<<<<< HEAD
       #{address,jdbcType=VARCHAR}, #{isDefault,jdbcType=INTEGER})
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      #{adress,jdbcType=VARCHAR}, #{isDefault,jdbcType=INTEGER})
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       #{adress,jdbcType=VARCHAR}, #{isDefault,jdbcType=INTEGER})
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -265,12 +293,17 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <if test="userInfoId1 != null">
         user_info_id1,
 =======
       <if test="userInfoId != null">
         user_info_id,
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      <if test="userInfoId1 != null">
+        user_info_id1,
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       <if test="userInfoId1 != null">
         user_info_id1,
@@ -293,12 +326,17 @@
       </if>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <if test="adress != null">
         adress,
 =======
       <if test="address != null">
         address,
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      <if test="adress != null">
+        adress,
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       <if test="adress != null">
         adress,
@@ -311,12 +349,17 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <if test="userInfoId1 != null">
         #{userInfoId1,jdbcType=INTEGER},
 =======
       <if test="userInfoId != null">
         #{userInfoId,jdbcType=INTEGER},
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      <if test="userInfoId1 != null">
+        #{userInfoId1,jdbcType=INTEGER},
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       <if test="userInfoId1 != null">
         #{userInfoId1,jdbcType=INTEGER},
@@ -339,12 +382,17 @@
       </if>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <if test="adress != null">
         #{adress,jdbcType=VARCHAR},
 =======
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      <if test="adress != null">
+        #{adress,jdbcType=VARCHAR},
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       <if test="adress != null">
         #{adress,jdbcType=VARCHAR},
@@ -377,12 +425,17 @@
       </if>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <if test="record.userInfoId1 != null">
         user_info_id1 = #{record.userInfoId1,jdbcType=INTEGER},
 =======
       <if test="record.userInfoId != null">
         user_info_id = #{record.userInfoId,jdbcType=INTEGER},
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      <if test="record.userInfoId1 != null">
+        user_info_id1 = #{record.userInfoId1,jdbcType=INTEGER},
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       <if test="record.userInfoId1 != null">
         user_info_id1 = #{record.userInfoId1,jdbcType=INTEGER},
@@ -405,12 +458,17 @@
       </if>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <if test="record.adress != null">
         adress = #{record.adress,jdbcType=VARCHAR},
 =======
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      <if test="record.adress != null">
+        adress = #{record.adress,jdbcType=VARCHAR},
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       <if test="record.adress != null">
         adress = #{record.adress,jdbcType=VARCHAR},
@@ -433,10 +491,14 @@
     set address_id = #{record.addressId,jdbcType=INTEGER},
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       user_info_id1 = #{record.userInfoId1,jdbcType=INTEGER},
 =======
       user_info_id = #{record.userInfoId,jdbcType=INTEGER},
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      user_info_id1 = #{record.userInfoId1,jdbcType=INTEGER},
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       user_info_id1 = #{record.userInfoId1,jdbcType=INTEGER},
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -447,10 +509,14 @@
       county = #{record.county,jdbcType=INTEGER},
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       adress = #{record.adress,jdbcType=VARCHAR},
 =======
       address = #{record.address,jdbcType=VARCHAR},
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      adress = #{record.adress,jdbcType=VARCHAR},
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       adress = #{record.adress,jdbcType=VARCHAR},
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -468,12 +534,17 @@
     <set>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <if test="userInfoId1 != null">
         user_info_id1 = #{userInfoId1,jdbcType=INTEGER},
 =======
       <if test="userInfoId != null">
         user_info_id = #{userInfoId,jdbcType=INTEGER},
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      <if test="userInfoId1 != null">
+        user_info_id1 = #{userInfoId1,jdbcType=INTEGER},
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       <if test="userInfoId1 != null">
         user_info_id1 = #{userInfoId1,jdbcType=INTEGER},
@@ -496,12 +567,17 @@
       </if>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <if test="adress != null">
         adress = #{adress,jdbcType=VARCHAR},
 =======
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      <if test="adress != null">
+        adress = #{adress,jdbcType=VARCHAR},
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       <if test="adress != null">
         adress = #{adress,jdbcType=VARCHAR},
@@ -521,10 +597,14 @@
     update all_carrige_address
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     set user_info_id1 = #{userInfoId1,jdbcType=INTEGER},
 =======
     set user_info_id = #{userInfoId,jdbcType=INTEGER},
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+    set user_info_id1 = #{userInfoId1,jdbcType=INTEGER},
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
     set user_info_id1 = #{userInfoId1,jdbcType=INTEGER},
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -535,10 +615,14 @@
       county = #{county,jdbcType=INTEGER},
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       adress = #{adress,jdbcType=VARCHAR},
 =======
       address = #{address,jdbcType=VARCHAR},
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      adress = #{adress,jdbcType=VARCHAR},
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       adress = #{adress,jdbcType=VARCHAR},
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -570,10 +654,14 @@
     <choose>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <when test="selective != null and selective.length > 0">
 =======
       <when test="selective != null and selective.length &gt; 0">
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+      <when test="selective != null and selective.length > 0">
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
       <when test="selective != null and selective.length > 0">
 >>>>>>> parent of 547cab6... 下单已经实现

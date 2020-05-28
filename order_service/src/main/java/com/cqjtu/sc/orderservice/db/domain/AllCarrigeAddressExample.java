@@ -390,6 +390,7 @@ public class AllCarrigeAddressExample {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         public Criteria andUserInfoId1IsNull() {
             addCriterion("user_info_id1 is null");
             return (Criteria) this;
@@ -409,6 +410,10 @@ public class AllCarrigeAddressExample {
         public Criteria andUserInfoId1IsNull() {
             addCriterion("user_info_id1 is null");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andUserInfoId1IsNull() {
+            addCriterion("user_info_id1 is null");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -418,9 +423,14 @@ public class AllCarrigeAddressExample {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         public Criteria andUserInfoIdEqualTo(Integer value) {
             addCriterion("user_info_id =", value, "userInfoId");
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+        public Criteria andUserInfoId1EqualTo(Integer value) {
+            addCriterion("user_info_id1 =", value, "userInfoId1");
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
         public Criteria andUserInfoId1EqualTo(Integer value) {
             addCriterion("user_info_id1 =", value, "userInfoId1");
@@ -434,6 +444,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andUserInfoId1EqualToColumn(AllCarrigeAddress.Column column) {
@@ -461,6 +472,15 @@ public class AllCarrigeAddressExample {
         public Criteria andUserInfoId1NotEqualTo(Integer value) {
             addCriterion("user_info_id1 <>", value, "userInfoId1");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andUserInfoId1EqualToColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("user_info_id1 = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andUserInfoId1NotEqualTo(Integer value) {
+            addCriterion("user_info_id1 <>", value, "userInfoId1");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -470,6 +490,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andUserInfoId1NotEqualToColumn(AllCarrigeAddress.Column column) {
@@ -497,6 +518,15 @@ public class AllCarrigeAddressExample {
         public Criteria andUserInfoId1GreaterThan(Integer value) {
             addCriterion("user_info_id1 >", value, "userInfoId1");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andUserInfoId1NotEqualToColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("user_info_id1 <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andUserInfoId1GreaterThan(Integer value) {
+            addCriterion("user_info_id1 >", value, "userInfoId1");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -506,6 +536,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andUserInfoId1GreaterThanColumn(AllCarrigeAddress.Column column) {
@@ -533,6 +564,15 @@ public class AllCarrigeAddressExample {
         public Criteria andUserInfoId1GreaterThanOrEqualTo(Integer value) {
             addCriterion("user_info_id1 >=", value, "userInfoId1");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andUserInfoId1GreaterThanColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("user_info_id1 > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andUserInfoId1GreaterThanOrEqualTo(Integer value) {
+            addCriterion("user_info_id1 >=", value, "userInfoId1");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -542,6 +582,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andUserInfoId1GreaterThanOrEqualToColumn(AllCarrigeAddress.Column column) {
@@ -569,6 +610,15 @@ public class AllCarrigeAddressExample {
         public Criteria andUserInfoId1LessThan(Integer value) {
             addCriterion("user_info_id1 <", value, "userInfoId1");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andUserInfoId1GreaterThanOrEqualToColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("user_info_id1 >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andUserInfoId1LessThan(Integer value) {
+            addCriterion("user_info_id1 <", value, "userInfoId1");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -578,6 +628,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andUserInfoId1LessThanColumn(AllCarrigeAddress.Column column) {
@@ -605,6 +656,15 @@ public class AllCarrigeAddressExample {
         public Criteria andUserInfoId1LessThanOrEqualTo(Integer value) {
             addCriterion("user_info_id1 <=", value, "userInfoId1");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andUserInfoId1LessThanColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("user_info_id1 < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andUserInfoId1LessThanOrEqualTo(Integer value) {
+            addCriterion("user_info_id1 <=", value, "userInfoId1");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -614,6 +674,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andUserInfoId1LessThanOrEqualToColumn(AllCarrigeAddress.Column column) {
@@ -645,6 +706,10 @@ public class AllCarrigeAddressExample {
         public Criteria andUserInfoId1LessThanOrEqualToColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("user_info_id1 <= ").append(column.getEscapedColumnName()).toString());
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andUserInfoId1LessThanOrEqualToColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("user_info_id1 <= ").append(column.getEscapedColumnName()).toString());
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -664,9 +729,14 @@ public class AllCarrigeAddressExample {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         public Criteria andUserInfoIdNotBetween(Integer value1, Integer value2) {
             addCriterion("user_info_id not between", value1, value2, "userInfoId");
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+        public Criteria andUserInfoId1NotBetween(Integer value1, Integer value2) {
+            addCriterion("user_info_id1 not between", value1, value2, "userInfoId1");
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
         public Criteria andUserInfoId1NotBetween(Integer value1, Integer value2) {
             addCriterion("user_info_id1 not between", value1, value2, "userInfoId1");
@@ -1326,6 +1396,7 @@ public class AllCarrigeAddressExample {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         public Criteria andAdressIsNull() {
             addCriterion("adress is null");
             return (Criteria) this;
@@ -1345,6 +1416,10 @@ public class AllCarrigeAddressExample {
         public Criteria andAdressIsNull() {
             addCriterion("adress is null");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andAdressIsNull() {
+            addCriterion("adress is null");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -1354,9 +1429,14 @@ public class AllCarrigeAddressExample {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         public Criteria andAddressEqualTo(String value) {
             addCriterion("address =", value, "address");
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+        public Criteria andAdressEqualTo(String value) {
+            addCriterion("adress =", value, "adress");
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
         public Criteria andAdressEqualTo(String value) {
             addCriterion("adress =", value, "adress");
@@ -1370,6 +1450,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andAdressEqualToColumn(AllCarrigeAddress.Column column) {
@@ -1397,6 +1478,15 @@ public class AllCarrigeAddressExample {
         public Criteria andAdressNotEqualTo(String value) {
             addCriterion("adress <>", value, "adress");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andAdressEqualToColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("adress = ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andAdressNotEqualTo(String value) {
+            addCriterion("adress <>", value, "adress");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -1406,6 +1496,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andAdressNotEqualToColumn(AllCarrigeAddress.Column column) {
@@ -1433,6 +1524,15 @@ public class AllCarrigeAddressExample {
         public Criteria andAdressGreaterThan(String value) {
             addCriterion("adress >", value, "adress");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andAdressNotEqualToColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("adress <> ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andAdressGreaterThan(String value) {
+            addCriterion("adress >", value, "adress");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -1442,6 +1542,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andAdressGreaterThanColumn(AllCarrigeAddress.Column column) {
@@ -1469,6 +1570,15 @@ public class AllCarrigeAddressExample {
         public Criteria andAdressGreaterThanOrEqualTo(String value) {
             addCriterion("adress >=", value, "adress");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andAdressGreaterThanColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("adress > ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andAdressGreaterThanOrEqualTo(String value) {
+            addCriterion("adress >=", value, "adress");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -1478,6 +1588,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andAdressGreaterThanOrEqualToColumn(AllCarrigeAddress.Column column) {
@@ -1505,6 +1616,15 @@ public class AllCarrigeAddressExample {
         public Criteria andAdressLessThan(String value) {
             addCriterion("adress <", value, "adress");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andAdressGreaterThanOrEqualToColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("adress >= ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andAdressLessThan(String value) {
+            addCriterion("adress <", value, "adress");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -1514,6 +1634,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andAdressLessThanColumn(AllCarrigeAddress.Column column) {
@@ -1541,6 +1662,15 @@ public class AllCarrigeAddressExample {
         public Criteria andAdressLessThanOrEqualTo(String value) {
             addCriterion("adress <=", value, "adress");
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andAdressLessThanColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("adress < ").append(column.getEscapedColumnName()).toString());
+            return (Criteria) this;
+        }
+
+        public Criteria andAdressLessThanOrEqualTo(String value) {
+            addCriterion("adress <=", value, "adress");
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -1550,6 +1680,7 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         public Criteria andAdressLessThanOrEqualToColumn(AllCarrigeAddress.Column column) {
@@ -1591,6 +1722,10 @@ public class AllCarrigeAddressExample {
         public Criteria andAdressLessThanOrEqualToColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("adress <= ").append(column.getEscapedColumnName()).toString());
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+        public Criteria andAdressLessThanOrEqualToColumn(AllCarrigeAddress.Column column) {
+            addCriterion(new StringBuilder("adress <= ").append(column.getEscapedColumnName()).toString());
+>>>>>>> parent of 547cab6... 下单已经实现
             return (Criteria) this;
         }
 
@@ -1620,9 +1755,14 @@ public class AllCarrigeAddressExample {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         public Criteria andAddressNotBetween(String value1, String value2) {
             addCriterion("address not between", value1, value2, "address");
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+        public Criteria andAdressNotBetween(String value1, String value2) {
+            addCriterion("adress not between", value1, value2, "adress");
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
         public Criteria andAdressNotBetween(String value1, String value2) {
             addCriterion("adress not between", value1, value2, "adress");
