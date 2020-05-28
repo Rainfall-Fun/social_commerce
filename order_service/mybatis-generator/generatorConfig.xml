@@ -75,9 +75,18 @@
 <!--        <table tableName="all_carrige_address">-->
 <!--            <generatedKey column="address_id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-        <table tableName="all_order">
-            <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>
+<!--        <table tableName="all_order">-->
+<!--            <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="all_carrige_address">
+            <generatedKey column="address_id" sqlStatement="Mysql" identity="true"/>
         </table>
+
+        <table tableName="all_region">
+            <generatedKey column="region_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+
 
     </context>
 </generatorConfiguration>

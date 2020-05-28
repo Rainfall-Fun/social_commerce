@@ -35,6 +35,8 @@ public class WxOrderController {
     OrderService orderService;
     @Autowired
     OrderDetailService orderDetailService;
+    @Autowired
+    CarrigeAddressService carrigeAddressService;
 
     @PostMapping("checkout")
     public Object checked(Integer userId, @RequestBody CheckDto body) {
@@ -93,7 +95,7 @@ public class WxOrderController {
         address.setAddressId(1);
         address.setConsignee("彭椿悦");
         address.setTel("18888888888");
-        address.setAdress("重庆交通大学");
+        address.setAddress("重庆交通大学");
         Map<String, Object> data = new HashMap<>();
         data.put("addressId", 0);
         data.put("checkedAddress", address);
@@ -164,13 +166,10 @@ public class WxOrderController {
             productIds.add(purchaseProduct.getProductId());
         }
 
-        //保存商品数量的map
-        Map<Integer, Integer> productNumberMap = new HashMap<>();
         //保存商品价格的map
         Map<Integer,BigDecimal> productPriceMap= new HashMap<>();
         List<AllGoodsSpecifiAttValue> allGoodsSpecifiAttValues = productService.queryInList(productIds);
         for (AllGoodsSpecifiAttValue allGoodsSpecifiAttValue : allGoodsSpecifiAttValues) {
-            productNumberMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getNumber());
             productPriceMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getPrice());
         }
 
@@ -178,12 +177,16 @@ public class WxOrderController {
         BigDecimal totalOrderPrice=BigDecimal.ZERO;
         for (GoodsVo checkedGood : checkedGoods) {
             Integer productId=checkedGood.getProductId();
-            totalOrderPrice=totalOrderPrice.add(productPriceMap.get(productId).multiply(BigDecimal.valueOf(productNumberMap.get(productId))));
+            totalOrderPrice=totalOrderPrice.add(productPriceMap.get(productId).multiply(BigDecimal.valueOf(checkedGood.getNumber())));
         }
+        //收货地址
+        Integer addressId=body.getAddressId();
+        addressId=1;//后面需要删除
+        String addressString = carrigeAddressService.addressString(addressId);
         //将订单信息写入订单表
         AllOrder order=new AllOrder();
         order.setAmount(totalOrderPrice);
-        order.setAddressStr("地址");
+        order.setAddressStr(addressString);
         order.setUserInfoId(userId);
         order.setGenTime(LocalTime.now());
         int orderId = orderService.add(order);
@@ -198,11 +201,11 @@ public class WxOrderController {
             allOrderDetail.setSpecifiValueId(checkedGood.getProductId());
             allOrderDetail.setQuantity(checkedGood.getNumber());
             allOrderDetail.setGoodsstatus(101);
+            allOrderDetail.setOrderId(orderId);
             orderDetailList.add(allOrderDetail);
         }
         orderDetailService.addBatch(orderDetailList);
         //异步为订单明细生成订单明细号
-
 
         return ResponseUtil.ok(orderId);
     }
