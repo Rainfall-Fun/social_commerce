@@ -78,6 +78,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <table tableName="all_order">
             <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>
         </table>
@@ -97,6 +98,12 @@
 
 
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+        <table tableName="all_order">
+            <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
         <table tableName="all_order">
             <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>

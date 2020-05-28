@@ -38,10 +38,13 @@ public class WxOrderController {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     @Autowired
     CarrigeAddressService carrigeAddressService;
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
 >>>>>>> parent of 547cab6... 下单已经实现
 =======
@@ -107,10 +110,14 @@ public class WxOrderController {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         address.setAdress("重庆交通大学");
 =======
         address.setAddress("重庆交通大学");
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+        address.setAdress("重庆交通大学");
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
         address.setAdress("重庆交通大学");
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -190,10 +197,15 @@ public class WxOrderController {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         //保存商品数量的map
         Map<Integer, Integer> productNumberMap = new HashMap<>();
 =======
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+        //保存商品数量的map
+        Map<Integer, Integer> productNumberMap = new HashMap<>();
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
         //保存商品数量的map
         Map<Integer, Integer> productNumberMap = new HashMap<>();
@@ -209,9 +221,13 @@ public class WxOrderController {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             productNumberMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getNumber());
 =======
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+            productNumberMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getNumber());
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
             productNumberMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getNumber());
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -225,6 +241,7 @@ public class WxOrderController {
         BigDecimal totalOrderPrice=BigDecimal.ZERO;
         for (GoodsVo checkedGood : checkedGoods) {
             Integer productId=checkedGood.getProductId();
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -242,14 +259,21 @@ public class WxOrderController {
 =======
             totalOrderPrice=totalOrderPrice.add(productPriceMap.get(productId).multiply(BigDecimal.valueOf(productNumberMap.get(productId))));
 >>>>>>> parent of 547cab6... 下单已经实现
+=======
+            totalOrderPrice=totalOrderPrice.add(productPriceMap.get(productId).multiply(BigDecimal.valueOf(productNumberMap.get(productId))));
+>>>>>>> parent of 547cab6... 下单已经实现
         }
         //将订单信息写入订单表
         AllOrder order=new AllOrder();
         order.setAmount(totalOrderPrice);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         order.setAddressStr(addressString);
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+        order.setAddressStr("地址");
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
         order.setAddressStr("地址");
 >>>>>>> parent of 547cab6... 下单已经实现
@@ -273,9 +297,12 @@ public class WxOrderController {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             allOrderDetail.setOrderId(orderId);
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
 >>>>>>> parent of 547cab6... 下单已经实现
 =======
@@ -288,9 +315,13 @@ public class WxOrderController {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
 
 >>>>>>> parent of 547cab6... 下单已经实现

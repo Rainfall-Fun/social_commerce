@@ -6,6 +6,7 @@ import java.util.List;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.apache.ibatis.annotations.Param;
 
 =======
@@ -14,6 +15,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+import org.apache.ibatis.annotations.Param;
+
+>>>>>>> parent of 547cab6... 下单已经实现
 =======
 import org.apache.ibatis.annotations.Param;
 
