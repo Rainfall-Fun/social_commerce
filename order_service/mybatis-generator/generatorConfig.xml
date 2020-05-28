@@ -86,9 +86,9 @@
             <generatedKey column="address_id" sqlStatement="Mysql" identity="true"/>
         </table>
 
-<!--        <table tableName="all_region">-->
-<!--            <generatedKey column="region_id" sqlStatement="Mysql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="all_region">
+            <generatedKey column="region_id" sqlStatement="Mysql" identity="true"/>
+        </table>
 
 
     </context>
