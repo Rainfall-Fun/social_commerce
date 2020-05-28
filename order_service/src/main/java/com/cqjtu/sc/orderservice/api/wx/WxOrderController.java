@@ -36,10 +36,13 @@ public class WxOrderController {
     @Autowired
     OrderDetailService orderDetailService;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     @Autowired
     CarrigeAddressService carrigeAddressService;
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+>>>>>>> parent of 547cab6... 下单已经实现
 
     @PostMapping("checkout")
     public Object checked(Integer userId, @RequestBody CheckDto body) {
@@ -99,10 +102,14 @@ public class WxOrderController {
         address.setConsignee("彭椿悦");
         address.setTel("18888888888");
 <<<<<<< HEAD
+<<<<<<< HEAD
         address.setAdress("重庆交通大学");
 =======
         address.setAddress("重庆交通大学");
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+        address.setAdress("重庆交通大学");
+>>>>>>> parent of 547cab6... 下单已经实现
         Map<String, Object> data = new HashMap<>();
         data.put("addressId", 0);
         data.put("checkedAddress", address);
@@ -174,18 +181,27 @@ public class WxOrderController {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         //保存商品数量的map
         Map<Integer, Integer> productNumberMap = new HashMap<>();
 =======
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+        //保存商品数量的map
+        Map<Integer, Integer> productNumberMap = new HashMap<>();
+>>>>>>> parent of 547cab6... 下单已经实现
         //保存商品价格的map
         Map<Integer,BigDecimal> productPriceMap= new HashMap<>();
         List<AllGoodsSpecifiAttValue> allGoodsSpecifiAttValues = productService.queryInList(productIds);
         for (AllGoodsSpecifiAttValue allGoodsSpecifiAttValue : allGoodsSpecifiAttValues) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             productNumberMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getNumber());
 =======
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+            productNumberMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getNumber());
+>>>>>>> parent of 547cab6... 下单已经实现
             productPriceMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getPrice());
         }
 
@@ -193,6 +209,7 @@ public class WxOrderController {
         BigDecimal totalOrderPrice=BigDecimal.ZERO;
         for (GoodsVo checkedGood : checkedGoods) {
             Integer productId=checkedGood.getProductId();
+<<<<<<< HEAD
 <<<<<<< HEAD
             totalOrderPrice=totalOrderPrice.add(productPriceMap.get(productId).multiply(BigDecimal.valueOf(productNumberMap.get(productId))));
         }
@@ -202,16 +219,19 @@ public class WxOrderController {
         order.setAddressStr("地址");
 =======
             totalOrderPrice=totalOrderPrice.add(productPriceMap.get(productId).multiply(BigDecimal.valueOf(checkedGood.getNumber())));
+=======
+            totalOrderPrice=totalOrderPrice.add(productPriceMap.get(productId).multiply(BigDecimal.valueOf(productNumberMap.get(productId))));
+>>>>>>> parent of 547cab6... 下单已经实现
         }
-        //收货地址
-        Integer addressId=body.getAddressId();
-        addressId=1;//后面需要删除
-        String addressString = carrigeAddressService.addressString(addressId);
         //将订单信息写入订单表
         AllOrder order=new AllOrder();
         order.setAmount(totalOrderPrice);
+<<<<<<< HEAD
         order.setAddressStr(addressString);
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+        order.setAddressStr("地址");
+>>>>>>> parent of 547cab6... 下单已经实现
         order.setUserInfoId(userId);
         order.setGenTime(LocalTime.now());
         int orderId = orderService.add(order);
@@ -227,18 +247,25 @@ public class WxOrderController {
             allOrderDetail.setQuantity(checkedGood.getNumber());
             allOrderDetail.setGoodsstatus(101);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             allOrderDetail.setOrderId(orderId);
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+>>>>>>> parent of 547cab6... 下单已经实现
             orderDetailList.add(allOrderDetail);
         }
         orderDetailService.addBatch(orderDetailList);
         //异步为订单明细生成订单明细号
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
+=======
+
+>>>>>>> parent of 547cab6... 下单已经实现
         return ResponseUtil.ok(orderId);
     }
 
