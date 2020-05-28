@@ -388,20 +388,6 @@ public class AllCarrigeAddressExample {
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
-        public Criteria andUserInfoId1IsNull() {
-            addCriterion("user_info_id1 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserInfoId1IsNotNull() {
-            addCriterion("user_info_id1 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserInfoId1EqualTo(Integer value) {
-            addCriterion("user_info_id1 =", value, "userInfoId1");
-=======
         public Criteria andUserInfoIdIsNull() {
             addCriterion("user_info_id is null");
             return (Criteria) this;
@@ -414,7 +400,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andUserInfoIdEqualTo(Integer value) {
             addCriterion("user_info_id =", value, "userInfoId");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -424,15 +409,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andUserInfoId1EqualToColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("user_info_id1 = ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andUserInfoId1NotEqualTo(Integer value) {
-            addCriterion("user_info_id1 <>", value, "userInfoId1");
-=======
         public Criteria andUserInfoIdEqualToColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("user_info_id = ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -440,7 +416,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andUserInfoIdNotEqualTo(Integer value) {
             addCriterion("user_info_id <>", value, "userInfoId");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -450,15 +425,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andUserInfoId1NotEqualToColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("user_info_id1 <> ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andUserInfoId1GreaterThan(Integer value) {
-            addCriterion("user_info_id1 >", value, "userInfoId1");
-=======
         public Criteria andUserInfoIdNotEqualToColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("user_info_id <> ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -466,7 +432,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andUserInfoIdGreaterThan(Integer value) {
             addCriterion("user_info_id >", value, "userInfoId");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -476,15 +441,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andUserInfoId1GreaterThanColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("user_info_id1 > ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andUserInfoId1GreaterThanOrEqualTo(Integer value) {
-            addCriterion("user_info_id1 >=", value, "userInfoId1");
-=======
         public Criteria andUserInfoIdGreaterThanColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("user_info_id > ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -492,7 +448,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andUserInfoIdGreaterThanOrEqualTo(Integer value) {
             addCriterion("user_info_id >=", value, "userInfoId");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -502,15 +457,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andUserInfoId1GreaterThanOrEqualToColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("user_info_id1 >= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andUserInfoId1LessThan(Integer value) {
-            addCriterion("user_info_id1 <", value, "userInfoId1");
-=======
         public Criteria andUserInfoIdGreaterThanOrEqualToColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("user_info_id >= ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -518,7 +464,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andUserInfoIdLessThan(Integer value) {
             addCriterion("user_info_id <", value, "userInfoId");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -528,15 +473,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andUserInfoId1LessThanColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("user_info_id1 < ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andUserInfoId1LessThanOrEqualTo(Integer value) {
-            addCriterion("user_info_id1 <=", value, "userInfoId1");
-=======
         public Criteria andUserInfoIdLessThanColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("user_info_id < ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -544,7 +480,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andUserInfoIdLessThanOrEqualTo(Integer value) {
             addCriterion("user_info_id <=", value, "userInfoId");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -554,30 +489,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andUserInfoId1LessThanOrEqualToColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("user_info_id1 <= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andUserInfoId1In(List<Integer> values) {
-            addCriterion("user_info_id1 in", values, "userInfoId1");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserInfoId1NotIn(List<Integer> values) {
-            addCriterion("user_info_id1 not in", values, "userInfoId1");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserInfoId1Between(Integer value1, Integer value2) {
-            addCriterion("user_info_id1 between", value1, value2, "userInfoId1");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserInfoId1NotBetween(Integer value1, Integer value2) {
-            addCriterion("user_info_id1 not between", value1, value2, "userInfoId1");
-=======
         public Criteria andUserInfoIdLessThanOrEqualToColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("user_info_id <= ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -600,7 +511,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andUserInfoIdNotBetween(Integer value1, Integer value2) {
             addCriterion("user_info_id not between", value1, value2, "userInfoId");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -1254,20 +1164,6 @@ public class AllCarrigeAddressExample {
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
-        public Criteria andAdressIsNull() {
-            addCriterion("adress is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressIsNotNull() {
-            addCriterion("adress is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressEqualTo(String value) {
-            addCriterion("adress =", value, "adress");
-=======
         public Criteria andAddressIsNull() {
             addCriterion("address is null");
             return (Criteria) this;
@@ -1280,7 +1176,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andAddressEqualTo(String value) {
             addCriterion("address =", value, "address");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -1290,15 +1185,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andAdressEqualToColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("adress = ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressNotEqualTo(String value) {
-            addCriterion("adress <>", value, "adress");
-=======
         public Criteria andAddressEqualToColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("address = ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -1306,7 +1192,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andAddressNotEqualTo(String value) {
             addCriterion("address <>", value, "address");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -1316,15 +1201,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andAdressNotEqualToColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("adress <> ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressGreaterThan(String value) {
-            addCriterion("adress >", value, "adress");
-=======
         public Criteria andAddressNotEqualToColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("address <> ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -1332,7 +1208,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andAddressGreaterThan(String value) {
             addCriterion("address >", value, "address");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -1342,15 +1217,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andAdressGreaterThanColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("adress > ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressGreaterThanOrEqualTo(String value) {
-            addCriterion("adress >=", value, "adress");
-=======
         public Criteria andAddressGreaterThanColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("address > ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -1358,7 +1224,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andAddressGreaterThanOrEqualTo(String value) {
             addCriterion("address >=", value, "address");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -1368,15 +1233,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andAdressGreaterThanOrEqualToColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("adress >= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressLessThan(String value) {
-            addCriterion("adress <", value, "adress");
-=======
         public Criteria andAddressGreaterThanOrEqualToColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("address >= ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -1384,7 +1240,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andAddressLessThan(String value) {
             addCriterion("address <", value, "address");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -1394,15 +1249,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andAdressLessThanColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("adress < ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressLessThanOrEqualTo(String value) {
-            addCriterion("adress <=", value, "adress");
-=======
         public Criteria andAddressLessThanColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("address < ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -1410,7 +1256,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andAddressLessThanOrEqualTo(String value) {
             addCriterion("address <=", value, "address");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 
@@ -1420,40 +1265,6 @@ public class AllCarrigeAddressExample {
          *
          * @mbg.generated
          */
-<<<<<<< HEAD
-        public Criteria andAdressLessThanOrEqualToColumn(AllCarrigeAddress.Column column) {
-            addCriterion(new StringBuilder("adress <= ").append(column.getEscapedColumnName()).toString());
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressLike(String value) {
-            addCriterion("adress like", value, "adress");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressNotLike(String value) {
-            addCriterion("adress not like", value, "adress");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressIn(List<String> values) {
-            addCriterion("adress in", values, "adress");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressNotIn(List<String> values) {
-            addCriterion("adress not in", values, "adress");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressBetween(String value1, String value2) {
-            addCriterion("adress between", value1, value2, "adress");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdressNotBetween(String value1, String value2) {
-            addCriterion("adress not between", value1, value2, "adress");
-=======
         public Criteria andAddressLessThanOrEqualToColumn(AllCarrigeAddress.Column column) {
             addCriterion(new StringBuilder("address <= ").append(column.getEscapedColumnName()).toString());
             return (Criteria) this;
@@ -1486,7 +1297,6 @@ public class AllCarrigeAddressExample {
 
         public Criteria andAddressNotBetween(String value1, String value2) {
             addCriterion("address not between", value1, value2, "address");
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
             return (Criteria) this;
         }
 

@@ -75,12 +75,10 @@
 <!--        <table tableName="all_carrige_address">-->
 <!--            <generatedKey column="address_id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-<<<<<<< HEAD
-        <table tableName="all_order">
-            <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>
-        </table>
+<!--        <table tableName="all_order">-->
+<!--            <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
 
-=======
 <!--        <table tableName="all_order">-->
 <!--            <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
@@ -88,12 +86,10 @@
             <generatedKey column="address_id" sqlStatement="Mysql" identity="true"/>
         </table>
 
-        <table tableName="all_region">
-            <generatedKey column="region_id" sqlStatement="Mysql" identity="true"/>
-        </table>
+<!--        <table tableName="all_region">-->
+<!--            <generatedKey column="region_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
 
 
-
->>>>>>> 547cab64eb76ae209f57ad6843f97b3160e0f76a
     </context>
 </generatorConfiguration>
