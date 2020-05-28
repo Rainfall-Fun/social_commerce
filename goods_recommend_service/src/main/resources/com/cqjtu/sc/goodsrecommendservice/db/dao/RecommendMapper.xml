@@ -20,7 +20,7 @@
         from all_goods_info t1,all_order_detail t2
         where t1.goods_id=t2.goods_id
         group by t1.goods_id
-        order by sum(t2.ratio) desc
+        order by avg(t2.ratio) desc
         limit 3 offset 0)
     </select>
   <select id="queryBySale" resultType="int" parameterType="map">
@@ -44,7 +44,7 @@
         from all_goods_info t1,all_order_detail t2
         where t1.goods_id=t2.goods_id
         group by t1.goods_id
-        order by sum(t2.ratio) desc
+        order by avg(t2.ratio) desc
         limit #{limit,jdbcType=INTEGER} offset #{offset,jdbcType=INTEGER};
     </select>
 

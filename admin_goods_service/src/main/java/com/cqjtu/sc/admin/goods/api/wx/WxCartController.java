@@ -53,6 +53,7 @@ public class WxCartController {
                 cartVo.setGoodsId(allCart.getGoodsId());
                 cartVo.setNumber(allCart.getNumber());
                 cartVo.setPrice(allGoodsSpecifiAttValue.getPrice());
+                cartVo.setProductId(allGoodsSpecifiAttValue.getId());
                 goodsIds.add(allCart.getGoodsId());
                 cartVos.add(cartVo);
             }

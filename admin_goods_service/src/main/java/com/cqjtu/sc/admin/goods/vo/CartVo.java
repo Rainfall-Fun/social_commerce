@@ -6,11 +6,20 @@ public class CartVo {
     int cartId;
     int goodsId;
     int number;
+    int productId;
     String goodsName;
     String specifications;
     String picUrl;
     BigDecimal price;
     boolean checked;
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 
     public boolean isChecked() {
         return checked;
