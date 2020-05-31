@@ -48,7 +48,7 @@ public class WxOrderController {
                        @RequestParam(defaultValue = "10") Integer limit,
                        @RequestParam(defaultValue = "add_time") String sort,
                        @RequestParam(defaultValue = "desc") String order) {
-        return ResponseUtil.ok();
+        return orderService.list(13,showType,page,limit,sort,order);
     }
 
     /**
@@ -60,7 +60,8 @@ public class WxOrderController {
      */
     @GetMapping("detail")
     public Object detail(@LoginUser Integer userId, @NotNull Integer orderId) {
-        return ResponseUtil.ok();
+        Object o = orderService.detail(13,orderId);
+        return o;
     }
 
     /**
@@ -96,7 +97,7 @@ public class WxOrderController {
      */
     @PostMapping("prepay")
     public Object prepay(@LoginUser Integer userId, @RequestBody String body, HttpServletRequest request) {
-        return ResponseUtil.ok();
+        return orderService.prepay(13,body);
     }
 
     /**

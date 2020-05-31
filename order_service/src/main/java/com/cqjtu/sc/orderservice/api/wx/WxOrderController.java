@@ -5,6 +5,8 @@ import com.cqjtu.sc.orderservice.db.service.*;
 import com.cqjtu.sc.orderservice.dto.CheckDto;
 import com.cqjtu.sc.orderservice.dto.PurchaseGoodsDto;
 import com.cqjtu.sc.orderservice.dto.PurchaseOrderDto;
+import com.cqjtu.sc.orderservice.util.JacksonUtil;
+import com.cqjtu.sc.orderservice.util.OrderUtil;
 import com.cqjtu.sc.orderservice.util.ResponseUtil;
 import com.cqjtu.sc.orderservice.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,31 +44,30 @@ public class WxOrderController {
     @PostMapping("checkout")
     public Object checked(Integer userId, @RequestBody CheckDto body) {
         PurchaseGoodsDto[] purchaseGoods = body.getPurchaseGoods();
-        List<Integer> productId=new ArrayList<>();
-        List<Integer> goodsId=new ArrayList<>();
-        Map<Integer,Integer> numberMap=new HashMap<>();
-        List<GoodsVo> checkedGoodsList=new ArrayList<>();
-        List<GoodsVo> uncheckedGoodsList=new ArrayList<>();
+        List<Integer> productId = new ArrayList<>();
+        List<Integer> goodsId = new ArrayList<>();
+        Map<Integer, Integer> numberMap = new HashMap<>();
+        List<GoodsVo> checkedGoodsList = new ArrayList<>();
+        List<GoodsVo> uncheckedGoodsList = new ArrayList<>();
         for (PurchaseGoodsDto purchaseGood : purchaseGoods) {
             productId.add(purchaseGood.getProductId());
-            numberMap.put(purchaseGood.getProductId(),purchaseGood.getNumber());
+            numberMap.put(purchaseGood.getProductId(), purchaseGood.getNumber());
             goodsId.add(purchaseGood.getGoodsId());
         }
         List<AllGoodsSpecifiAttValue> allGoodsSpecifiAttValues = productService.queryInList(productId);
-        BigDecimal orderTotalPrice=new BigDecimal(0);
+        BigDecimal orderTotalPrice = new BigDecimal(0);
         for (AllGoodsSpecifiAttValue allGoodsSpecifiAttValue : allGoodsSpecifiAttValues) {
-            GoodsVo goodsVo=new GoodsVo();
+            GoodsVo goodsVo = new GoodsVo();
             goodsVo.setGoodsId(allGoodsSpecifiAttValue.getGoodsId());
             goodsVo.setProductId(allGoodsSpecifiAttValue.getId());
             goodsVo.setSpecifications(allGoodsSpecifiAttValue.getSpecifications());
             goodsVo.setPrice(allGoodsSpecifiAttValue.getPrice());
             goodsVo.setNumber(numberMap.get(allGoodsSpecifiAttValue.getId()));
-            if (numberMap.get(allGoodsSpecifiAttValue.getId())>allGoodsSpecifiAttValue.getNumber()){//库存不足
+            if (numberMap.get(allGoodsSpecifiAttValue.getId()) > allGoodsSpecifiAttValue.getNumber()) {//库存不足
                 uncheckedGoodsList.add(goodsVo);
                 continue;
-            }
-            else {
-                orderTotalPrice=orderTotalPrice.add(allGoodsSpecifiAttValue.getPrice().multiply(new BigDecimal(numberMap.get(allGoodsSpecifiAttValue.getId()))));
+            } else {
+                orderTotalPrice = orderTotalPrice.add(allGoodsSpecifiAttValue.getPrice().multiply(new BigDecimal(numberMap.get(allGoodsSpecifiAttValue.getId()))));
                 checkedGoodsList.add(goodsVo);
             }
         }
@@ -74,24 +76,24 @@ public class WxOrderController {
 
         for (GoodsVo goodsVo : checkedGoodsList) {
             for (BriefGoods briefGood : briefGoods) {
-                if (briefGood.getId()==goodsVo.getGoodsId()){
+                if (briefGood.getId() == goodsVo.getGoodsId()) {
                     goodsVo.setGoodsName(briefGood.getName());
-                    goodsVo.setGoodsPic("http://localhost:8777/"+briefGood.getPicUrl());
+                    goodsVo.setGoodsPic("http://localhost:8777/" + briefGood.getPicUrl());
                 }
             }
         }
 
         for (GoodsVo goodsVo : uncheckedGoodsList) {
             for (BriefGoods briefGood : briefGoods) {
-                if (briefGood.getId()==goodsVo.getGoodsId()){
+                if (briefGood.getId() == goodsVo.getGoodsId()) {
                     goodsVo.setGoodsName(briefGood.getName());
-                    goodsVo.setGoodsPic("http://localhost:8777/"+briefGood.getPicUrl());
+                    goodsVo.setGoodsPic("http://localhost:8777/" + briefGood.getPicUrl());
                 }
             }
         }
 
         //此地址后面需要从数据库中获取
-        AllCarrigeAddress address=new AllCarrigeAddress();
+        AllCarrigeAddress address = new AllCarrigeAddress();
         address.setAddressId(1);
         address.setConsignee("彭椿悦");
         address.setTel("18888888888");
@@ -103,7 +105,7 @@ public class WxOrderController {
         data.put("freightPrice", 0);
         data.put("orderTotalPrice", orderTotalPrice);
         data.put("actualPrice", orderTotalPrice);
-        data.put("checkedGoodsList",checkedGoodsList);
+        data.put("checkedGoodsList", checkedGoodsList);
 //        if (userId == null) {
 //            return ResponseUtil.unlogin();
 //        }
@@ -118,12 +120,45 @@ public class WxOrderController {
 
     @GetMapping("list")
     public Object list(Integer userId,
-                       @RequestParam(defaultValue = "0") Integer showType,
+                       @RequestParam(defaultValue = "0") Short showType,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
                        @RequestParam(defaultValue = "add_time") String sort,
                        @RequestParam(defaultValue = "desc") String order) {
-        return ResponseUtil.ok();
+
+        if (showType==OrderUtil.STATUS_CREATE){
+            List<AllOrder> allOrders = orderService.queryUnpaid(userId, page, limit, sort, order);
+            List<Map<String, Object>> orderVoList = new ArrayList<>();
+            for (AllOrder allOrder : allOrders) {
+                Map<String, Object> orderVo = new HashMap<>();
+                orderVo.put("id", allOrder.getOrderId());
+                orderVo.put("orderSn", allOrder.getOrderNumber());
+                orderVo.put("actualPrice", allOrder.getAmount());
+                orderVo.put("orderStatusText", OrderUtil.orderStatusText(OrderUtil.STATUS_CREATE));
+                orderVo.put("handleOption", OrderUtil.build(OrderUtil.STATUS_CREATE));
+
+
+                List<Map<String, Object>> orderGoodsVoList = new ArrayList<>();
+                for (LitemallOrderGoods orderGoods : orderGoodsList) {
+                    Map<String, Object> orderGoodsVo = new HashMap<>();
+                    orderGoodsVo.put("id", orderGoods.getId());
+                    orderGoodsVo.put("goodsName", orderGoods.getGoodsName());
+                    orderGoodsVo.put("number", orderGoods.getNumber());
+                    orderGoodsVo.put("picUrl", orderGoods.getPicUrl());
+                    orderGoodsVo.put("specifications", orderGoods.getSpecifications());
+                    orderGoodsVo.put("price",orderGoods.getPrice());
+                    orderGoodsVoList.add(orderGoodsVo);
+                }
+                orderVo.put("goodsList", orderGoodsVoList);
+                orderVoList.add(orderVo);
+                return ResponseUtil.okList(orderVoList,allOrders);
+            }
+        }else {
+            List<Short> orderStatus = OrderUtil.orderStatus(showType);
+            return ResponseUtil.okList(null,null);
+        }
+
+
     }
 
     /**
@@ -135,7 +170,8 @@ public class WxOrderController {
      */
     @GetMapping("detail")
     public Object detail(Integer userId, @NotNull Integer orderId) {
-        return ResponseUtil.ok();
+        AllOrder byId = orderService.getById(orderId);
+        return ResponseUtil.ok(byId);
     }
 
     /**
@@ -149,16 +185,16 @@ public class WxOrderController {
     public Object submit(Integer userId, @RequestBody PurchaseOrderDto body) throws Exception {
         GoodsVo[] purchaseProducts = body.getPurchaseProducts();
         //检查通过的商品
-        List<GoodsVo> uncheckedGoods=new ArrayList<>();
+        List<GoodsVo> uncheckedGoods = new ArrayList<>();
         //检查未通过的商品
-        List<GoodsVo> checkedGoods=new ArrayList<>();
+        List<GoodsVo> checkedGoods = new ArrayList<>();
         //检查通过的商品id
-        List<Integer> productIds=new ArrayList<>();
+        List<Integer> productIds = new ArrayList<>();
 
         //检查库存是否充足，充足并在库存表中减少商品数量
         for (GoodsVo purchaseProduct : purchaseProducts) {
             boolean b = productService.reduceNumber(purchaseProduct.getProductId(), purchaseProduct.getNumber());
-            if (b==false){
+            if (b == false) {
                 uncheckedGoods.add(purchaseProduct);
                 continue;
             }
@@ -168,46 +204,52 @@ public class WxOrderController {
 
 
         //保存商品价格的map
-        Map<Integer,BigDecimal> productPriceMap= new HashMap<>();
+        Map<Integer, BigDecimal> productPriceMap = new HashMap<>();
         List<AllGoodsSpecifiAttValue> allGoodsSpecifiAttValues = productService.queryInList(productIds);
         for (AllGoodsSpecifiAttValue allGoodsSpecifiAttValue : allGoodsSpecifiAttValues) {
-            productPriceMap.put(allGoodsSpecifiAttValue.getId(),allGoodsSpecifiAttValue.getPrice());
+            productPriceMap.put(allGoodsSpecifiAttValue.getId(), allGoodsSpecifiAttValue.getPrice());
         }
 
         //计算订单总价
-        BigDecimal totalOrderPrice=BigDecimal.ZERO;
+        BigDecimal totalOrderPrice = BigDecimal.ZERO;
         for (GoodsVo checkedGood : checkedGoods) {
-            Integer productId=checkedGood.getProductId();
-            totalOrderPrice=totalOrderPrice.add(productPriceMap.get(productId).multiply(BigDecimal.valueOf(checkedGood.getNumber())));
+            Integer productId = checkedGood.getProductId();
+            totalOrderPrice = totalOrderPrice.add(productPriceMap.get(productId).multiply(BigDecimal.valueOf(checkedGood.getNumber())));
         }
 
         //收货地址
-        Integer addressId=body.getAddressId();
-        addressId=1;//后面需要删除
+        Integer addressId = body.getAddressId();
+        addressId = 1;//后面需要删除
         String addressString = carrigeAddressService.addressString(addressId);
         //将订单信息写入订单表
-        AllOrder order=new AllOrder();
+        AllOrder order = new AllOrder();
         order.setAmount(totalOrderPrice);
         order.setAddressStr(addressString);
         order.setUserInfoId(userId);
-        order.setGenTime(LocalTime.now());
+        order.setGenTime(LocalDateTime.now());
         int orderId = orderService.add(order);
-        //异步为订单生成订单号
+
+        order.setOrderId(orderId);
+        String orderSn = System.currentTimeMillis() + "" + orderId;
+        order.setOrderNumber(orderSn);
+        orderService.update(order);
 
 
         //将商品信息写入订单明细
-        List<AllOrderDetail> orderDetailList=new ArrayList<>();
-        for (GoodsVo checkedGood : checkedGoods) {
-            AllOrderDetail allOrderDetail=new AllOrderDetail();
+        List<AllOrderDetail> orderDetailList = new ArrayList<>();
+        for (int i = 0; i < checkedGoods.size(); i++) {
+            GoodsVo checkedGood = checkedGoods.get(i);
+            AllOrderDetail allOrderDetail = new AllOrderDetail();
             allOrderDetail.setGoodsId(checkedGood.getGoodsId());
-            allOrderDetail.setSpecifiValueId(checkedGood.getProductId());
+            allOrderDetail.setId(checkedGood.getProductId());
             allOrderDetail.setQuantity(checkedGood.getNumber());
             allOrderDetail.setGoodsstatus(101);
             allOrderDetail.setOrderId(orderId);
+            allOrderDetail.setAmount(BigDecimal.valueOf(checkedGood.getNumber()).multiply(productPriceMap.get(checkedGood.getProductId())));
+            allOrderDetail.setOrderDetailNumber(orderSn + i);
             orderDetailList.add(allOrderDetail);
         }
         orderDetailService.addBatch(orderDetailList);
-        //异步为订单明细生成订单明细号
 
 
         return ResponseUtil.ok(orderId);
@@ -233,12 +275,22 @@ public class WxOrderController {
      * @return 支付订单ID
      */
     @PostMapping("prepay")
-    public Object prepay(Integer userId, @RequestBody String body, HttpServletRequest request) {
+    public Object prepay(Integer userId, @RequestBody String body) {
+        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
+        AllOrder byId = orderService.getById(orderId);
+        byId.setPayTime(LocalDateTime.now());
+        orderService.update(byId);
+        List<AllOrderDetail> byOrderId = orderDetailService.findByOrderId(orderId);
+        for (AllOrderDetail allOrderDetail : byOrderId) {
+            allOrderDetail.setGoodsstatus(Integer.valueOf(OrderUtil.STATUS_PAY));
+            orderDetailService.update(allOrderDetail);
+        }
         return ResponseUtil.ok();
     }
 
     /**
      * 微信H5支付
+     *
      * @param userId
      * @param body
      * @param request
@@ -252,10 +304,10 @@ public class WxOrderController {
     /**
      * 微信付款成功或失败回调接口
      * <p>
-     *  TODO
-     *  注意，这里pay-notify是示例地址，建议开发者应该设立一个隐蔽的回调地址
+     * TODO
+     * 注意，这里pay-notify是示例地址，建议开发者应该设立一个隐蔽的回调地址
      *
-     * @param request 请求内容
+     * @param request  请求内容
      * @param response 响应内容
      * @return 操作结果
      */
@@ -325,6 +377,29 @@ public class WxOrderController {
     @PostMapping("comment")
     public Object comment(Integer userId, @RequestBody String body) {
         return ResponseUtil.ok();
+    }
+
+    @GetMapping("index")
+    public Object index(Integer userId) {
+
+        int unpaid = 0;
+        int unship = 0;
+        int unrecv = 0;
+        int uncomment = 0;
+
+        HashMap<Short, Integer> statusSum = orderDetailService.countForGoodsStatus(userId);
+        unpaid = statusSum.get(OrderUtil.STATUS_CREATE);
+        unship = statusSum.get(OrderUtil.STATUS_PAY);
+        unrecv = statusSum.get(OrderUtil.STATUS_SHIP);
+        int a1 = statusSum.get(OrderUtil.STATUS_CONFIRM) == null ? 0 : statusSum.get(OrderUtil.STATUS_CONFIRM);
+        int a2 = statusSum.get(OrderUtil.STATUS_AUTO_CONFIRM) == null ? 0 : statusSum.get(OrderUtil.STATUS_AUTO_CONFIRM);
+        uncomment = a1 + a2;
+        Map<Object, Object> orderInfo = new HashMap<Object, Object>();
+        orderInfo.put("unpaid", unpaid);
+        orderInfo.put("unship", unship);
+        orderInfo.put("unrecv", unrecv);
+        orderInfo.put("uncomment", uncomment);
+        return ResponseUtil.ok(orderInfo);
     }
 
 }
