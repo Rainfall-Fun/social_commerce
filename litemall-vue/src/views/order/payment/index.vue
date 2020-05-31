@@ -7,9 +7,9 @@
     </div>
 
     <van-cell-group class="payment_group">
-      <van-cell title="订单编号" :value="order.orderInfo.orderSn"/>
+      <van-cell title="订单编号" :value="order.orderNumber"/>
       <van-cell title="实付金额">
-        <span class="red">{{order.orderInfo.actualPrice *100 | yuan}}</span>
+        <span class="red">{{order.amount *100 | yuan}}</span>
       </van-cell>
     </van-cell-group>
 
@@ -50,8 +50,6 @@ export default {
     return {
       payWay: 'wx',
       order: {
-        orderInfo: {},
-        orderGoods: []
       },
       orderId: 0
     };
@@ -79,37 +77,40 @@ export default {
           if (isWeixin) {
             orderPrepay({ orderId: this.orderId })
               .then(res => {
-                let data = res.data.data;
-                let prepay_data = JSON.stringify({
-                  appId: data.appId,
-                  timeStamp: data.timeStamp,
-                  nonceStr: data.nonceStr,
-                  package: data.packageValue,
-                  signType: 'MD5',
-                  paySign: data.paySign
-                });
-                setLocalStorage({ prepay_data: prepay_data });
+                Dialog.alert({
+                  message: '支付成功'
+                })
+                // let data = res.data.data;
+                // let prepay_data = JSON.stringify({
+                //   appId: data.appId,
+                //   timeStamp: data.timeStamp,
+                //   nonceStr: data.nonceStr,
+                //   package: data.packageValue,
+                //   signType: 'MD5',
+                //   paySign: data.paySign
+                // });
+                // setLocalStorage({ prepay_data: prepay_data });
 
-                if (typeof WeixinJSBridge == 'undefined') {
-                  if (document.addEventListener) {
-                    document.addEventListener(
-                      'WeixinJSBridgeReady',
-                      this.onBridgeReady,
-                      false
-                    );
-                  } else if (document.attachEvent) {
-                    document.attachEvent(
-                      'WeixinJSBridgeReady',
-                      this.onBridgeReady
-                    );
-                    document.attachEvent(
-                      'onWeixinJSBridgeReady',
-                      this.onBridgeReady
-                    );
-                  }
-                } else {
-                  this.onBridgeReady();
-                }
+                // if (typeof WeixinJSBridge == 'undefined') {
+                //   if (document.addEventListener) {
+                //     document.addEventListener(
+                //       'WeixinJSBridgeReady',
+                //       this.onBridgeReady,
+                //       false
+                //     );
+                //   } else if (document.attachEvent) {
+                //     document.attachEvent(
+                //       'WeixinJSBridgeReady',
+                //       this.onBridgeReady
+                //     );
+                //     document.attachEvent(
+                //       'onWeixinJSBridgeReady',
+                //       this.onBridgeReady
+                //     );
+                //   }
+                // } else {
+                //   this.onBridgeReady();
+                // }
               })
               .catch(err => {
                 Dialog.alert({ message: err.data.errmsg });

@@ -4,22 +4,22 @@
       <van-cell v-if="checkedAddress" isLink @click="goAddressList()" title="收货地址">
       <div slot="label">
         <div>
-         <span>{{ checkedAddress.name }} </span>
+         <span>{{ checkedAddress.consignee }} </span>
          <span>{{ checkedAddress.tel }} </span>
       </div>
       <div>
-        {{ checkedAddress.addressDetail }}
+        {{ checkedAddress.adress }}
       </div>
       </div>
     </van-cell>
   </van-cell-group>
 
-  <van-cell-group>
+  <!-- <van-cell-group>
     <van-cell class="order-coupon" title="优惠券" is-link :value="getCouponValue()" @click="getCoupons" />
-  </van-cell-group>
+  </van-cell-group> -->
 
 <!-- 优惠券列表 -->
-<van-popup v-model="showList" position="bottom">
+<!-- <van-popup v-model="showList" position="bottom">
   <van-coupon-list
     :coupons="coupons"
     :chosen-coupon="chosenCoupon"
@@ -27,7 +27,7 @@
     @change="onChange"
     @exchange="onExchange"
   />
-</van-popup>
+</van-popup> -->
 
     <van-card
       v-for="item in checkedGoodsList"
@@ -35,7 +35,7 @@
       :title="item.goodsName"
       :num="item.number"
       :price="item.price +'.00'"
-      :thumb="item.picUrl"
+      :thumb="item.goodsPic"
     >
       <div slot="desc">
         <div class="van-card__desc">
@@ -53,9 +53,9 @@
       <van-cell title="邮费">
         <span class="red">{{ freightPrice * 100| yuan}}</span>
       </van-cell>
-      <van-cell title="优惠券">
+      <!-- <van-cell title="优惠券">
         <span class="red">-{{ couponPrice * 100| yuan}}</span>
-      </van-cell>
+      </van-cell> -->
       <van-field v-model="message" placeholder="请输入备注" label="订单备注">
       <template slot="icon">{{message.length}}/50</template>
       </van-field>      
@@ -100,7 +100,6 @@ export default {
     };
   },
   created() {
-    console.log(this.$store.state.purchaseGoodsList);
     this.init();
   },
 
@@ -118,18 +117,15 @@ export default {
 
       orderSubmit({
         addressId: AddressId,
-        cartId: CartId,
-        couponId: CouponId,
-        userCouponId: UserCouponId,
-        grouponLinkId: 0,
-        grouponRulesId: 0,
+        purchaseProducts: this.checkedGoodsList,
         message: this.message
       }).then(res => {
         
         // 下单成功，重置下单参数。
-        setLocalStorage({AddressId: 0, CartId: 0, CouponId: 0});
+        // setLocalStorage({AddressId: 0, CartId: 0, CouponId: 0});
 
-        let orderId = res.data.data.orderId;
+        let orderId = res.data.data;
+        console.log(orderId)
         this.$router.push({
           name: 'payment',
           params: { orderId: orderId }
@@ -187,22 +183,31 @@ export default {
     },
     init() {
       const {AddressId, CartId, CouponId, UserCouponId} = getLocalStorage('AddressId', 'CartId', 'CouponId', 'UserCouponId');
-
-      cartCheckout({cartId: CartId, addressId: AddressId, couponId: CouponId, userCouponId: UserCouponId, grouponRulesId: 0}).then(res => {
-          var data = res.data.data
-
-          this.checkedGoodsList = data.checkedGoodsList;
-          this.checkedAddress= data.checkedAddress;
-          this.availableCouponLength= data.availableCouponLength;
-          this.actualPrice= data.actualPrice;
-          this.couponPrice= data.couponPrice;
-          this.grouponPrice= data.grouponPrice;
-          this.freightPrice= data.freightPrice;
-          this.goodsTotalPrice= data.goodsTotalPrice;
-          this.orderTotalPrice= data.orderTotalPrice;
-
-          setLocalStorage({AddressId: data.addressId, CartId: data.cartId, CouponId: data.couponId, UserCouponId: data.userCouponId});
+      const data={purchaseGoods:this.$store.state.purchaseGoodsList}
+      cartCheckout(data).then(res => {
+            var data = res.data.data
+            this.checkedGoodsList = data.checkedGoodsList;
+            this.checkedAddress= data.checkedAddress;
+            this.actualPrice= data.actualPrice;
+            this.freightPrice= data.freightPrice;
+            this.goodsTotalPrice= data.goodsTotalPrice;
+            this.orderTotalPrice= data.orderTotalPrice;
       });
+      // cartCheckout({cartId: CartId, addressId: AddressId, couponId: CouponId, userCouponId: UserCouponId, grouponRulesId: 0}).then(res => {
+      //     var data = res.data.data
+
+      //     this.checkedGoodsList = data.checkedGoodsList;
+      //     this.checkedAddress= data.checkedAddress;
+      //     this.availableCouponLength= data.availableCouponLength;
+      //     this.actualPrice= data.actualPrice;
+      //     this.couponPrice= data.couponPrice;
+      //     this.grouponPrice= data.grouponPrice;
+      //     this.freightPrice= data.freightPrice;
+      //     this.goodsTotalPrice= data.goodsTotalPrice;
+      //     this.orderTotalPrice= data.orderTotalPrice;
+
+      //     setLocalStorage({AddressId: data.addressId, CartId: data.cartId, CouponId: data.couponId, UserCouponId: data.userCouponId});
+      // });
 
     },
     onChange(index) {
