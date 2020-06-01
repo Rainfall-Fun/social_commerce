@@ -46,7 +46,7 @@ public class WxOrderController {
                        @RequestParam(defaultValue = "0") Integer showType,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
-                       @RequestParam(defaultValue = "add_time") String sort,
+                       @RequestParam(defaultValue = "order_id") String sort,
                        @RequestParam(defaultValue = "desc") String order) {
         return orderService.list(13,showType,page,limit,sort,order);
     }
@@ -148,7 +148,7 @@ public class WxOrderController {
      */
     @PostMapping("confirm")
     public Object confirm(@LoginUser Integer userId, @RequestBody String body) {
-        return ResponseUtil.ok();
+        return orderService.confirm(13,body);
     }
 
     /**

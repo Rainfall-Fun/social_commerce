@@ -7,13 +7,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.cqjtu.sc.orderservice.db.domain.UnpaidOrderInfo;
 import com.cqjtu.sc.orderservice.util.CountGoodsStatus;
 import com.cqjtu.sc.orderservice.vo.OrderDetailVo;
 import com.cqjtu.sc.orderservice.vo.OrderVo;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface AllOrderDetailMapper {
+    int countByUserIdAndStatus(Integer userId, List<Short> status,int limit);
+    Page<UnpaidOrderInfo> selectByUserIdAndStatus(Integer userId, List<Short> status, int offset, int limit);
+    List<UnpaidOrderInfo> selectUnpaidOrderInfo(Integer userId, List<Integer> orderIdList);
     List<CountGoodsStatus> countForGoodsStatus(Integer userId);
     OrderDetailVo selectOrderDetail(int userId);
     List<OrderVo> selectOrder(Integer userId,List<Short> goodsStatus,String orderSn);

@@ -13,7 +13,7 @@ import java.util.List;
 
 @FeignClient(name = "order-service")
 public interface OrderService {
-    @GetMapping("list")
+    @GetMapping("wx/order/list")
     Object list(@RequestParam Integer userId,
                @RequestParam(defaultValue = "0") Integer showType,
                @RequestParam(defaultValue = "1") Integer page,
@@ -32,6 +32,8 @@ public interface OrderService {
 
     @PostMapping(value = "wx/order/prepay", consumes = "application/json")
     Object prepay(@RequestParam("userId") Integer userId, @RequestBody String body);
+    @PostMapping(value = "wx/order/confirm", consumes = "application/json")
+    Object confirm(@RequestParam("userId") Integer userId, @RequestBody String body);
 
     @GetMapping("wx/order/index")
     Object index(@RequestParam("userId") Integer userId);

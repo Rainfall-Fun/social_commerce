@@ -120,22 +120,22 @@ public class OrderUtil {
 
     public static List<Short> orderStatus(Short showType) {
         // 全部订单
-        if (showType == 0) {
+        if (showType == 4) {
             return null;
         }
 
         List<Short> status = new ArrayList<Short>(2);
 
-        if (showType.equals(1)) {
+        if (showType.equals((short)0)) {
             // 待付款订单
             status.add((short) 101);
-        } else if (showType.equals(2)) {
+        } else if (showType.equals((short)2)) {
             // 待发货订单
             status.add((short) 201);
-        } else if (showType.equals(3)) {
+        } else if (showType.equals((short)3)) {
             // 待收货订单
             status.add((short) 301);
-        } else if (showType.equals(4)) {
+        } else if (showType.equals((short)1)) {
             // 待评价订单
             status.add((short) 401);
         } else {
