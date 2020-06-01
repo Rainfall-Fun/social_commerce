@@ -34,7 +34,7 @@ public class AdminOrderController {
 
     @GetMapping("/list")
     public Object list(Integer userId, String orderSn,
-                       @RequestParam(required = false) List<Short> orderStatusArray,
+                       @RequestParam(required = false) List<Integer> orderStatusArray,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
                        @RequestParam(defaultValue = "add_time") String sort,

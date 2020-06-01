@@ -20,21 +20,21 @@ import java.util.List;
  */
 public class OrderUtil {
 
-    public static final Short STATUS_CREATE = 101;
-    public static final Short STATUS_PAY = 201;
-    public static final Short STATUS_SHIP = 301;
-    public static final Short STATUS_CONFIRM = 401;
-    public static final Short STATUS_CANCEL = 102;
-    public static final Short STATUS_AUTO_CANCEL = 103;
-    public static final Short STATUS_ADMIN_CANCEL = 104;
-    public static final Short STATUS_REFUND = 202;
-    public static final Short STATUS_REFUND_CONFIRM = 203;
-    public static final Short STATUS_AUTO_CONFIRM = 402;
-    public static final Short STATUS_PAY_GROUPON = 200;
-    public static final Short STATUS_TIMEOUT_GROUPON = 204;
+    public static final Integer STATUS_CREATE = 101;
+    public static final Integer STATUS_PAY = 201;
+    public static final Integer STATUS_SHIP = 301;
+    public static final Integer STATUS_CONFIRM = 401;
+    public static final Integer STATUS_CANCEL = 102;
+    public static final Integer STATUS_AUTO_CANCEL = 103;
+    public static final Integer STATUS_ADMIN_CANCEL = 104;
+    public static final Integer STATUS_REFUND = 202;
+    public static final Integer STATUS_REFUND_CONFIRM = 203;
+    public static final Integer STATUS_AUTO_CONFIRM = 402;
+    public static final Integer STATUS_PAY_GROUPON = 200;
+    public static final Integer STATUS_TIMEOUT_GROUPON = 204;
 
 
-    public static String orderStatusText(Short status) {
+    public static String orderStatusText(Integer status) {
 
         if (status == 101) {
             return "未付款";
@@ -84,7 +84,7 @@ public class OrderUtil {
     }
 
 
-    public static OrderHandleOption build(Short status) {
+    public static OrderHandleOption build(Integer status) {
         OrderHandleOption handleOption = new OrderHandleOption();
 
         if (status == 101) {
@@ -118,26 +118,26 @@ public class OrderUtil {
         return handleOption;
     }
 
-    public static List<Short> orderStatus(Short showType) {
+    public static List<Integer> orderStatus(Integer showType) {
         // 全部订单
         if (showType == 4) {
             return null;
         }
 
-        List<Short> status = new ArrayList<Short>(2);
+        List<Integer> status = new ArrayList<Integer>(2);
 
-        if (showType.equals((short)0)) {
+        if (showType.equals(0)) {
             // 待付款订单
-            status.add((short) 101);
-        } else if (showType.equals((short)2)) {
+            status.add(101);
+        } else if (showType.equals(2)) {
             // 待发货订单
-            status.add((short) 201);
-        } else if (showType.equals((short)3)) {
+            status.add(201);
+        } else if (showType.equals(3)) {
             // 待收货订单
-            status.add((short) 301);
-        } else if (showType.equals((short)1)) {
+            status.add(301);
+        } else if (showType.equals(1)) {
             // 待评价订单
-            status.add((short) 401);
+            status.add(401);
         } else {
             return null;
         }

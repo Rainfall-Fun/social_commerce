@@ -136,7 +136,7 @@ public class WxOrderController {
      */
     @PostMapping("refund")
     public Object refund(@LoginUser Integer userId, @RequestBody String body) {
-        return ResponseUtil.ok();
+        return orderService.refund(13,body);
     }
 
     /**

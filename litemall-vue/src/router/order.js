@@ -1,4 +1,5 @@
 const Tabbar = () => import('@/components/Tabbar/');
+const CommentGoods = () => import('@/views/user/comment-goods')
 
 export default [
   {
@@ -32,5 +33,10 @@ export default [
     name: 'paymentStatus',
     component: () => import('@/views/order/payment-status'),
     props: true
+  },
+  {
+    path: '/order/comment/:orderId',
+    name: 'commentGoods',
+    component: CommentGoods
   }
 ];

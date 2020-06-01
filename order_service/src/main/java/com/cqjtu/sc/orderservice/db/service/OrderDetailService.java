@@ -53,7 +53,7 @@ public class OrderDetailService {
     }
 
 
-    public List<OrderVo> selectBySpecifiedKey(Integer userId,List<Short> goodsStatus,String orderSn){
+    public List<OrderVo> selectBySpecifiedKey(Integer userId,List<Integer> goodsStatus,String orderSn){
         return mapper.selectOrder(userId,goodsStatus,orderSn);
     }
 
@@ -64,9 +64,9 @@ public class OrderDetailService {
         mapper.updateByPrimaryKeySelective(orderDetail);
     }
 
-    public HashMap<Short,Integer> countForGoodsStatus(Integer userId){
+    public HashMap<Integer,Integer> countForGoodsStatus(Integer userId){
         List<CountGoodsStatus> list = mapper.countForGoodsStatus(userId);
-        HashMap<Short,Integer> map=new HashMap<>();
+        HashMap<Integer,Integer> map=new HashMap<>();
         for (CountGoodsStatus countGoodsStatus : list) {
             map.put(countGoodsStatus.getGoodsStatus(),countGoodsStatus.getSum());
         }
@@ -78,7 +78,7 @@ public class OrderDetailService {
         return mapper.selectUnpaidOrderInfo(userId,orderIds);
     }
 
-    public Page<UnpaidOrderInfo> selectOrderInfo(Integer userId,List<Short> status,Integer page,Integer limit){
+    public Page<UnpaidOrderInfo> selectOrderInfo(Integer userId,List<Integer> status,Integer page,Integer limit){
         int i = mapper.countByUserIdAndStatus(userId, status,limit);
         Page<UnpaidOrderInfo> unpaidOrderInfos = mapper.selectByUserIdAndStatus(userId, status, (page - 1) * limit, limit);
         unpaidOrderInfos.setPages(i);

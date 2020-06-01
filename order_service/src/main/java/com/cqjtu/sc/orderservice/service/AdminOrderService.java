@@ -30,7 +30,7 @@ public class AdminOrderService {
     OrderDetailService orderDetailService;
 
 
-    public Object list(Integer userId, String orderSn, List<Short> orderStatusArray,
+    public Object list(Integer userId, String orderSn, List<Integer> orderStatusArray,
                        Integer page, Integer limit, String sort, String order) {
 //        List<LitemallOrder> orderList = orderService.querySelective(userId, orderSn, orderStatusArray, page, limit,
 //                sort, order);

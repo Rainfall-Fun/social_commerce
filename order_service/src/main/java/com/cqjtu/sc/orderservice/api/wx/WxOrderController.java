@@ -5,9 +5,7 @@ import com.cqjtu.sc.orderservice.db.service.*;
 import com.cqjtu.sc.orderservice.dto.CheckDto;
 import com.cqjtu.sc.orderservice.dto.PurchaseGoodsDto;
 import com.cqjtu.sc.orderservice.dto.PurchaseOrderDto;
-import com.cqjtu.sc.orderservice.util.JacksonUtil;
-import com.cqjtu.sc.orderservice.util.OrderUtil;
-import com.cqjtu.sc.orderservice.util.ResponseUtil;
+import com.cqjtu.sc.orderservice.util.*;
 import com.cqjtu.sc.orderservice.vo.GoodsVo;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,7 +119,7 @@ public class WxOrderController {
 
     @GetMapping("list")
     public Object list(Integer userId,
-                       @RequestParam(defaultValue = "0") Short showType,
+                       @RequestParam(defaultValue = "0") Integer showType,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
                        @RequestParam(defaultValue = "order_id") String sort,
@@ -160,13 +158,13 @@ public class WxOrderController {
             }
             return ResponseUtil.okList(orderVoList,allOrders);
         }else {
-            List<Short> orderStatus = OrderUtil.orderStatus(showType);
+            List<Integer> orderStatus = OrderUtil.orderStatus(showType);
             List<Integer> status=new ArrayList<>();
             if (orderStatus==null){
                 status.add(null);
             }else {
-                for (Short aShort : orderStatus) {
-                    status.add((int)aShort);
+                for (Integer aShort : orderStatus) {
+                    status.add(aShort);
                 }
             }
             Page<UnpaidOrderInfo> unpaidOrderInfos = orderDetailService.selectOrderInfo(userId, orderStatus,page,limit);
@@ -373,6 +371,14 @@ public class WxOrderController {
      */
     @PostMapping("refund")
     public Object refund(Integer userId, @RequestBody String body) {
+        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
+        AllOrderDetail orderDetail = orderDetailService.findById(orderId);
+        OrderHandleOption handleOption = OrderUtil.build(orderDetail.getGoodsstatus());
+        if (!handleOption.isRefund()) {
+            return ResponseUtil.fail(WxResponseCode.ORDER_INVALID_OPERATION, "订单不能取消");
+        }
+        orderDetail.setGoodsstatus(OrderUtil.STATUS_REFUND);
+        orderDetailService.update(orderDetail);
         return ResponseUtil.ok();
     }
 
@@ -439,7 +445,7 @@ public class WxOrderController {
         int unrecv = 0;
         int uncomment = 0;
 
-        HashMap<Short, Integer> statusSum = orderDetailService.countForGoodsStatus(userId);
+        HashMap<Integer, Integer> statusSum = orderDetailService.countForGoodsStatus(userId);
         unpaid = statusSum.get(OrderUtil.STATUS_CREATE)==null?0:statusSum.get(OrderUtil.STATUS_CREATE);
         unship = statusSum.get(OrderUtil.STATUS_PAY)==null?0:statusSum.get(OrderUtil.STATUS_PAY);
         unrecv = statusSum.get(OrderUtil.STATUS_SHIP)==null?0:statusSum.get(OrderUtil.STATUS_SHIP);

@@ -34,6 +34,8 @@ public interface OrderService {
     Object prepay(@RequestParam("userId") Integer userId, @RequestBody String body);
     @PostMapping(value = "wx/order/confirm", consumes = "application/json")
     Object confirm(@RequestParam("userId") Integer userId, @RequestBody String body);
+    @PostMapping(value = "wx/order/refund", consumes = "application/json")
+    Object refund(@RequestParam("userId") Integer userId, @RequestBody String body);
 
     @GetMapping("wx/order/index")
     Object index(@RequestParam("userId") Integer userId);

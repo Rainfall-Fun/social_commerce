@@ -11,13 +11,13 @@ public class UnpaidOrderInfo {
     private String number;
     private Integer goodsId;
     private String orderSn;
-    private Short status;
+    private Integer status;
 
-    public Short getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Short status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

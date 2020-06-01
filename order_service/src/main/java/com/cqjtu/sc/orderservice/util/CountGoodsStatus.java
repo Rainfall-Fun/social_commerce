@@ -1,14 +1,14 @@
 package com.cqjtu.sc.orderservice.util;
 
 public class CountGoodsStatus {
-    private Short goodsStatus;
+    private Integer goodsStatus;
     private Integer sum;
 
-    public Short getGoodsStatus() {
+    public Integer getGoodsStatus() {
         return goodsStatus;
     }
 
-    public void setGoodsStatus(Short goodsStatus) {
+    public void setGoodsStatus(Integer goodsStatus) {
         this.goodsStatus = goodsStatus;
     }
 

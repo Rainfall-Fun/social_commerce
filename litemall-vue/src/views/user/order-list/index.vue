@@ -12,8 +12,7 @@
           <van-panel v-for="(el, i) in orderList"
                      :key="i"
                      :title="'订单编号: ' + el.orderSn"
-                     :status="el.orderStatusText"
-                     @click.native="toOrderDetail(el.id)">
+                     :status="el.orderStatusText">
             <van-card v-for="(goods, goodsI) in el.goodsList"
                       :key="goodsI"
                       :title="goods.goodsName"
@@ -58,7 +57,6 @@
                   @load="getOrderList">
           <van-panel v-for="(el, i) in orderList"
                      :key="i"
-                     :title="'订单编号: ' + el.orderSn"
                      :status="el.orderStatusText"
                      @click.native="toOrderDetail(el.id)">
             <van-card v-for="(goods, goodsI) in el.goodsList"
@@ -84,10 +82,6 @@
               <van-button size="small"
                           v-if="el.handleOption.cancel"
                           @click.stop="cancelOrder(el.id)">取消订单</van-button>
-              <van-button size="small"
-                          v-if="el.handleOption.pay"
-                          type="danger"
-                          @click.stop="toPay(el.id)">去支付</van-button>
               <van-button size="small"
                           v-if="el.handleOption.refund"
                           type="danger"
@@ -136,7 +130,7 @@ export default {
       tabTitles: ['待评价',  '待发货', '待收货', '全部'],
       orderList: [],
       page: 0,
-      limit: 10,
+      limit: 5,
       loading: false,
       finished: false
     };
@@ -207,7 +201,11 @@ export default {
         })
         .catch(() => {});
     },
-    commentOrder(id) {},
+    commentOrder(id) {
+      this.$router.push({
+        path: '/order/comment/'+id
+      });
+    },
     toPay(id) {
       this.$router.push({ name: 'payment', params: { orderId: id } });
     },
