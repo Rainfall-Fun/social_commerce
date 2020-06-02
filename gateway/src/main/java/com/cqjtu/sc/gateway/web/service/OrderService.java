@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -39,9 +40,15 @@ public interface OrderService {
 
     @GetMapping("wx/order/index")
     Object index(@RequestParam("userId") Integer userId);
+    @GetMapping("wx/order/goods")
+    Object goods(@RequestParam("userId") Integer userId,
+                 @RequestParam("orderId") Integer orderId);
 
+    @PostMapping(value = "wx/order/comment",consumes = "application/json")
+    Object comment(@RequestParam("userId") Integer userId, @RequestBody String body);
     @GetMapping("admin/order/list")
-    Object adminList(@RequestParam("userId") Integer userId,
+    Object adminList(@RequestParam("supplierId") Integer supplierId,
+                     @RequestParam("userId") Integer userId,
                      @RequestParam("orderSn") String orderSn,
                      @RequestParam(required = false) List<Short> orderStatusArray,
                      @RequestParam(defaultValue = "1") Integer page,

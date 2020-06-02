@@ -37,6 +37,7 @@ export default [
   {
     path: '/order/comment/:orderId',
     name: 'commentGoods',
+    props: true,
     component: CommentGoods
   }
 ];

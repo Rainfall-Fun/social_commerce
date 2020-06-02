@@ -16,6 +16,7 @@ const UserCouponList = () => import('@/views/user/coupon-list');
 const UserRefundList = () => import('@/views/user/refund-list');
 const UserIntersted = () => import('@/views/user/module-intersted')
 
+
 const Tabbar = () => import('@/components/Tabbar/');
 
 export default [

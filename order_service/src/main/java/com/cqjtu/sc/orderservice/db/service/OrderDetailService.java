@@ -6,6 +6,7 @@ import com.cqjtu.sc.orderservice.db.domain.AllOrderDetail;
 import com.cqjtu.sc.orderservice.db.domain.AllOrderDetailExample;
 import com.cqjtu.sc.orderservice.db.domain.UnpaidOrderInfo;
 import com.cqjtu.sc.orderservice.util.CountGoodsStatus;
+import com.cqjtu.sc.orderservice.vo.CommentGoodsVo;
 import com.cqjtu.sc.orderservice.vo.OrderDetailVo;
 import com.cqjtu.sc.orderservice.vo.OrderVo;
 import com.github.pagehelper.Page;
@@ -53,8 +54,8 @@ public class OrderDetailService {
     }
 
 
-    public List<OrderVo> selectBySpecifiedKey(Integer userId,List<Integer> goodsStatus,String orderSn){
-        return mapper.selectOrder(userId,goodsStatus,orderSn);
+    public List<OrderVo> selectBySpecifiedKey(Integer userId,List<Integer> goodsStatus,String orderSn,Integer supplierId){
+        return mapper.selectOrder(userId,goodsStatus,orderSn,supplierId);
     }
 
     public OrderDetailVo selectOrderDetail(Integer userId){
@@ -85,5 +86,9 @@ public class OrderDetailService {
         unpaidOrderInfos.setPageSize(limit);
         unpaidOrderInfos.setPageNum(page);
         return unpaidOrderInfos;
+    }
+
+    public CommentGoodsVo getCommentGoodsInfo(Integer userId,Integer orderId){
+        return mapper.getCommentGoodsInfo(userId,orderId);
     }
 }

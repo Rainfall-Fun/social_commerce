@@ -6,6 +6,7 @@ import com.cqjtu.sc.orderservice.dto.CheckDto;
 import com.cqjtu.sc.orderservice.dto.PurchaseGoodsDto;
 import com.cqjtu.sc.orderservice.dto.PurchaseOrderDto;
 import com.cqjtu.sc.orderservice.util.*;
+import com.cqjtu.sc.orderservice.vo.CommentGoodsVo;
 import com.cqjtu.sc.orderservice.vo.GoodsVo;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -415,14 +416,13 @@ public class WxOrderController {
      *
      * @param userId  用户ID
      * @param orderId 订单ID
-     * @param goodsId 商品ID
      * @return 待评价订单商品信息
      */
     @GetMapping("goods")
     public Object goods(Integer userId,
-                        @NotNull Integer orderId,
-                        @NotNull Integer goodsId) {
-        return ResponseUtil.ok();
+                        @NotNull Integer orderId) {
+        CommentGoodsVo commentGoodsInfo = orderDetailService.getCommentGoodsInfo(userId, orderId);
+        return ResponseUtil.ok(commentGoodsInfo);
     }
 
     /**
@@ -434,6 +434,13 @@ public class WxOrderController {
      */
     @PostMapping("comment")
     public Object comment(Integer userId, @RequestBody String body) {
+        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
+        Integer rate = JacksonUtil.parseInteger(body,"rate");
+        String message = JacksonUtil.parseString(body, "message");
+        AllOrderDetail byId = orderDetailService.findById(orderId);
+        byId.setRatio(rate);
+        byId.setGoodsstatus(OrderUtil.STATUS_COMMENTED);
+        orderDetailService.update(byId);
         return ResponseUtil.ok();
     }
 
