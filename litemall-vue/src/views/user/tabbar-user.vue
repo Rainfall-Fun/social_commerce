@@ -2,7 +2,7 @@
   <div class="tabbar-user">
     <user-header :isLogin="isLogin"/>
     <order-group/>
-    <coupon-group/>
+    <!-- <coupon-group/> -->
     <user-module/>
   </div>
 </template>

@@ -134,9 +134,19 @@ export default {
           });
       } else {
         this.isSubmit = true;
-        setLocalStorage({AddressId: 0, CartId: 0, CouponId: 0});
-        console.log(this.checkedGoods)
-        // this.$router.push('/order/checkout');
+        setLocalStorage({AddressId: 0, CartId: 0, CouponId: 0})
+        let purchaseList= []
+        for(var i=0;i<this.checkedGoods.length;i++){
+          for(var j=0;j<this.goods.length;j++){
+            if(this.checkedGoods[i]==this.goods[j].cartId){
+              purchaseList.push({goodsId:this.goods[j].goodsId,number:this.goods[j].number,productId:this.goods[j].productId})
+            }
+          }
+        }
+        this.$store.commit('putPurchaseList',{
+        list:purchaseList
+      });
+        this.$router.push('/order/checkout');
       }
     },
     setCheckAll(val) {

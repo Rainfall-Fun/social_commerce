@@ -3,9 +3,7 @@
     <van-tabs v-model="activeIndex"
               :swipe-threshold="5"
               @click="handleTabClick">
-      <van-tab v-for="(tabTitle, index) in tabTitles"
-               :title="tabTitle"
-               :key="index">
+      <van-tab title="待付款">
         <van-list v-model="loading"
                   :finished="finished"
                   :immediate-check="false"
@@ -14,8 +12,7 @@
           <van-panel v-for="(el, i) in orderList"
                      :key="i"
                      :title="'订单编号: ' + el.orderSn"
-                     :status="el.orderStatusText"
-                     @click.native="toOrderDetail(el.id)">
+                     :status="el.orderStatusText">
             <van-card v-for="(goods, goodsI) in el.goodsList"
                       :key="goodsI"
                       :title="goods.goodsName"
@@ -43,6 +40,48 @@
                           v-if="el.handleOption.pay"
                           type="danger"
                           @click.stop="toPay(el.id)">去支付</van-button>
+          
+            </div>
+
+          </van-panel>
+
+        </van-list>
+      </van-tab>
+      <van-tab v-for="(tabTitle, index) in tabTitles"
+               :title="tabTitle"
+               :key="index">
+        <van-list v-model="loading"
+                  :finished="finished"
+                  :immediate-check="false"
+                  finished-text="没有更多了"
+                  @load="getOrderList">
+          <van-panel v-for="(el, i) in orderList"
+                     :key="i"
+                     :status="el.orderStatusText"
+                     @click.native="toOrderDetail(el.id)">
+            <van-card v-for="(goods, goodsI) in el.goodsList"
+                      :key="goodsI"
+                      :title="goods.goodsName"
+                      :num="goods.number"
+                      :thumb="goods.picUrl">
+              <div slot="desc">
+                <div class="desc">
+                  <van-tag plain
+                           style="margin-right:6px;"
+                           v-for="(spec, index) in goods.specifications"
+                           :key="index">
+                    {{spec}}
+                  </van-tag>
+                </div>
+              </div>
+            </van-card>
+            <div class="total">合计: {{el.actualPrice * 100 | yuan}}（含运费{{el.post_fee | yuan}}）</div>
+
+            <div slot="footer"
+                 class="footer_btn">
+              <van-button size="small"
+                          v-if="el.handleOption.cancel"
+                          @click.stop="cancelOrder(el.id)">取消订单</van-button>
               <van-button size="small"
                           v-if="el.handleOption.refund"
                           type="danger"
@@ -88,10 +127,10 @@ export default {
   data() {
     return {
       activeIndex: Number(this.active),
-      tabTitles: ['全部', '待付款', '待发货', '待收货', '待评价'],
+      tabTitles: ['待评价',  '待发货', '待收货', '全部'],
       orderList: [],
       page: 0,
-      limit: 10,
+      limit: 5,
       loading: false,
       finished: false
     };
@@ -162,7 +201,11 @@ export default {
         })
         .catch(() => {});
     },
-    commentOrder(id) {},
+    commentOrder(id) {
+      this.$router.push({
+        path: '/order/comment/'+id
+      });
+    },
     toPay(id) {
       this.$router.push({ name: 'payment', params: { orderId: id } });
     },

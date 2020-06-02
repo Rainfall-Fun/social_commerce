@@ -128,7 +128,7 @@ export default {
   methods: {
     copy(){
       var toast=this.$toast;
-      var text=window.btoa('goods id is:'+this.itemId);//进行base64编码
+      var text=window.btoa('goods id is:'+this.itemId);
       var text1=window.atob(text);
       var password='打开社交小商城，查看好友推荐的商品('+text+')';
       this.$copyText(password).then(
@@ -177,8 +177,19 @@ export default {
     },
     getProductId(s1, s2) {
       var productId;
+      var s1_name;
+      var s2_name;
+      _.each(this.goods.specificationList, specification => {
+        _.each(specification.valueList, specValue => {
+          if (specValue.goodsSpecifiId === s1) {
+            s1_name = specValue.specifiValue;
+          } else if (specValue.goodsSpecifiId === s2) {
+            s2_name = specValue.specifiValue;
+          }
+        });
+      });
       _.each(this.goods.productList, v => {
-        let result = _.without(v.specifications, s1, s2);
+        let result = _.without(v.specifications, s1_name, s2_name);
         if (result.length === 0) {
           productId = v.id;
         }
@@ -283,8 +294,10 @@ export default {
       var sku_list = [];
       _.each(this.goods.productList, v => {
         var sku_list_obj = {};
-        _.each(v.specifications, (specificationId, index) => {
-          sku_list_obj['s' + (~~index + 1)] = specificationId;
+        _.each(v.specifications, (specifiName, index) => {
+          sku_list_obj['s' + (~~index + 1)] = this.findSpecValueIdByName(
+            specifiName
+          );
         });
 
         sku_list_obj.price = v.price * 100;
@@ -314,6 +327,21 @@ export default {
         });
       });
       return specifications;
+    },
+    findSpecValueIdByName(name) {
+      let id = 0;
+      _.each(this.goods.specificationList, specification => {
+        _.each(specification.valueList, specValue => {
+          if (specValue.specifiValue === name) {
+            id = specValue.goodsSpecifiId;
+            return;
+          }
+        });
+        if (id !== 0) {
+          return;
+        }
+      });
+      return id;
     }
   },
 

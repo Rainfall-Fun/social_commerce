@@ -7,10 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +26,12 @@ public class AdminUserController {
                        @RequestParam(defaultValue = "10") Integer limit,
                        @RequestParam(defaultValue = "add_time") String sort,
                        @RequestParam(defaultValue = "desc") String order) {
+        System.out.println("进入了");
+        return ResponseUtil.ok();
+    }
+
+    @PostMapping("/submit")
+    public Object submit(){
         System.out.println("进入了");
         return ResponseUtil.ok();
     }

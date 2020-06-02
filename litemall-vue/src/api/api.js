@@ -214,12 +214,12 @@ export function cartGoodsCount() {
     method: 'get'
   })
 }
-const CartCheckout='wx/cart/checkout'; // 下单前信息确认
-export function cartCheckout(query) {
+const CartCheckout='wx/order/checkout'; // 下单前信息确认
+export function cartCheckout(data) {
   return request({
     url: CartCheckout,
-    method: 'get',
-    params: query
+    method: 'post',
+    data
   })
 }
 
