@@ -11,6 +11,15 @@ public class AdminUserInfo {
     String operatorAccount;
     String operatorPassword;
     int operatorIsavailable;
+    int supplierId;
+
+    public int getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(int supplierId) {
+        this.supplierId = supplierId;
+    }
 
     public int getOperatorId() {
         return operatorId;

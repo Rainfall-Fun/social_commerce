@@ -23,18 +23,17 @@ import java.util.Map;
 
 
 @Service
-
 public class AdminOrderService {
 
     @Autowired
     OrderDetailService orderDetailService;
 
 
-    public Object list(Integer userId, String orderSn, List<Integer> orderStatusArray,
+    public Object list(Integer supplierId,Integer userId, String orderSn, List<Integer> orderStatusArray,
                        Integer page, Integer limit, String sort, String order) {
 //        List<LitemallOrder> orderList = orderService.querySelective(userId, orderSn, orderStatusArray, page, limit,
 //                sort, order);
-        List<OrderVo> orderVos = orderDetailService.selectBySpecifiedKey(userId, orderStatusArray, orderSn);
+        List<OrderVo> orderVos = orderDetailService.selectBySpecifiedKey(userId, orderStatusArray, orderSn,supplierId);
         for (OrderVo orderVo : orderVos) {
             System.out.println(orderVo.toString());
         }
@@ -66,9 +65,11 @@ public class AdminOrderService {
      */
     @Transactional
     public Object refund(String body) {
-//        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
-//        String refundMoney = JacksonUtil.parseString(body, "refundMoney");
-
+        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
+        String refundMoney = JacksonUtil.parseString(body, "refundMoney");
+        AllOrderDetail byId = orderDetailService.findById(orderId);
+        byId.setGoodsstatus(OrderUtil.STATUS_REFUND_CONFIRM);
+        orderDetailService.update(byId);
         return ResponseUtil.ok();
     }
 

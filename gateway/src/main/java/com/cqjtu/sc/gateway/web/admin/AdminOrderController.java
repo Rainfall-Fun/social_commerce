@@ -1,15 +1,15 @@
 package com.cqjtu.sc.gateway.web.admin;
 
 import com.cqjtu.sc.gateway.annotation.RequiresPermissionsDesc;
+import com.cqjtu.sc.gateway.dao.entity.admin.AdminUserInfo;
 import com.cqjtu.sc.gateway.util.ResponseUtil;
 import com.cqjtu.sc.gateway.web.service.OrderService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +34,12 @@ public class AdminOrderController {
                        @RequestParam(defaultValue = "10") Integer limit,
                        @RequestParam(defaultValue = "add_time") String sort,
                        @RequestParam(defaultValue = "desc") String order) {
-        return adminOrderService.adminList(userId, orderSn, orderStatusArray, page, limit, sort, order);
+
+        Subject currentUser = SecurityUtils.getSubject();
+        AdminUserInfo admin = (AdminUserInfo) currentUser.getPrincipal();
+        int supplierId = admin.getSupplierId();
+        System.out.println(supplierId);
+        return adminOrderService.adminList(supplierId,userId, orderSn, orderStatusArray, page, limit, sort, order);
     }
 
     /**

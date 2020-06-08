@@ -8,6 +8,15 @@ public class OrderHandleOption {
     private boolean confirm = false;    // 确认收货操作
     private boolean refund = false;     // 取消订单并退款操作
     private boolean rebuy = false;        // 再次购买
+    private boolean commented = false;
+
+    public boolean isCommented() {
+        return commented;
+    }
+
+    public void setCommented(boolean commented) {
+        this.commented = commented;
+    }
 
     public boolean isCancel() {
         return cancel;

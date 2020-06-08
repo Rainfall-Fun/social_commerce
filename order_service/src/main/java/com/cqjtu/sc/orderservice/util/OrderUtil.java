@@ -32,6 +32,8 @@ public class OrderUtil {
     public static final Integer STATUS_AUTO_CONFIRM = 402;
     public static final Integer STATUS_PAY_GROUPON = 200;
     public static final Integer STATUS_TIMEOUT_GROUPON = 204;
+    public static final Integer STATUS_COMMENTED = 501;//用户评论
+    public static final Integer STATUS_AUTO_COMMENTED = 502;//用户超时未评论，系统自动默认好评
 
 
     public static String orderStatusText(Integer status) {
@@ -80,6 +82,10 @@ public class OrderUtil {
             return "已收货(系统)";
         }
 
+        if (status == 501 || status == 502){
+            return "已评论";
+        }
+
         throw new IllegalStateException("orderStatus不支持");
     }
 
@@ -111,7 +117,9 @@ public class OrderUtil {
             handleOption.setDelete(true);
             handleOption.setComment(true);
             handleOption.setRebuy(true);
-        } else {
+        } else if(status == 501 || status == 502){
+            handleOption.setCommented(true);
+        }else {
             throw new IllegalStateException("status不支持");
         }
 

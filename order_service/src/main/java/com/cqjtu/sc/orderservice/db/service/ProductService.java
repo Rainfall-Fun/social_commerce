@@ -54,4 +54,9 @@ public class ProductService {
 
         return numberMap;
     }
+
+    public int addNumber(Integer productId, Integer number) {
+        Integer integer = mapper.addNumber(number,productId);
+        return integer;
+    }
 }

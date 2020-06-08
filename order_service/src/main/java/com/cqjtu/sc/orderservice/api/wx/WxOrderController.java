@@ -6,8 +6,10 @@ import com.cqjtu.sc.orderservice.dto.CheckDto;
 import com.cqjtu.sc.orderservice.dto.PurchaseGoodsDto;
 import com.cqjtu.sc.orderservice.dto.PurchaseOrderDto;
 import com.cqjtu.sc.orderservice.util.*;
+import com.cqjtu.sc.orderservice.vo.CommentGoodsVo;
 import com.cqjtu.sc.orderservice.vo.GoodsVo;
 import com.github.pagehelper.Page;
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -125,13 +127,15 @@ public class WxOrderController {
                        @RequestParam(defaultValue = "order_id") String sort,
                        @RequestParam(defaultValue = "desc") String order) {
 
-        if (showType==0){
+        if (showType == 0) {
             List<AllOrder> allOrders = orderService.queryUnpaid(userId, page, limit, sort, order);
-            List<Integer> orderIds=new ArrayList<>();
+            List<Integer> orderIds = new ArrayList<>();
             for (AllOrder allOrder : allOrders) {
                 orderIds.add(allOrder.getOrderId());
             }
             List<Map<String, Object>> orderVoList = new ArrayList<>();
+            if (orderIds.size() == 0)
+                orderIds = null;
             List<UnpaidOrderInfo> unpaidOrderInfos = orderDetailService.selectUnpaidOrderInfo(userId, orderIds);
             for (AllOrder allOrder : allOrders) {
                 Map<String, Object> orderVo = new HashMap<>();
@@ -156,18 +160,18 @@ public class WxOrderController {
                 orderVoList.add(orderVo);
 
             }
-            return ResponseUtil.okList(orderVoList,allOrders);
-        }else {
+            return ResponseUtil.okList(orderVoList, allOrders);
+        } else {
             List<Integer> orderStatus = OrderUtil.orderStatus(showType);
-            List<Integer> status=new ArrayList<>();
-            if (orderStatus==null){
+            List<Integer> status = new ArrayList<>();
+            if (orderStatus == null) {
                 status.add(null);
-            }else {
+            } else {
                 for (Integer aShort : orderStatus) {
                     status.add(aShort);
                 }
             }
-            Page<UnpaidOrderInfo> unpaidOrderInfos = orderDetailService.selectOrderInfo(userId, orderStatus,page,limit);
+            Page<UnpaidOrderInfo> unpaidOrderInfos = orderDetailService.selectOrderInfo(userId, orderStatus, page, limit);
             Page<Map<String, Object>> orderVoList = new Page<>();
             for (UnpaidOrderInfo unpaidOrderInfo : unpaidOrderInfos) {
                 Map<String, Object> orderVo = new HashMap<>();
@@ -198,10 +202,10 @@ public class WxOrderController {
 
     }
 
-    List<UnpaidOrderInfo> getById(List<UnpaidOrderInfo> unpaidOrderInfos,Integer id){
-        List<UnpaidOrderInfo> result=new ArrayList<>();
+    List<UnpaidOrderInfo> getById(List<UnpaidOrderInfo> unpaidOrderInfos, Integer id) {
+        List<UnpaidOrderInfo> result = new ArrayList<>();
         for (UnpaidOrderInfo unpaidOrderInfo : unpaidOrderInfos) {
-            if (unpaidOrderInfo.getId()==id)
+            if (unpaidOrderInfo.getId() == id)
                 result.add(unpaidOrderInfo);
         }
         return result;
@@ -273,6 +277,7 @@ public class WxOrderController {
         order.setAddressStr(addressString);
         order.setUserInfoId(userId);
         order.setGenTime(LocalDateTime.now());
+        order.setOrderStatus(OrderUtil.STATUS_CREATE);
         int orderId = orderService.add(order);
 
         order.setOrderId(orderId);
@@ -325,6 +330,7 @@ public class WxOrderController {
         Integer orderId = JacksonUtil.parseInteger(body, "orderId");
         AllOrder byId = orderService.getById(orderId);
         byId.setPayTime(LocalDateTime.now());
+        byId.setOrderStatus(OrderUtil.STATUS_PAY);
         orderService.update(byId);
         List<AllOrderDetail> byOrderId = orderDetailService.findByOrderId(orderId);
         for (AllOrderDetail allOrderDetail : byOrderId) {
@@ -415,14 +421,13 @@ public class WxOrderController {
      *
      * @param userId  用户ID
      * @param orderId 订单ID
-     * @param goodsId 商品ID
      * @return 待评价订单商品信息
      */
     @GetMapping("goods")
     public Object goods(Integer userId,
-                        @NotNull Integer orderId,
-                        @NotNull Integer goodsId) {
-        return ResponseUtil.ok();
+                        @NotNull Integer orderId) {
+        CommentGoodsVo commentGoodsInfo = orderDetailService.getCommentGoodsInfo(userId, orderId);
+        return ResponseUtil.ok(commentGoodsInfo);
     }
 
     /**
@@ -434,6 +439,13 @@ public class WxOrderController {
      */
     @PostMapping("comment")
     public Object comment(Integer userId, @RequestBody String body) {
+        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
+        Integer rate = JacksonUtil.parseInteger(body, "rate");
+        String message = JacksonUtil.parseString(body, "message");
+        AllOrderDetail byId = orderDetailService.findById(orderId);
+        byId.setRatio(rate);
+        byId.setGoodsstatus(OrderUtil.STATUS_COMMENTED);
+        orderDetailService.update(byId);
         return ResponseUtil.ok();
     }
 
@@ -446,9 +458,9 @@ public class WxOrderController {
         int uncomment = 0;
 
         HashMap<Integer, Integer> statusSum = orderDetailService.countForGoodsStatus(userId);
-        unpaid = statusSum.get(OrderUtil.STATUS_CREATE)==null?0:statusSum.get(OrderUtil.STATUS_CREATE);
-        unship = statusSum.get(OrderUtil.STATUS_PAY)==null?0:statusSum.get(OrderUtil.STATUS_PAY);
-        unrecv = statusSum.get(OrderUtil.STATUS_SHIP)==null?0:statusSum.get(OrderUtil.STATUS_SHIP);
+        unpaid = statusSum.get(OrderUtil.STATUS_CREATE) == null ? 0 : statusSum.get(OrderUtil.STATUS_CREATE);
+        unship = statusSum.get(OrderUtil.STATUS_PAY) == null ? 0 : statusSum.get(OrderUtil.STATUS_PAY);
+        unrecv = statusSum.get(OrderUtil.STATUS_SHIP) == null ? 0 : statusSum.get(OrderUtil.STATUS_SHIP);
         int a1 = statusSum.get(OrderUtil.STATUS_CONFIRM) == null ? 0 : statusSum.get(OrderUtil.STATUS_CONFIRM);
         int a2 = statusSum.get(OrderUtil.STATUS_AUTO_CONFIRM) == null ? 0 : statusSum.get(OrderUtil.STATUS_AUTO_CONFIRM);
         uncomment = a1 + a2;

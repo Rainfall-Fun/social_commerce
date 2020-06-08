@@ -33,14 +33,14 @@ public class AdminOrderController {
      */
 
     @GetMapping("/list")
-    public Object list(Integer userId, String orderSn,
+    public Object list(Integer supplierId,Integer userId, String orderSn,
                        @RequestParam(required = false) List<Integer> orderStatusArray,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
                        @RequestParam(defaultValue = "add_time") String sort,
                        @RequestParam(defaultValue = "desc") String order) {
 
-        Object list = adminOrderService.list(userId, orderSn, orderStatusArray, page, limit, sort, order);
+        Object list = adminOrderService.list(supplierId,userId, orderSn, orderStatusArray, page, limit, sort, order);
         return list;
     }
 
@@ -75,7 +75,8 @@ public class AdminOrderController {
      */
     @PostMapping("/refund")
     public Object refund(@RequestBody String body) {
-        return ResponseUtil.ok();
+        Object refund = adminOrderService.refund(body);
+        return refund;
     }
 
     /**

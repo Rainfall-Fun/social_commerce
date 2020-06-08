@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cqjtu.sc.orderservice.db.dao.AllOrderDetailMapper">
+  <resultMap id="CommentMap" type="com.cqjtu.sc.orderservice.vo.CommentGoodsVo">
+    <result column="specifications" jdbcType="VARCHAR" property="specifications" typeHandler="com.cqjtu.sc.orderservice.util.JsonStringArrayTypeHandler"/>
+  </resultMap>
   <resultMap id="MyMap" type="com.cqjtu.sc.orderservice.db.domain.UnpaidOrderInfo">
     <result column="specifications" jdbcType="VARCHAR" property="specifications" typeHandler="com.cqjtu.sc.orderservice.util.JsonStringArrayTypeHandler"/>
   </resultMap>
@@ -498,10 +501,10 @@
   </insert>
 
   <select id="selectOrder" parameterType="map" resultMap="OrderVoMap">
-    select t1.user_info_id as userId,t3.order_detail_id as id,t3.goodsStatus as goodsStatus,t3.order_detail_number as orderSn,t3.amount as orderPrice,t2.gen_time as genTime
-    from all_user_info t1,all_order t2,all_order_detail t3
+    select t1.user_info_id as userId,t3.order_detail_id as id,t3.goodsStatus as goodsStatus,t3.order_detail_number as orderSn,t3.amount as orderPrice,t3.amount as actualPrice,t2.gen_time as genTime
+    from all_user_info t1,all_order t2,all_order_detail t3,all_goods_info t4
     <where>
-      t1.user_info_id=t2.user_info_id and t2.order_id=t3.order_id
+      t1.user_info_id=t2.user_info_id and t2.order_id=t3.order_id and t3.goods_id=t4.goods_id and t4.supplier_id=#{supplierId,jdbcType=INTEGER}
       and t3.goodsStatus in
       <foreach close=")" collection="goodsStatus" item="status" open="(" separator=",">
       #{status}
@@ -531,10 +534,13 @@
   <select id="selectUnpaidOrderInfo" parameterType="map" resultMap="MyMap">
     select t3.goods_name as goodsName,t1.order_id as id,t1.amount as actualPrice,t3.goods_name as goodsName,t4.specifications as specifications,t5.url as picUrl,t2.quantity as number,t1.order_number as orderSn
     from all_order t1,all_order_detail t2,all_goods_info t3,all_goods_specifi_att_value t4,all_goods_specifi_img t5
-    where t1.order_id=t2.order_id and t2.goods_id=t3.goods_id and t2.id=t4.id and t2.goods_id=t5.goods_id and t1.user_info_id=#{userId,jdbcType=INTEGER} and t5.type=3 and t1.pay_time is null and t1.order_id in
-    <foreach close=")" collection="orderIdList" item="orderId" open="(" separator=",">
-      #{orderId}
-    </foreach>
+    where t1.order_id=t2.order_id and t2.goods_id=t3.goods_id and t2.id=t4.id and t2.goods_id=t5.goods_id and t1.user_info_id=#{userId,jdbcType=INTEGER} and t5.type=3 and t1.order_status=101
+    <if test="orderIdList != null">
+      and t1.order_id in
+      <foreach close=")" collection="orderIdList" item="orderId" open="(" separator=",">
+        #{orderId}
+      </foreach>
+    </if>
   </select>
 
   <select id="selectByUserIdAndStatus" parameterType="map" resultMap="MyMap">
@@ -559,6 +565,11 @@
         #{status}
       </foreach>
     </if>
+  </select>
+  <select id="getCommentGoodsInfo" parameterType="map" resultMap="CommentMap">
+    select  t3.goods_name as goodsName,t2.quantity as number,t4.specifications as specifications,t5.url as picUrl
+    from all_order t1,all_order_detail t2,all_goods_info t3,all_goods_specifi_att_value t4,all_goods_specifi_img t5
+    where t1.order_id=t2.order_id and t2.goods_id=t3.goods_id and t2.id=t4.id and t2.goods_id=t5.goods_id and t1.user_info_id=13 and t5.type=3 and t1.user_info_id=#{userId,jdbcType=INTEGER} and t2.order_detail_id=#{orderId,jdbcType=INTEGER}
   </select>
 
 </mapper>
