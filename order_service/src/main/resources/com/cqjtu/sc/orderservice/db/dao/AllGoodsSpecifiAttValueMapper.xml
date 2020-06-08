@@ -465,4 +465,7 @@
     </where>
     for update
   </select>
+  <update id="addNumber" parameterType="map">
+    update all_goods_specifi_att_value set number=number+#{number,jdbcType=INTEGER} where id=#{productId,jdbcType=INTEGER}
+  </update>
 </mapper>

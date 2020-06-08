@@ -3,6 +3,7 @@ package com.cqjtu.sc.orderservice.db.service;
 import com.cqjtu.sc.orderservice.db.dao.AllOrderMapper;
 import com.cqjtu.sc.orderservice.db.domain.AllOrder;
 import com.cqjtu.sc.orderservice.db.domain.AllOrderExample;
+import com.cqjtu.sc.orderservice.util.OrderUtil;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +36,19 @@ public class OrderService {
     public List<AllOrder> queryUnpaid(Integer userId, Integer page, Integer limit,String sort, String order){
         AllOrderExample example=new AllOrderExample();
         AllOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andUserInfoIdEqualTo(userId).andPayTimeIsNull();
+        criteria.andUserInfoIdEqualTo(userId).andOrderStatusEqualTo(OrderUtil.STATUS_CREATE);
         example.setOrderByClause(sort+" "+order);
         PageHelper.startPage(page, limit);
         List<AllOrder> allOrders = mapper.selectByExample(example);
         return allOrders;
+    }
+
+    public List<AllOrder> queryAllUnpaid(){
+        AllOrderExample example=new AllOrderExample();
+        AllOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderStatusEqualTo(OrderUtil.STATUS_CREATE);
+        AllOrder.Column column[]={AllOrder.Column.orderId,AllOrder.Column.genTime};
+        return mapper.selectByExampleSelective(example,column);
     }
 
     public List<Integer> queryOrderIdsByUserId(Integer userId){

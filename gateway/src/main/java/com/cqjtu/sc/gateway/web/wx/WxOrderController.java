@@ -168,7 +168,6 @@ public class WxOrderController {
      *
      * @param userId  用户ID
      * @param orderId 订单ID
-     * @param goodsId 商品ID
      * @return 待评价订单商品信息
      */
     @GetMapping("goods")

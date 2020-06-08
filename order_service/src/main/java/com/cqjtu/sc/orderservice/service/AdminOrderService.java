@@ -23,7 +23,6 @@ import java.util.Map;
 
 
 @Service
-
 public class AdminOrderService {
 
     @Autowired
@@ -66,9 +65,11 @@ public class AdminOrderService {
      */
     @Transactional
     public Object refund(String body) {
-//        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
-//        String refundMoney = JacksonUtil.parseString(body, "refundMoney");
-
+        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
+        String refundMoney = JacksonUtil.parseString(body, "refundMoney");
+        AllOrderDetail byId = orderDetailService.findById(orderId);
+        byId.setGoodsstatus(OrderUtil.STATUS_REFUND_CONFIRM);
+        orderDetailService.update(byId);
         return ResponseUtil.ok();
     }
 

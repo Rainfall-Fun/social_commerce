@@ -57,9 +57,9 @@
                              targetProject="src/main/java"/>
         <!--表名-->
 
-        <table tableName="all_order_detail">
-            <generatedKey column="order_detail_id" sqlStatement="MySql" identity="true"/>
-        </table>
+<!--        <table tableName="all_order_detail">-->
+<!--            <generatedKey column="order_detail_id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
 <!--        <table tableName="all_goods_specifi_att_value">-->
 <!--            <generatedKey column="specifi_value_id" sqlStatement="MySql" identity="true"/>-->
 <!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
@@ -79,9 +79,9 @@
 <!--            <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
 
-<!--        <table tableName="all_order">-->
-<!--            <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="all_order">
+            <generatedKey column="order_id" sqlStatement="Mysql" identity="true"/>
+        </table>
 <!--        <table tableName="all_carrige_address">-->
 <!--            <generatedKey column="address_id" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->

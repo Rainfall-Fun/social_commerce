@@ -91,4 +91,13 @@ public class OrderDetailService {
     public CommentGoodsVo getCommentGoodsInfo(Integer userId,Integer orderId){
         return mapper.getCommentGoodsInfo(userId,orderId);
     }
+
+    public void updateStatusByOrderId(Integer orderId,Integer status){
+        AllOrderDetail allOrderDetail=new AllOrderDetail();
+        allOrderDetail.setGoodsstatus(status);
+        AllOrderDetailExample example=new AllOrderDetailExample();
+        AllOrderDetailExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderIdEqualTo(orderId);
+        mapper.updateByExampleSelective(allOrderDetail,example);
+    }
 }

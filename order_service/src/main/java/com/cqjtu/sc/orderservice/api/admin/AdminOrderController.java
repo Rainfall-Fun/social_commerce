@@ -75,7 +75,8 @@ public class AdminOrderController {
      */
     @PostMapping("/refund")
     public Object refund(@RequestBody String body) {
-        return ResponseUtil.ok();
+        Object refund = adminOrderService.refund(body);
+        return refund;
     }
 
     /**

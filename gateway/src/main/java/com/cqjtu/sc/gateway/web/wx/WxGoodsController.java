@@ -52,7 +52,7 @@ public class WxGoodsController {
     @RequestMapping("supplierRecommend")
     public Object supplierRecommend(@RequestParam(defaultValue = "1") Integer page,
                                     @RequestParam(defaultValue = "10") Integer limit){
-        return recommendService.getSupplierOtherGoods(3,page,limit);
+        return recommendService.getSupplierOtherGoods(13,page,limit);
     }
     public static Object fail(int errno, String errmsg) {
         Map<String, Object> obj = new HashMap<String, Object>();

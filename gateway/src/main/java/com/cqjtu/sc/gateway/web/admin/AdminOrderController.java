@@ -4,15 +4,12 @@ import com.cqjtu.sc.gateway.annotation.RequiresPermissionsDesc;
 import com.cqjtu.sc.gateway.dao.entity.admin.AdminUserInfo;
 import com.cqjtu.sc.gateway.util.ResponseUtil;
 import com.cqjtu.sc.gateway.web.service.OrderService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;

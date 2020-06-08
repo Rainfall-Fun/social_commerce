@@ -11,7 +11,7 @@
         UNION DISTINCT
        (select t3.goods_id
         from all_user_info t1,all_order t2,all_order_detail t3
-        where t1.user_info_id=t2.user_info_id1 and t2.order_id=t3.order_id and t1.region_id=(select region_id from all_user_info where user_info_id=#{userId,jdbcType=INTEGER}) and t1.user_info_id!=#{userId,jdbcType=INTEGER}
+        where t1.user_info_id=t2.user_info_id and t2.order_id=t3.order_id and t1.region_id=(select region_id from all_user_info where user_info_id=#{userId,jdbcType=INTEGER}) and t1.user_info_id!=#{userId,jdbcType=INTEGER}
         group by goods_id
         order by sum(t3.quantity) desc
         limit 3 offset 0)
@@ -34,7 +34,7 @@
     <select id="queryByRegion" resultType="int" parameterType="map">
         select t3.goods_id
         from all_user_info t1,all_order t2,all_order_detail t3
-        where t1.user_info_id=t2.user_info_id1 and t2.order_id=t3.order_id and t1.region_id=(select region_id from all_user_info where user_info_id=#{userId,jdbcType=INTEGER}) and t1.user_info_id!=#{userId,jdbcType=INTEGER}
+        where t1.user_info_id=t2.user_info_id and t2.order_id=t3.order_id and t1.region_id=(select region_id from all_user_info where user_info_id=#{userId,jdbcType=INTEGER}) and t1.user_info_id!=#{userId,jdbcType=INTEGER}
         group by goods_id
         order by sum(t3.quantity) desc
         limit #{limit,jdbcType=INTEGER} offset #{offset,jdbcType=INTEGER};
@@ -51,12 +51,12 @@
     <select id="querySupplier" resultType="int" parameterType="map">
         select all_goods_info.goods_id from all_goods_info where supplier_id = (select t3.supplier_id as supplier_id
         from all_order t1,all_order_detail t2,all_goods_info t3
-        where t1.order_id=t2.order_id and t1.user_info_id1=#{userId,jdbcType=INTEGER} and t2.goods_id=t3.goods_id
+        where t1.order_id=t2.order_id and t1.user_info_id=#{userId,jdbcType=INTEGER} and t2.goods_id=t3.goods_id
         group by t3.supplier_id
         limit 0,3)
         and goods_id != all(select t2.goods_id as goods_id
         from all_order t1,all_order_detail t2
-        where t1.order_id=t2.order_id and t1.user_info_id1=#{userId,jdbcType=INTEGER})
+        where t1.order_id=t2.order_id and t1.user_info_id=#{userId,jdbcType=INTEGER})
         limit #{limit,jdbcType=INTEGER} offset #{offset,jdbcType=INTEGER};
     </select>
 
@@ -69,7 +69,7 @@
     <select id="countByRegion" resultType="int" parameterType="map">
         select ceil(count(*)/#{limit,jdbcType=INTEGER}) from (select t3.goods_id
         from all_user_info t1,all_order t2,all_order_detail t3
-        where t1.user_info_id=t2.user_info_id1 and t2.order_id=t3.order_id and t1.region_id=(select region_id from all_user_info where user_info_id=#{userId,jdbcType=INTEGER}) and t1.user_info_id!=#{userId,jdbcType=INTEGER}
+        where t1.user_info_id=t2.user_info_id and t2.order_id=t3.order_id and t1.region_id=(select region_id from all_user_info where user_info_id=#{userId,jdbcType=INTEGER}) and t1.user_info_id!=#{userId,jdbcType=INTEGER}
         group by goods_id) as t
     </select>
     <select id="countByRatio" resultType="int" parameterType="map">
@@ -82,12 +82,12 @@
     <select id="countBySupplier" resultType="int" parameterType="map">
         select ceil(count(*)/#{limit,jdbcType=INTEGER}) from (select all_goods_info.goods_id from all_goods_info where supplier_id = (select t3.supplier_id as supplier_id
         from all_order t1,all_order_detail t2,all_goods_info t3
-        where t1.order_id=t2.order_id and t1.user_info_id1=#{userId,jdbcType=INTEGER} and t2.goods_id=t3.goods_id
+        where t1.order_id=t2.order_id and t1.user_info_id=#{userId,jdbcType=INTEGER} and t2.goods_id=t3.goods_id
         group by t3.supplier_id
         limit 0,3)
         and goods_id != all(select t2.goods_id as goods_id
         from all_order t1,all_order_detail t2
-        where t1.order_id=t2.order_id and t1.user_info_id1=#{userId,jdbcType=INTEGER})) as t
+        where t1.order_id=t2.order_id and t1.user_info_id=#{userId,jdbcType=INTEGER})) as t
     </select>
 
 </mapper>
