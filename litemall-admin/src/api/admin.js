@@ -39,3 +39,27 @@ export function deleteAdmin(data) {
     data
   })
 }
+
+export function supplierOptions(query) {
+  return request({
+    url: '/admin/supplier',
+    method: 'get',
+    params: query
+  })
+}
+
+export function getPermission(query) {
+  return request({
+    url: '/admin/permissions',
+    method: 'get',
+    params: query
+  })
+}
+
+export function updatePermission(data) {
+  return request({
+    url: '/admin/permissions',
+    method: 'post',
+    data
+  })
+}
