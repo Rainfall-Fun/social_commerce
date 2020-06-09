@@ -45,6 +45,7 @@ public class WxCartController {
         List<AllCart> allCarts = cartService.queryByUserInfoId(userInfoId);
         List<Integer> goodsIds=new ArrayList<>();
         //将库存充足的显示，最好是把库存不足的也放在前端，让用户删除
+        System.out.println(allCarts.size()+"aaaa");
         for (AllCart allCart : allCarts) {
             AllGoodsSpecifiAttValue allGoodsSpecifiAttValue = goodsSpecifiAttValService.queryById(allCart.getId());
             if (allGoodsSpecifiAttValue.getNumber()>=allCart.getNumber()){
@@ -54,10 +55,21 @@ public class WxCartController {
                 cartVo.setNumber(allCart.getNumber());
                 cartVo.setPrice(allGoodsSpecifiAttValue.getPrice());
                 cartVo.setProductId(allGoodsSpecifiAttValue.getId());
+                cartVo.setSpecifications(allGoodsSpecifiAttValue.getSpecifications());
                 goodsIds.add(allCart.getGoodsId());
                 cartVos.add(cartVo);
             }
-
+        }
+        if (goodsIds.size()==0){
+            Map<String, Object> cartTotal = new HashMap<>();
+//        cartTotal.put("goodsCount", goodsCount);
+//        cartTotal.put("goodsAmount", goodsAmount);
+//        cartTotal.put("checkedGoodsCount", checkedGoodsCount);
+//        cartTotal.put("checkedGoodsAmount", checkedGoodsAmount);
+            Map<String, Object> result = new HashMap<>();
+            result.put("cartList", cartVos);
+            result.put("cartTotal", cartTotal);
+            return ResponseUtil.ok(result);
         }
         List<BriefGoods> briefGoods = briefGoodsService.getBriefGoods(goodsIds);
         Map<Integer,String> goodsNameMap=new HashMap<>();
@@ -68,7 +80,7 @@ public class WxCartController {
         }
         for (CartVo cartVo : cartVos) {
             cartVo.setGoodsName(goodsNameMap.get(cartVo.getGoodsId()));
-            cartVo.setPicUrl("http://localhost:8777/"+imgMap.get(cartVo.getGoodsId()));
+            cartVo.setPicUrl("http://112.124.20.144:8080/"+imgMap.get(cartVo.getGoodsId()));
             cartVo.setChecked(true);
         }
 
@@ -77,7 +89,6 @@ public class WxCartController {
 //        cartTotal.put("goodsAmount", goodsAmount);
 //        cartTotal.put("checkedGoodsCount", checkedGoodsCount);
 //        cartTotal.put("checkedGoodsAmount", checkedGoodsAmount);
-
         Map<String, Object> result = new HashMap<>();
         result.put("cartList", cartVos);
         result.put("cartTotal", cartTotal);
@@ -98,7 +109,7 @@ public class WxCartController {
     public Object add(Integer userInfoId, @RequestBody AllCart cart) {
         cart.setUserInfoId(userInfoId);
         //如果有此规格直接添加，否则在数据库中创建
-        AllCart allCart = cartService.existByProductId(cart.getId());
+        AllCart allCart = cartService.existByProductIdAndUserId(cart.getId(),userInfoId);
         if (allCart!=null){
             allCart.setNumber(allCart.getNumber()+cart.getNumber());
             cartService.update(allCart);

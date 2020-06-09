@@ -41,6 +41,8 @@ public class WxOrderController {
     OrderDetailService orderDetailService;
     @Autowired
     CarrigeAddressService carrigeAddressService;
+    @Autowired
+    BrokerageService brokerageService;
 
     @PostMapping("checkout")
     public Object checked(Integer userId, @RequestBody CheckDto body) {
@@ -79,7 +81,7 @@ public class WxOrderController {
             for (BriefGoods briefGood : briefGoods) {
                 if (briefGood.getId() == goodsVo.getGoodsId()) {
                     goodsVo.setGoodsName(briefGood.getName());
-                    goodsVo.setGoodsPic("http://localhost:8777/" + briefGood.getPicUrl());
+                    goodsVo.setGoodsPic("http://112.124.20.144:8080/" + briefGood.getPicUrl());
                 }
             }
         }
@@ -88,7 +90,7 @@ public class WxOrderController {
             for (BriefGoods briefGood : briefGoods) {
                 if (briefGood.getId() == goodsVo.getGoodsId()) {
                     goodsVo.setGoodsName(briefGood.getName());
-                    goodsVo.setGoodsPic("http://localhost:8777/" + briefGood.getPicUrl());
+                    goodsVo.setGoodsPic("http://112.124.20.144:8080/" + briefGood.getPicUrl());
                 }
             }
         }
@@ -151,7 +153,7 @@ public class WxOrderController {
                     orderGoodsVo.put("id", orderGoods.getId());
                     orderGoodsVo.put("goodsName", orderGoods.getGoodsName());
                     orderGoodsVo.put("number", orderGoods.getNumber());
-                    orderGoodsVo.put("picUrl", orderGoods.getPicUrl());
+                    orderGoodsVo.put("picUrl", "http://112.124.20.144:8080/"+orderGoods.getPicUrl());
                     orderGoodsVo.put("specifications", orderGoods.getSpecifications());
 //                    orderGoodsVo.put("price",orderGoods.getPrice());
                     orderGoodsVoList.add(orderGoodsVo);
@@ -186,7 +188,7 @@ public class WxOrderController {
                 orderGoodsVo.put("id", unpaidOrderInfo.getGoodsId());
                 orderGoodsVo.put("goodsName", unpaidOrderInfo.getGoodsName());
                 orderGoodsVo.put("number", unpaidOrderInfo.getNumber());
-                orderGoodsVo.put("picUrl", unpaidOrderInfo.getPicUrl());
+                orderGoodsVo.put("picUrl", "http://112.124.20.144:8080/"+unpaidOrderInfo.getPicUrl());
                 orderGoodsVo.put("specifications", unpaidOrderInfo.getSpecifications());
 //                    orderGoodsVo.put("price",orderGoods.getPrice());
                 orderGoodsVoList.add(orderGoodsVo);
@@ -452,6 +454,7 @@ public class WxOrderController {
     @GetMapping("index")
     public Object index(Integer userId) {
 
+        Brokerage brokerage = brokerageService.findBuUserId(userId);
         int unpaid = 0;
         int unship = 0;
         int unrecv = 0;
@@ -469,6 +472,8 @@ public class WxOrderController {
         orderInfo.put("unship", unship);
         orderInfo.put("unrecv", unrecv);
         orderInfo.put("uncomment", uncomment);
+        orderInfo.put("generatedBrokerage",brokerage.getGeneratedBrokerage());
+        orderInfo.put("gainedBrokerage",brokerage.getGainedBrokerage());
         return ResponseUtil.ok(orderInfo);
     }
 

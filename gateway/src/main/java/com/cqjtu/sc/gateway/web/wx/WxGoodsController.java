@@ -42,28 +42,23 @@ public class WxGoodsController {
     }
 
     @RequestMapping("recommendList")
-    public Object recommendList(Integer recommendType,
+    public Object recommendList(@LoginUser Integer userId, Integer recommendType,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit) {
-        Object recommendGoodsList = recommendService.getRecommendGoodsList(recommendType,13, page, limit);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        Object recommendGoodsList = recommendService.getRecommendGoodsList(recommendType,userId, page, limit);
         return recommendGoodsList;
     }
 
     @RequestMapping("supplierRecommend")
-    public Object supplierRecommend(@RequestParam(defaultValue = "1") Integer page,
+    public Object supplierRecommend(@LoginUser Integer userId,@RequestParam(defaultValue = "1") Integer page,
                                     @RequestParam(defaultValue = "10") Integer limit){
-        return recommendService.getSupplierOtherGoods(13,page,limit);
-    }
-    public static Object fail(int errno, String errmsg) {
-        Map<String, Object> obj = new HashMap<String, Object>();
-        obj.put("errno", errno);
-        obj.put("errmsg", errmsg);
-        return obj;
-    }
-
-
-    public static Object unlogin() {
-        return fail(501, "请登录");
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        return recommendService.getSupplierOtherGoods(userId,page,limit);
     }
 
 }

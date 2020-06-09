@@ -29,14 +29,9 @@ public class WxOrderController {
      */
     @PostMapping("checkout")
     public Object checkout(@LoginUser Integer userId, @RequestBody String body) {
-//        if (userId == null) {
-//            return ResponseUtil.unlogin();
-//        }
-//        if (body == null) {
-//            return ResponseUtil.badArgument();
-//        }
-
-
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
         return orderService.checkout(13,body);
     }
 
@@ -48,7 +43,10 @@ public class WxOrderController {
                        @RequestParam(defaultValue = "10") Integer limit,
                        @RequestParam(defaultValue = "order_id") String sort,
                        @RequestParam(defaultValue = "desc") String order) {
-        return orderService.list(13,showType,page,limit,sort,order);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        return orderService.list(userId,showType,page,limit,sort,order);
     }
 
     /**
@@ -60,7 +58,10 @@ public class WxOrderController {
      */
     @GetMapping("detail")
     public Object detail(@LoginUser Integer userId, @NotNull Integer orderId) {
-        Object o = orderService.detail(13,orderId);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        Object o = orderService.detail(userId,orderId);
         return o;
     }
 
@@ -73,7 +74,10 @@ public class WxOrderController {
      */
     @PostMapping("submit")
     public Object submit(@LoginUser Integer userId, @RequestBody String body) {
-        return orderService.submit(13,body);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        return orderService.submit(userId,body);
     }
 
     /**
@@ -97,7 +101,10 @@ public class WxOrderController {
      */
     @PostMapping("prepay")
     public Object prepay(@LoginUser Integer userId, @RequestBody String body, HttpServletRequest request) {
-        return orderService.prepay(13,body);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        return orderService.prepay(userId,body);
     }
 
     /**
@@ -136,7 +143,10 @@ public class WxOrderController {
      */
     @PostMapping("refund")
     public Object refund(@LoginUser Integer userId, @RequestBody String body) {
-        return orderService.refund(13,body);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        return orderService.refund(userId,body);
     }
 
     /**
@@ -148,7 +158,10 @@ public class WxOrderController {
      */
     @PostMapping("confirm")
     public Object confirm(@LoginUser Integer userId, @RequestBody String body) {
-        return orderService.confirm(13,body);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        return orderService.confirm(userId,body);
     }
 
     /**
@@ -173,7 +186,10 @@ public class WxOrderController {
     @GetMapping("goods")
     public Object goods(@LoginUser Integer userId,
                         @NotNull Integer orderId) {
-        return orderService.goods(13,orderId);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        return orderService.goods(userId,orderId);
     }
 
     /**
@@ -185,7 +201,10 @@ public class WxOrderController {
      */
     @PostMapping("comment")
     public Object comment(@LoginUser Integer userId, @RequestBody String body) {
-        return orderService.comment(13,body);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        return orderService.comment(userId,body);
     }
 
 }

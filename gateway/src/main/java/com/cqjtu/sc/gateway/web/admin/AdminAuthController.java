@@ -134,4 +134,13 @@ public class AdminAuthController {
         return apis;
     }
 
+
+    @RequiresAuthentication
+    @PostMapping("/logout")
+    public Object logout() {
+        Subject currentUser = SecurityUtils.getSubject();
+        currentUser.logout();
+        return ResponseUtil.ok();
+    }
+
 }

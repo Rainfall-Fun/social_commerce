@@ -8,7 +8,7 @@ public class CartVo {
     int number;
     int productId;
     String goodsName;
-    String specifications;
+    String specifications[];
     String picUrl;
     BigDecimal price;
     boolean checked;
@@ -69,11 +69,11 @@ public class CartVo {
         this.goodsName = goodsName;
     }
 
-    public String getSpecifications() {
+    public String[] getSpecifications() {
         return specifications;
     }
 
-    public void setSpecifications(String specifications) {
+    public void setSpecifications(String[] specifications) {
         this.specifications = specifications;
     }
 

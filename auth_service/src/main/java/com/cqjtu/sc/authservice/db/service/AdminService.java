@@ -36,8 +36,9 @@ public class AdminService {
         return mapper.selectByExample(example);
     }
 
-    public void add(AdminOperator admin) {
+    public int add(AdminOperator admin) {
         mapper.insertSelective(admin);
+        return admin.getOperatorId();
     }
 
     public List<AdminOperator> querySelective(String username, Integer page, Integer limit, String sort, String order) {

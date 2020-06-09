@@ -1,9 +1,11 @@
 package com.cqjtu.sc.authservice.api.admin;
 
 import com.cqjtu.sc.authservice.db.domain.AdminActor;
+import com.cqjtu.sc.authservice.db.domain.AdminActorAuthority;
 import com.cqjtu.sc.authservice.db.domain.AdminOperator;
 import com.cqjtu.sc.authservice.db.domain.AllSupplier;
 import com.cqjtu.sc.authservice.db.service.AdminPermissionService;
+import com.cqjtu.sc.authservice.db.service.AdminRolePermissionService;
 import com.cqjtu.sc.authservice.db.service.AdminService;
 import com.cqjtu.sc.authservice.db.service.SupplierService;
 import com.cqjtu.sc.authservice.util.JacksonUtil;
@@ -35,6 +37,8 @@ public class AdminAdminController {
     private SupplierService supplierService;
     @Autowired
     AdminPermissionService adminPermissionService;
+    @Autowired
+    AdminRolePermissionService adminRolePermissionService;
 
 
     @GetMapping("/list")
@@ -77,7 +81,15 @@ public class AdminAdminController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(rawPassword);
         admin.setOperatorPassword(encodedPassword);
-        adminService.add(admin);
+        int operatorId = adminService.add(admin);
+        //为此用户添加角色权限
+        Integer roleId = admin.getActorId();
+        List<AdminActorAuthority> byActorId = adminRolePermissionService.findByActorId(roleId);
+        List<Integer> permissions=new ArrayList<>();
+        for (AdminActorAuthority adminActorAuthority : byActorId) {
+            permissions.add(adminActorAuthority.getAuthorityId());
+        }
+        adminPermissionService.addPermissionsByPid(operatorId,permissions);
         return ResponseUtil.ok(admin);
     }
 
