@@ -37,11 +37,10 @@ public class WxCartController {
      */
     @GetMapping("index")
     public Object index(@LoginUser Integer userId) {
-//        if (userId == null) {
-//            return ResponseUtil.unlogin();
-//        }
-
-        Object o = goodsService.cartIndex(13);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        Object o = goodsService.cartIndex(userId);
 
         return o;
     }
@@ -58,15 +57,10 @@ public class WxCartController {
      */
     @PostMapping("add")
     public Object add(@LoginUser Integer userId, @RequestBody String cart) {
-//        if (userId == null) {
-//            return ResponseUtil.unlogin();
-//        }
-//        if (cart == null) {
-//            return ResponseUtil.badArgument();
-//        }
-
-
-        return goodsService.add(13,cart);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        return goodsService.add(userId,cart);
     }
 
 
@@ -86,7 +80,6 @@ public class WxCartController {
         if (cart == null) {
             return ResponseUtil.badArgument();
         }
-
         return ResponseUtil.ok();
     }
 
@@ -142,9 +135,6 @@ public class WxCartController {
         if (userId == null) {
             return ResponseUtil.unlogin();
         }
-        if (body == null) {
-            return ResponseUtil.badArgument();
-        }
         return index(userId);
     }
 
@@ -158,13 +148,10 @@ public class WxCartController {
      */
     @GetMapping("goodscount")
     public Object goodscount(@LoginUser Integer userId) {
-//        if (userId == null) {
-//            return ResponseUtil.ok(0);
-//        }
-
-
-
-        return goodsService.goodscount(13);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        return goodsService.goodscount(userId);
     }
 //
 //    /**

@@ -232,7 +232,7 @@ public class WxGoodsController {
         List<BriefGoods> briefGoods = briefGoodsService.getBriefGoods(goodsIds);
         for (BriefGoods datum : briefGoods) {
             datum.setCounterPrice(datum.getRetailPrice().multiply(BigDecimal.valueOf(1.5)));
-            datum.setPicUrl("http://localhost:8777/"+datum.getPicUrl());
+            datum.setPicUrl("http://112.124.20.144:8080/"+datum.getPicUrl());
         }
         return briefGoods;
     }

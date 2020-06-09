@@ -1,6 +1,7 @@
 package com.cqjtu.sc.gateway.web.wx;
 
 import com.cqjtu.sc.gateway.annotation.LoginUser;
+import com.cqjtu.sc.gateway.util.ResponseUtil;
 import com.cqjtu.sc.gateway.web.service.GoodsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,11 +29,7 @@ public class WxHomeController {
 
     @Autowired
     GoodsService goodsService;
-    private final static ArrayBlockingQueue<Runnable> WORK_QUEUE = new ArrayBlockingQueue<>(9);
 
-    private final static RejectedExecutionHandler HANDLER = new ThreadPoolExecutor.CallerRunsPolicy();
-
-    private static ThreadPoolExecutor executorService = new ThreadPoolExecutor(9, 9, 1000, TimeUnit.MILLISECONDS, WORK_QUEUE, HANDLER);
 
     @GetMapping("/cache")
     public Object cache(@NotNull String key) {
@@ -46,7 +43,10 @@ public class WxHomeController {
      */
     @GetMapping("/index")
     public Object index(@LoginUser Integer userId) {
-        Object index = goodsService.index(13);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        Object index = goodsService.index(userId);
         return index;
     }
 

@@ -34,11 +34,10 @@ public class WxUserController {
      */
     @GetMapping("index")
     public Object list(@LoginUser Integer userId) {
-//        if (userId == null) {
-//            return ResponseUtil.unlogin();
-//        }
-
-        return orderService.index(13);
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        return orderService.index(userId);
     }
 
 }

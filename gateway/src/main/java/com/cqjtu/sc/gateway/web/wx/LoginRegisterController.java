@@ -5,6 +5,7 @@ import com.cqjtu.sc.gateway.dao.entity.wx.UserWxInfo;
 import com.cqjtu.sc.gateway.dao.service.UserInfoService;
 import com.cqjtu.sc.gateway.dao.service.UserWxInfoService;
 import com.cqjtu.sc.gateway.service.UserTokenManager;
+import com.cqjtu.sc.gateway.util.ResponseUtil;
 import com.cqjtu.sc.gateway.web.service.WXService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,24 +48,11 @@ public class LoginRegisterController {
             HashMap<Object, Object> map = new HashMap<>();
             map.put("token",UserTokenManager.generateToken(userInfoId));
             map.put("userName",userName);
-            return ok(map);
+            return ResponseUtil.ok(map);
         }
-        return fail(500,"登录失败");
+        return ResponseUtil.fail(500,"登录失败");
     }
 
-    public static Object ok(Object data) {
-        Map<String, Object> obj = new HashMap<String, Object>();
-        obj.put("errno", 0);
-        obj.put("errmsg", "成功");
-        obj.put("data", data);
-        return obj;
-    }
 
-    public static Object fail(int errno, String errmsg) {
-        Map<String, Object> obj = new HashMap<String, Object>();
-        obj.put("errno", errno);
-        obj.put("errmsg", errmsg);
-        return obj;
-    }
 
 }

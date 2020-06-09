@@ -20,6 +20,7 @@
         <module>price_comparison_service</module>
         <module>picture_search_service</module>
         <module>file_upload_service</module>
+        <module>auth_service</module>
     </modules>
 
     <!--    继承SpringBoot父项目，注意与SpringCloud版本匹配-->

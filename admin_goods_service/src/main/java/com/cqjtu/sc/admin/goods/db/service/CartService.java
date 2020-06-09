@@ -25,10 +25,10 @@ public class CartService {
         return l;
     }
 
-    public AllCart existByProductId(int id){
+    public AllCart existByProductIdAndUserId(int id,int userId){
         AllCartExample example=new AllCartExample();
         AllCartExample.Criteria criteria = example.createCriteria();
-        criteria.andIdEqualTo(id);
+        criteria.andIdEqualTo(id).andUserInfoIdEqualTo(userId);
         List<AllCart> allCarts = mapper.selectByExample(example);
         if (allCarts.size()==0)
             return null;

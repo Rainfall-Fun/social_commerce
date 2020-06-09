@@ -11,25 +11,26 @@
 
     <!-- 查询结果 -->
     <el-table v-loading="listLoading" :data="list" element-loading-text="正在查询中。。。" border fit highlight-current-row>
-      <el-table-column align="center" label="管理员ID" prop="id" sortable/>
+      <!-- <el-table-column align="center" label="管理员ID" prop="id" sortable/> -->
 
-      <el-table-column align="center" label="管理员名称" prop="username"/>
+      <el-table-column align="center" label="管理员名称" prop="operatorAccount"/>
 
-      <el-table-column align="center" label="管理员头像" prop="avatar">
+      <!-- <el-table-column align="center" label="管理员头像" prop="avatar">
         <template slot-scope="scope">
           <img v-if="scope.row.avatar" :src="scope.row.avatar" width="40">
         </template>
-      </el-table-column>
+      </el-table-column> -->
 
-      <el-table-column align="center" label="管理员角色" prop="roleIds">
+      <el-table-column align="center" label="管理员角色" prop="actorId">
         <template slot-scope="scope">
-          <el-tag v-for="roleId in scope.row.roleIds" :key="roleId" type="primary" style="margin-right: 20px;"> {{ formatRole(roleId) }} </el-tag>
+          <el-tag type="primary" style="margin-right: 20px;"> {{ formatRole(scope.row.actorId) }} </el-tag>
         </template>
       </el-table-column>
 
       <el-table-column align="center" label="操作" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button v-permission="['POST /admin/admin/update']" type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
+          <el-button v-permission="['GET /admin/admin/permissions']" type="primary" size="mini" @click="handlePermission(scope.row)">授权</el-button>
           <el-button v-permission="['POST /admin/admin/delete']" type="danger" size="mini" @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
@@ -40,13 +41,13 @@
     <!-- 添加或修改对话框 -->
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="dataForm" status-icon label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
-        <el-form-item label="管理员名称" prop="username">
-          <el-input v-model="dataForm.username"/>
+        <el-form-item label="管理员名称" prop="operatorAccount">
+          <el-input v-model="dataForm.operatorAccount"/>
         </el-form-item>
-        <el-form-item label="管理员密码" prop="password">
-          <el-input v-model="dataForm.password" type="password" auto-complete="off"/>
+        <el-form-item label="管理员密码" prop="operatorPassword">
+          <el-input v-model="dataForm.operatorPassword" type="password" auto-complete="off"/>
         </el-form-item>
-        <el-form-item label="管理员头像" prop="avatar">
+        <!-- <el-form-item label="管理员头像" prop="avatar">
           <el-upload
             :headers="headers"
             :action="uploadPath"
@@ -57,9 +58,9 @@
             <img v-if="dataForm.avatar" :src="dataForm.avatar" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"/>
           </el-upload>
-        </el-form-item>
-        <el-form-item label="管理员角色" prop="roleIds">
-          <el-select v-model="dataForm.roleIds" multiple placeholder="请选择">
+        </el-form-item> -->
+        <el-form-item label="管理员角色" prop="actorId">
+          <el-select v-model="dataForm.actorId" placeholder="请选择">
             <el-option
               v-for="item in roleOptions"
               :key="item.value"
@@ -67,11 +68,50 @@
               :value="item.value"/>
           </el-select>
         </el-form-item>
+        <el-form-item label="所属供应商" prop="supplierId">
+          <el-select v-model="dataForm.supplierId" placeholder="请选择">
+            <el-option
+              v-for="item in supplierOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"/>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="是否有效" prop="operatorIsavailable">
+          <el-select v-model="dataForm.operatorIsavailable" placeholder="请选择">
+            <el-option
+              label="是"
+              value="1" />
+            <el-option
+              label="否"
+              value="0" />
+          </el-select>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
         <el-button v-if="dialogStatus=='create'" type="primary" @click="createData">确定</el-button>
         <el-button v-else type="primary" @click="updateData">确定</el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 权限配置对话框 -->
+    <el-dialog :visible.sync="permissionDialogFormVisible" title="权限配置">
+      <el-tree
+        ref="tree"
+        :data="systemPermissions"
+        :default-checked-keys="assignedPermissions"
+        show-checkbox
+        node-key="id"
+        highlight-current>
+        <span slot-scope="{ node, data }" class="custom-tree-node">
+          <span>{{ data.label }}</span>
+          <el-tag v-if="data.api" type="success" size="mini">{{ data.api }}</el-tag>
+        </span>
+      </el-tree>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="permissionDialogFormVisible = false">取消</el-button>
+        <el-button type="primary" @click="updatePermission">确定</el-button>
       </div>
     </el-dialog>
 
@@ -105,7 +145,7 @@
 </style>
 
 <script>
-import { listAdmin, createAdmin, updateAdmin, deleteAdmin } from '@/api/admin'
+import { listAdmin, createAdmin, updateAdmin, deleteAdmin, supplierOptions, getPermission, updatePermission } from '@/api/admin'
 import { roleOptions } from '@/api/role'
 import { uploadPath } from '@/api/storage'
 import { getToken } from '@/utils/auth'
@@ -120,20 +160,22 @@ export default {
       list: null,
       total: 0,
       roleOptions: null,
+      supplierOptions: null,
       listLoading: true,
       listQuery: {
         page: 1,
         limit: 20,
         username: undefined,
-        sort: 'add_time',
+        sort: 'operator_id',
         order: 'desc'
       },
       dataForm: {
         id: undefined,
-        username: undefined,
-        password: undefined,
+        operatorAccount: undefined,
+        operatorPassword: undefined,
         avatar: undefined,
-        roleIds: []
+        actorId: undefined,
+        operatorIsavailable: undefined
       },
       dialogFormVisible: false,
       dialogStatus: '',
@@ -147,7 +189,14 @@ export default {
         ],
         password: [{ required: true, message: '密码不能为空', trigger: 'blur' }]
       },
-      downloadLoading: false
+      downloadLoading: false,
+      permissionDialogFormVisible: false,
+      systemPermissions: null,
+      assignedPermissions: null,
+      permissionForm: {
+        operatorId: undefined,
+        permissions: []
+      }
     }
   },
   computed: {
@@ -163,6 +212,11 @@ export default {
     roleOptions()
       .then(response => {
         this.roleOptions = response.data.data.list
+      })
+
+    supplierOptions()
+      .then(response => {
+        this.supplierOptions = response.data.data.list
       })
   },
   methods: {
@@ -195,10 +249,11 @@ export default {
     resetForm() {
       this.dataForm = {
         id: undefined,
-        username: undefined,
-        password: undefined,
+        operatorAccount: undefined,
+        operatorPassword: undefined,
         avatar: undefined,
-        roleIds: []
+        actorId: undefined,
+        operatorIsavailable: '1'
       }
     },
     uploadAvatar: function(response) {
@@ -235,6 +290,7 @@ export default {
     },
     handleUpdate(row) {
       this.dataForm = Object.assign({}, row)
+      this.dataForm.operatorIsavailable = String(this.dataForm.operatorIsavailable)
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
       this.$nextTick(() => {
@@ -298,6 +354,32 @@ export default {
         )
         this.downloadLoading = false
       })
+    },
+    handlePermission(row) {
+      this.permissionDialogFormVisible = true
+      this.permissionForm.operatorId = row.operatorId
+      getPermission({ operatorId: row.operatorId })
+        .then(response => {
+          this.systemPermissions = response.data.data.systemPermissions
+          this.assignedPermissions = response.data.data.assignedPermissions
+        })
+    },
+    updatePermission() {
+      this.permissionForm.permissions = this.$refs.tree.getCheckedKeys(true)
+      updatePermission(this.permissionForm)
+        .then(response => {
+          this.permissionDialogFormVisible = false
+          this.$notify.success({
+            title: '成功',
+            message: '授权成功'
+          })
+        })
+        .catch(response => {
+          this.$notify.error({
+            title: '失败',
+            message: response.data.errmsg
+          })
+        })
     }
   }
 }
