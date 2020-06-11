@@ -1,16 +1,15 @@
 package com.cqjtu.membermanageservice.controller;
 
-import com.alibaba.druid.sql.ast.statement.SQLIfStatement;
-import com.cqjtu.membermanageservice.db.*;
-import com.cqjtu.membermanageservice.service.OperatorService;
+import com.cqjtu.membermanageservice.db.Item;
+import com.cqjtu.membermanageservice.db.UserAdress;
+import com.cqjtu.membermanageservice.db.UserCollect;
+import com.cqjtu.membermanageservice.db.UserSuggest;
 import com.cqjtu.membermanageservice.service.UserService;
 import com.cqjtu.membermanageservice.util.ResponseUtil;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
