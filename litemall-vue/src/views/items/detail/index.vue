@@ -28,7 +28,7 @@
       />
       <van-cell title="属性" isLink @click.native="propsPopup = true"/>
       <van-cell title="运费" value="满88免邮费"/>
-      <van-cell title="淘口令" @click="copy" value="点击复制淘口令"/> 
+      <van-cell title="淘口令" @click="copy" value="点击复制淘口令"/>
     </van-cell-group>
     <van-sku
       v-model="showSku"
@@ -53,6 +53,52 @@
       </div>
     </div>
 
+    <div class="item_price_comparison">
+      <van-cell-group title="价格对比">
+        <van-cell title="分类名称" :value="priceComparison.vo.categoryName">
+          <template #right-icon>
+            <van-icon name="success" style="line-height: inherit;"
+                      color="#13ce66"/>
+          </template>
+        </van-cell>
+        <van-cell title="商品名称" :value="priceComparison.vo.commodityName">
+          <template #right-icon>
+            <van-icon name="success" style="line-height: inherit;"
+                      color="#13ce66"/>
+          </template>
+        </van-cell>
+        <van-cell title="品牌" :value="priceComparison.vo.commodityBrand.key" @click="onPriceComparisonClick(priceComparison.vo.commodityBrand)">
+          <template #right-icon>
+            <van-icon name="success" style="line-height: inherit;"
+                      :color="priceComparison.vo.commodityBrand.isEnable?'#13ce66':'#92a8d1'"/>
+          </template>
+        </van-cell>
+        <van-cell v-for="item in priceComparison.vo.customerAttributes" :key="item"
+                  :title="item.attribute"
+                  :value="item.value"
+                  :color="item.isEnable?'#13ce66':'#92a8d1'"
+                  @click="onPriceComparisonClick(item)">
+          <template #right-icon>
+            <van-icon name="success" style="line-height: inherit;"
+                      :color="item.isEnable?'#13ce66':'#92a8d1'"/>
+          </template>
+        </van-cell>
+        <van-button size="large" @click="priceComparisonRefresh">刷新</van-button>
+        <!--        <van-cell @click="priceComparisonRefresh">刷新</van-cell>-->
+        <van-cell-group title="同类商品价格对比" v-if="priceComparison.res.valid">
+          <van-cell title="商品当前价格" :value="priceComparison.res.curPrice"/>
+          <van-cell title="本系统最低价" :value="priceComparison.res.minPrice"/>
+          <van-cell title="本系统平均价" :value="priceComparison.res.avgPrice"/>
+        </van-cell-group>
+        <van-cell-group title="当前价格低于目标系统价格百分比" v-if="priceComparison.res.valid">
+          <van-cell title="本系统" :value="priceComparison.res.value"/>
+          <template v-for="(item,key,index) in priceComparison.res.values">
+            <van-cell :title="key" :value="item"/>
+          </template>
+        </van-cell-group>
+      </van-cell-group>
+    </div>
+
     <van-goods-action>
       <van-goods-action-icon @click="toCart" icon="cart-o" :info="(cartInfo > 0) ? cartInfo : ''"/>
       <van-goods-action-icon @click="addCollect" icon="star-o" :style="(goods.userHasCollect !== 0) ? 'color: #f7b444;':''"/>
@@ -65,7 +111,7 @@
 
 <script>
 
-import { goodsDetail, cartGoodsCount, collectAddOrDelete, cartAdd, cartFastAdd } from '@/api/api';
+import { getComparisonCustomer, goodsDetail, cartGoodsCount, collectAddOrDelete, cartAdd, cartFastAdd } from '@/api/api';
 
 import { Sku, Swipe, SwipeItem, GoodsAction, GoodsActionButton, GoodsActionIcon, Popup } from 'vant';
 import { setLocalStorage } from '@/utils/local-storage';
@@ -123,6 +169,7 @@ export default {
 
   created() {
     this.initData();
+    this.priceComparison_initAttrs();
   },
 
   methods: {
@@ -342,6 +389,73 @@ export default {
         }
       });
       return id;
+    },
+    onPriceComparisonClick(obj) {
+      obj.isEnable = !obj.isEnable
+      this.priceComparison.vo.customerAttributes.push({})
+      this.priceComparison.vo.customerAttributes.pop()
+    },
+    priceComparison_initAttrs() {
+      // 测试
+      var commodityId = '87058862';
+      var categoryName = '手机';
+      var commodityName = '诺基亚';
+      var commodityBrand = '诺基亚';
+      this.priceComparison.vo.commodityId = commodityId;
+      this.priceComparison.vo.categoryName = categoryName;
+      this.priceComparison.vo.commodityName = commodityName;
+      this.priceComparison.vo.commodityBrand.key = commodityBrand;
+      this.priceComparison.vo.commodityBrand.isEnable = false;
+      var attrs = this.priceComparison.vo.customerAttributes;
+      var originAttrs = this.goods.attribute;
+      originAttrs = [{attribute:'内存',value:'8GB'},{attribute:'颜色',value:'白色'}]
+      for (var i = 0; i < originAttrs.length; i++) {
+        var temp = {};
+        temp['attribute'] = originAttrs[i]['attribute'];
+        temp['value'] = originAttrs[i]['value'];
+        temp['isEnable'] = false;
+        attrs.push(temp);
+      }
+      this.getComparisonCustomer(this.getListQuery());
+    },
+    priceComparisonRefresh() {
+      this.getComparisonCustomer(this.getListQuery());
+    },
+    getListQuery() {
+      var categoryName = this.priceComparison.vo.categoryName;
+      var commodityName = this.priceComparison.vo.commodityName;
+      var brand = null;
+      if (this.priceComparison.vo.commodityBrand.isEnable) {
+        brand = this.priceComparison.vo.commodityBrand.key
+      }
+      var attrs = {};
+      var originAttrs = this.priceComparison.vo.customerAttributes;
+      for (var index = 0; index < originAttrs.length; index++) {
+        if (originAttrs[index].isEnable) {
+          attrs[originAttrs[index]['attribute']] = originAttrs[index]['value']
+        }
+      }
+      var commodityId = '87058862';
+      var categoryName = '手机';
+      var commodityName = '诺基亚';
+      var brand = '';
+      var listQuery = {
+        'commodityId': commodityId,
+        'categoryName': categoryName,
+        'commodityName': commodityName,
+        'commodityBrand': brand,
+        'customerAttributes': attrs
+      }
+      return listQuery
+    },
+    getComparisonCustomer(listQuery) {
+      getComparisonCustomer(listQuery)
+              .then(response => {
+                console.log(response.data.data);
+                this.priceComparison.res = response.data.data
+              }).catch(()=>{
+        console.log()
+      })
     }
   },
 
