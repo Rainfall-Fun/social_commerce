@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqjtu.membermanageservice.dao.UserInfoDao">
+
+
+    <resultMap id="BaseResultMap" type="com.cqjtu.membermanageservice.db.AllUserInfo">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="username" jdbcType="VARCHAR"/>
+        <result column="phonenumber" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="user_sexy" property="userSexy" jdbcType="TINYINT" javaType="Boolean"/>
+        <result column="invitor" property="invitor" jdbcType="INTEGER"/>
+        <result column="bank_number" property="bankNumber" jdbcType="VARCHAR"/>
+        <result column="is_valid" property="isValid" jdbcType="TINYINT"/>
+        <result column="grade" property="grade" jdbcType="INTEGER"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="Logoff" parameterType="int" >
+    UPDATE all_user_info SET is_valid = false WHERE user_id = #{user_id}
+ </select>
+
+    <select id="AuthInfo" parameterType="int"  resultMap="BaseResultMap">
+     select * from all_user_info where user_id = #{user_id}
+ </select>
+
+    <select id="SaveName"  >
+    UPDATE all_user_info SET user_name = #{nickName} WHERE user_id = #{user_id}
+ </select>
+
+    <select id="SaveSex"  >
+    UPDATE all_user_info SET user_sexy = #{sex} WHERE user_id = #{user_id}
+ </select>
+    <select id="SaveMobile"  >
+    UPDATE all_user_info SET phonenumber = #{mobile} WHERE user_id = #{user_id}
+ </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <resultMap id="SuggestionMap" type="com.cqjtu.membermanageservice.db.UserSuggest">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="suggestion_type" property="suggestionType" jdbcType="VARCHAR"/>
+        <result column="suggestion" property="Suggestion" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="Submit" parameterType="map" resultMap="SuggestionMap">
+    INSERT INTO  suggestion
+    VALUES(#{userId},#{suggestionType},#{time},#{Suggestion})
+
+
+ </select>
+
+
+
+
+
+    <resultMap id="AdressMap" type="com.cqjtu.membermanageservice.db.UserAdress">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="username" jdbcType="VARCHAR"/>
+        <result column="adress_id" property="adressId" jdbcType="INTEGER"/>
+        <result column="tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="country" property="country" jdbcType="VARCHAR"/>
+        <result column="adress" property="adress" jdbcType="VARCHAR"/>
+        <result column="is_default" property="isDefault" jdbcType="TINYINT"/>
+        <result column="area_Code" property="areaCode" jdbcType="TINYINT"/>
+    </resultMap>
+    <select id="AdressList" parameterType="int" resultMap="AdressMap">
+   select * from all_user_adress where user_id = #{user_id}
+ </select>
+
+    <select id="detail" parameterType="int" resultMap="AdressMap">
+   select * from all_user_adress where adress_id = #{adressId}
+ </select>
+
+    <select id="SaveAdress"  >
+     INSERT INTO all_user_adress (user_id,user_name,tel,province,city,country,adress,is_default,area_Code)
+     VALUES (#{userId},#{username},#{tel},#{province},#{city},#{country},#{adress},#{isDefault},#{areaCode})
+</select>
+
+    <select id="UpdateUserAdress"  >
+      UPDATE all_user_adress SET adress_id = #{adressId},user_id=#{userId},user_name=#{username},tel=#{tel},province=#{province},city=#{city},country=#{country},adress=#{adress},is_default=#{isDefault},area_Code=#{areaCode}
+     WHERE adress_id = #{adressId}
+</select>
+
+    <select id="DeleteAdress" >
+    DELETE FROM all_user_adress WHERE adress_id = #{adressId}
+ </select>
+
+
+
+
+
+    <resultMap id="CollectMap" type="com.cqjtu.membermanageservice.db.UserCollect">
+        <result column="collect_id" property="collectId" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="value_id" property="valueId" jdbcType="VARCHAR"/>
+        <result column="add_Time" property="addTime" jdbcType="VARCHAR"/>
+    </resultMap>
+      <select id="collectList" resultMap="CollectMap ">
+     select * from all_user_collect where user_id=#{user_id}
+ </select>
+    <select id="DeleteCollect" >
+     delete  from all_user_collect where collect_id=#{collect_id}
+ </select>
+
+
+
+    <resultMap id="ItemMap" type="com.cqjtu.membermanageservice.db.Item">
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="counterPrice" property="counterPrice" jdbcType="INTEGER"/>
+        <result column="retailPrice" property="retailPrice" jdbcType="VARCHAR"/>
+        <result column="picUrl" property="picUrl" jdbcType="VARCHAR"/>
+        <result column="brief" property="brief" jdbcType="VARCHAR"/>
+        <result column="valueId" property="valueId" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="Convert" resultMap="ItemMap ">
+     select * from item where valueId=#{valueId}
+ </select>
+
+    <select id="SearchDeletedInfo" resultType="INTEGER">
+     SELECT collect_id FROM all_user_collect where user_id=#{user_id} and value_id=#{valueId}
+ </select>
+
+
+
+        <resultMap id="UserInfoMap" type="com.cqjtu.membermanageservice.db.AllUserInfo">
+            <result column="user_id" property="userId" jdbcType="INTEGER"/>
+            <result column="user_name" property="username" jdbcType="VARCHAR"/>
+            <result column="phonenumber" property="phoneNumber" jdbcType="VARCHAR"/>
+            <result column="user_sexy" property="userSexy" jdbcType="TINYINT" javaType="Boolean"/>
+            <result column="invitor" property="invitor" jdbcType="INTEGER"/>
+            <result column="bank_number" property="bankNumber" jdbcType="VARCHAR"/>
+            <result column="is_valid" property="isValid" jdbcType="TINYINT"/>
+            <result column="grade" property="grade" jdbcType="INTEGER"/>
+            <result column="score" property="score" jdbcType="INTEGER"/>
+        </resultMap>
+
+    <select id="UpGrade" >
+     UPDATE all_user_info SET grade=#{grade} ,score=#{score} WHERE user_id = #{user_id}
+ </select>
+
+
+
+</mapper>

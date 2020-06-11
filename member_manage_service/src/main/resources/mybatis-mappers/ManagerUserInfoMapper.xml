@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cqjtu.membermanageservice.dao.ManagerUserInfoDao">
+    <resultMap id="BaseResultMap" type="com.cqjtu.membermanageservice.db.AllUserInfo">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="username" jdbcType="VARCHAR"/>
+        <result column="phonenumber" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="user_sexy" property="userSexy" jdbcType="TINYINT" javaType="Boolean"/>
+        <result column="invitor" property="invitor" jdbcType="INTEGER"/>
+        <result column="bank_number" property="bankNumber" jdbcType="VARCHAR"/>
+        <result column="is_valid" property="isValid" jdbcType="TINYINT"/>
+        <result column="grade" property="grade" jdbcType="INTEGER"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="SearchUserInfo" parameterType="int" resultMap="BaseResultMap">
+   select * from all_user_info where user_id = #{user_id}
+ </select>
+
+<select id="SearchAllUserInfo" parameterType="map" resultMap="BaseResultMap">
+     SELECT * FROM all_user_info
+     limit #{a},#{b}
+</select>
+
+    <select id="SearchAlluserCount"  resultType="int">
+    select count(*) from all_user_info
+</select>
+
+    <select id="UpdateUserInfo" parameterType="com.cqjtu.membermanageservice.db.AllUserInfo" resultType="com.cqjtu.membermanageservice.db.AllUserInfo">
+    UPDATE all_user_info SET user_id = #{userId},user_name=#{username},phonenumber=#{phoneNumber},user_sexy=#{userSexy},invitor=#{invitor},bank_number=#{bankNumber},is_valid=#{isValid},grade=#{grade},score=#{score}
+     WHERE user_id = #{userId}
+ </select>
+
+    <select id="DeleteUserInfo" parameterType="int" resultType="com.cqjtu.membermanageservice.db.AllUserInfo">
+    DELETE FROM all_user_info WHERE user_id = #{userId}
+ </select>
+
+
+
+    <resultMap id="AdressMap" type="com.cqjtu.membermanageservice.db.UserAdress">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="username" jdbcType="VARCHAR"/>
+        <result column="adress_id" property="adressId" jdbcType="INTEGER"/>
+        <result column="tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="country" property="country" jdbcType="VARCHAR"/>
+        <result column="adress" property="adress" jdbcType="VARCHAR"/>
+        <result column="is_default" property="isDefault" jdbcType="TINYINT"/>
+    </resultMap>
+
+<select id="SearchUserAdressById" parameterType="int" resultMap="AdressMap">
+   select * from all_user_adress where user_id = #{user_id} limit #{a},#{b}
+ </select>
+
+    <select id="SearchAdressByIdCount"  resultType="int">
+    select count(*) from all_user_adress where  user_id = #{user_id}
+</select>
+
+
+    <select id="SearchAlluserCountAdress"  resultType="int">
+    select count(*) from all_user_adress
+</select>
+    <select id="SearchAllUserAdress" parameterType="map" resultMap="AdressMap">
+     SELECT * FROM all_user_adress
+     limit #{a},#{b}
+</select>
+
+
+    <resultMap id="CollectMap" type="com.cqjtu.membermanageservice.db.UserCollect">
+        <result column="collect_id" property="collectId" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="value_id" property="valueId" jdbcType="VARCHAR"/>
+        <result column="add_Time" property="addTime" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="SearchUserCollectByIdCount" parameterType="int" resultType="int">
+   select count(*) from all_user_collect where  user_id = #{user_id}
+ </select>
+    <select id="SearchUserCollect" parameterType="int" resultMap="CollectMap">
+  select * from all_user_collect where user_id = #{user_id} limit #{a},#{b}
+ </select>
+    <select id="SearchAlluserCountCollect"  resultType="int">
+    select count(*) from all_user_collect
+</select>
+    <select id="SearchAllUserCollect" parameterType="map" resultMap="CollectMap">
+     SELECT * FROM all_user_collect
+     limit #{a},#{b}
+</select>
+
+    <resultMap id="SuggestionMap" type="com.cqjtu.membermanageservice.db.UserSuggest">
+    <result column="user_id" property="userId" jdbcType="INTEGER"/>
+    <result column="suggestion_type" property="suggestionType" jdbcType="VARCHAR"/>
+    <result column="suggestion" property="Suggestion" jdbcType="INTEGER"/>
+    <result column="time" property="time" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="SearchSuggest" parameterType="int" resultMap="SuggestionMap">
+   select * from suggestion where user_id = #{user_id} limit #{a},#{b}
+ </select>
+    <select id="SearchSuggestCountByIdCount"  resultType="int">
+    select count(*) from suggestion where  user_id = #{user_id}
+</select>
+
+    <select id="SearchAllSuggest" parameterType="map" resultMap="SuggestionMap">
+     SELECT * FROM suggestion
+     limit #{a},#{b}
+</select>
+
+    <select id="SearchAllSuggestCount"  resultType="int">
+    select count(*) from suggestion
+</select>
+
+
+
+
+
+
+
+
+
+    <resultMap id="userSearchHistoryMap" type="com.cqjtu.membermanageservice.db.UserSearchHistory">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="search_id" property="searchId" jdbcType="INTEGER"/>
+        <result column="addtime" property="addTime" jdbcType="VARCHAR"/>
+        <result column="keywords" property="keyWords" jdbcType="VARCHAR"/>
+    </resultMap>
+
+<select id="Addkeywords"  >
+    INSERT INTO user_search_history (user_id,search_id,addtime,keywords)
+    VALUES (#{userId},#{searchId},#{addTime},#{keyWords})
+     </select>
+
+    <select id="SearchHistoryBYid" parameterType="int" resultMap="userSearchHistoryMap">
+   select * from user_search_history where user_id = #{user_id} limit #{a},#{b}
+ </select>
+    <select id="SearchHistoryBYidCount"  resultType="int">
+    select count(*) from user_search_history where  user_id = #{user_id}
+</select>
+    <select id="searchAllUserHistory" parameterType="map" resultMap="userSearchHistoryMap">
+     SELECT * FROM user_search_history
+     limit #{a},#{b}
+</select>
+
+    <select id="SearchAllUserHistoryCount"  resultType="int">
+    select count(*) from user_search_history
+</select>
+
+
+</mapper>
