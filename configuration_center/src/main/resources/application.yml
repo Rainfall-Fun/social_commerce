@@ -7,7 +7,7 @@ spring:
       server:
         git:
           uri: https://github.com/ChunyuePeng/spring-cloud-config-repo
-          search-paths: dev
+          search-paths: dep
 
 
 server:

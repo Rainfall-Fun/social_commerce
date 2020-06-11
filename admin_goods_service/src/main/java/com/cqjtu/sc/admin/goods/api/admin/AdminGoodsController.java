@@ -1,7 +1,5 @@
 package com.cqjtu.sc.admin.goods.api.admin;
 
-import com.cqjtu.sc.admin.goods.db.domain.AllGoodsSpecifiAttValue;
-import com.cqjtu.sc.admin.goods.db.domain.AllGoodsSpecification;
 import com.cqjtu.sc.admin.goods.dto.GoodsAllinone;
 import com.cqjtu.sc.admin.goods.service.GoodsService;
 import com.cqjtu.sc.admin.goods.validator.Order;
@@ -18,12 +16,10 @@ public class AdminGoodsController {
 
     @Autowired
     GoodsService goodsService;
+
     /**
-     * 查询商品
-     *
-     * @param goodsId
-     * @param goodsSn
-     * @param name
+     * @param barcode
+     * @param goodsName
      * @param page
      * @param limit
      * @param sort
@@ -31,18 +27,23 @@ public class AdminGoodsController {
      * @return
      */
     @GetMapping("/list")
-    public Object list(Integer goodsId, String goodsSn, String name,
-                       @RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer limit,
-                       @Sort @RequestParam(defaultValue = "add_time") String sort,
-                       @Order @RequestParam(defaultValue = "desc") String order) {
-        System.out.println("jinr");
+    public Object list(
+            @RequestParam(value = "goodsSn", defaultValue = "defaultGoodsSn") String barcode,
+            @RequestParam(value = "name", defaultValue = "defaultName") String goodsName,
+            @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "limit", defaultValue = "10") Integer limit,
+            @RequestParam(value = "sort", defaultValue = "add_time") String sort,
+            @RequestParam(value = "order", defaultValue = "desc") String order
+    ) {
+        System.out.println("list");
+        goodsService.list(barcode, goodsName, page, limit, sort, order);
         return null;
     }
 
     @GetMapping("/catAndBrand")
-    public Object list2() {
-        return null;
+    public Object catAndBrand() {
+        System.out.println("catAndBrand");
+        return goodsService.catAndBrand();
     }
 
     /**
@@ -74,10 +75,10 @@ public class AdminGoodsController {
      * @return
      */
     @PostMapping("/create")
-    public Object create(@RequestBody GoodsAllinone finalGoods) {
+    public Object create(@RequestBody GoodsAllinone finalGoods, Integer supplierId) {
         long l = System.currentTimeMillis();
-        Object o = goodsService.addGoods(finalGoods);
-        System.out.println(System.currentTimeMillis()-l);
+        Object o = goodsService.addGoods(finalGoods, supplierId);
+        System.out.println(System.currentTimeMillis() - l);
         return o;
 
     }
