@@ -3,37 +3,47 @@
 
     <!-- 查询和其他操作 -->
     <div class="filter-container">
-      <el-input v-model="listQuery.id" clearable class="filter-item" style="width: 200px;" placeholder="请输入用户反馈ID" />
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleSearchSuggestById">查找</el-button>
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleSearchAllSuggest">查找全部</el-button>
+      <el-input v-model="listQuery.username" clearable class="filter-item" style="width: 200px;" placeholder="请输入用户名"/>
+      <el-input v-model="listQuery.id" clearable class="filter-item" style="width: 200px;" placeholder="请输入反馈ID"/>
+      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
       <el-button :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">导出</el-button>
     </div>
 
     <!-- 查询结果 -->
     <el-table v-loading="listLoading" :data="list" element-loading-text="正在查询中。。。" border fit highlight-current-row>
-      <el-table-column align="center" width="200px" height="200px" label="反馈ID" prop="userId" />
-      <el-table-column align="center" label="反馈类型" prop="suggestionType" />
-      <el-table-column align="center" label="反馈内容" prop="Suggestion" />
-      <el-table-column align="center" label="时间" prop="time" />
+
+      <el-table-column align="center" label="反馈ID" prop="id"/>
+
+      <el-table-column align="center" label="用户名" prop="username"/>
+
+      <el-table-column align="center" label="手机号码" prop="mobile"/>
+
+      <el-table-column align="center" label="反馈类型" prop="feedType"/>
+
+      <el-table-column align="center" label="反馈内容" prop="content"/>
+
+      <el-table-column align="center" label="反馈图片" prop="picUrls">
+        <template slot-scope="scope">
+          <el-image v-for="item in scope.row.picUrls" :key="item" :src="item" :preview-src-list="scope.row.picUrls" :lazy="true" style="width: 40px; height: 40px; margin-right: 5px;"/>
+        </template>
+      </el-table-column>
+
+      <el-table-column align="center" label="时间" prop="addTime"/>
+
     </el-table>
-    <!--分页-->
-    <el-pagination
-      v-show="total>1"
-      :current-page="listQuery.page"
-      :page-sizes="[10, 20,40, 100]"
-      :page-size="listQuery.limit"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="total"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-    />
+
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+
   </div>
 </template>
 
 <script>
-import { SearchAllSuggest, SearchSuggest } from '../../api/user' // Secondary package based on el-pagination
+import { listFeedback } from '@/api/user'
+import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
+
 export default {
   name: 'Feedback',
+  components: { Pagination },
   data() {
     return {
       list: [],
@@ -42,46 +52,22 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
+        username: undefined,
         sort: 'add_time',
-        order: 'desc',
-        id: undefined
+        order: 'desc'
       },
-      downloadLoading: false,
-      isAll: true
+      downloadLoading: false
     }
   },
   created() {
-    this.handleSearchSuggestById()
+    this.getList()
   },
   methods: {
-    handleSearchSuggestById() {
-      this.isAll = false
-      this.listQuery.page = 1
-      this.SearchSuggestBYid()
-    },
-    SearchSuggestBYid() {
-      this.listLoading = false
-      SearchSuggest(this.listQuery).then(response => {
-        this.list = response.data.data.data.list
-        this.total = response.data.data.data.total
-        this.listLoading = false
-      }).catch(() => {
-        this.list = []
-        this.total = 0
-        this.listLoading = false
-      })
-    },
-    handleSearchAllSuggest() {
-      this.listQuery.id = ''
-      this.isAll = true
-      this.listQuery.page = 1
-      this.SearchAllSuggest()
-    },
-    SearchAllSuggest() {
+    getList() {
       this.listLoading = true
-      SearchAllSuggest(this.listQuery).then(response => {
-        this.list = response.data.data.data.list
-        this.total = response.data.data.data.total
+      listFeedback(this.listQuery).then(response => {
+        this.list = response.data.data.list
+        this.total = response.data.data.total
         this.listLoading = false
       }).catch(() => {
         this.list = []
@@ -89,27 +75,15 @@ export default {
         this.listLoading = false
       })
     },
-    handleSizeChange(val) {
-      this.listQuery.limit = val
-      if (this.isAll) {
-        this.SearchAllSuggest()
-      } else {
-        this.SearchSuggestBYid()
-      }
-    },
-    handleCurrentChange(val) {
-      this.listQuery.page = val
-      if (this.isAll) {
-        this.SearchAllSuggest()
-      } else {
-        this.SearchSuggestBYid()
-      }
+    handleFilter() {
+      this.listQuery.page = 1
+      this.getList()
     },
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['反馈ID', '反馈类型', '反馈内容', '时间']
-        const filterVal = ['userId', 'suggestionType', 'Suggestion', 'time']
+        const tHeader = ['反馈ID', '用户名称', '反馈内容', '反馈图片列表', '反馈时间']
+        const filterVal = ['id', 'username', 'content', 'picUrls', 'addTime']
         excel.export_json_to_excel2(tHeader, this.list, filterVal, '意见反馈信息')
         this.downloadLoading = false
       })

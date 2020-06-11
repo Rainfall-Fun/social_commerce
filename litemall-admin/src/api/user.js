@@ -1,78 +1,37 @@
 import request from '@/utils/request'
+
 export function fetchList(query) {
   return request({
-    url: '/user/SearchUserInfo',
-    method: 'get',
-    params: query
-  })
-}
-export function searchAll(query) {
-  return request({
-    url: '/user/SearchAllUserInfo',
-    method: 'get',
-    params: query
-  })
-}
-export function update(one) {
-  return request({
-    url: '/user/UpdateUserInfo',
-    method: 'get',
-    params: one
-  })
-}
-
-export function deleteuserinfo(one) {
-  return request({
-    url: '/user/DeleteUserInfo',
-    method: 'get',
-    params: one
-  })
-}
-
-export function searchuseradress(query) {
-  return request({
-    url: '/user/SearchUserAdressById',
-    method: 'get',
-    params: query
-  })
-}
-export function searchAlluseradress(query) {
-  return request({
-    url: '/user/SearchAllUserAdress',
+    url: '/user/list',
     method: 'get',
     params: query
   })
 }
 
-export function searchusercollect(query) {
+export function listAddress(query) {
   return request({
-    url: '/user/SearchUserCollect',
+    url: '/address/list',
     method: 'get',
     params: query
   })
 }
 
-export function searchAllusercollect(query) {
+export function listCollect(query) {
   return request({
-    url: '/user/SearchAllUserCollect',
+    url: '/collect/list',
     method: 'get',
     params: query
   })
 }
-export function SearchSuggest(query) {
+
+export function listFeedback(query) {
   return request({
-    url: '/user/SearchSuggest',
+    url: '/feedback/list',
     method: 'get',
     params: query
   })
 }
-export function SearchAllSuggest(query) {
-  return request({
-    url: '/user/SearchAllSuggest',
-    method: 'get',
-    params: query
-  })
-}
+
 export function listFootprint(query) {
   return request({
     url: '/footprint/list',
@@ -81,18 +40,11 @@ export function listFootprint(query) {
   })
 }
 
-export function searchHistoryBYid(query) {
+export function listHistory(query) {
   return request({
-    url: '/user/searchHistory',
+    url: '/history/list',
     method: 'get',
     params: query
   })
 }
 
-export function searchAllUserHistory(query) {
-  return request({
-    url: '/user/searchAllUserHistory',
-    method: 'get',
-    params: query
-  })
-}
