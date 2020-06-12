@@ -55,7 +55,7 @@ export function authProfile(data) {
   return request({
     url: AuthProfile,
     method: 'post',
-    data
+    data    
   })
 }
 const AuthRegister='wx/auth/register'; //账号注册
@@ -71,7 +71,7 @@ export function authReset(data) {
   return request({
     url: AuthReset,
     method: 'post',
-    data
+    data    
   })
 }
 const AuthRegisterCaptcha='wx/auth/regCaptcha'; //注册验证码
@@ -79,7 +79,7 @@ export function authRegisterCaptcha(data) {
   return request({
     url: AuthRegisterCaptcha,
     method: 'post',
-    data
+    data    
   })
 }
 const AuthCaptcha='wx/auth/captcha'; //验证码
@@ -87,7 +87,7 @@ export function authCaptcha(data) {
   return request({
     url: AuthCaptcha,
     method: 'post',
-    data
+    data    
   })
 }
 
@@ -479,14 +479,6 @@ export function getList(api, query) {
     url: api,
     method: 'get',
     params: query
-  })
-}
-
-export function getComparisonCustomer(query) {
-  return request({
-    url: '/wx/priceComparison/comparison/customer',
-    method: 'POST',
-    data: query
   })
 }
 
